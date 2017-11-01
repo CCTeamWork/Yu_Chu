@@ -19,6 +19,9 @@
     // Do any additional setup after loading the view.
 }
 
+
+#pragma mark 生命周期
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
