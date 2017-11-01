@@ -37,6 +37,9 @@
     [self.view addSubview:nav];
     [nav.LocationBtn addTarget:self action:@selector(locationBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    self.view.backgroundColor = HEXCOLOR(0xffffff);
+    
 }
 
 - (void)locationBtnClick:(UIButton *)sender{
