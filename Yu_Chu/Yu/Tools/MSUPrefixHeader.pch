@@ -1,0 +1,85 @@
+//
+//  MSUPrefixHeader.pch
+//  秀贝
+//
+//  Created by Zhuge_Su on 2017/5/24.
+//  Copyright © 2017年 Zhuge_Su. All rights reserved.
+//
+
+#ifndef MSUPrefixHeader_pch
+#define MSUPrefixHeader_pch
+
+#import <AVFoundation/AVFoundation.h>
+
+
+//masonry
+#define MAS_SHORTHAND
+#define MAS_SHORTHAND_GLOBALS
+#import "Masonry.h"
+
+//SDWebImage
+#import "UIButton+WebCache.h"
+#import "UIImageView+WebCache.h"
+
+//#import <Hyphenate/Hyphenate.h> 
+//#import "EaseUI.h"
+
+/// MJRefresh
+#import <MJRefresh.h>
+//#import "MSURefreshHeader.h"
+//#import "MSUDIYHeader.h"
+
+/// MJExtention
+#import <MJExtension.h>
+
+/// 数据请求
+#import "MSUAFNRequest.h"
+
+/// 弹窗
+#import "MSUHUD.h"
+
+//自定义屏幕宽高
+#define WIDTH [UIScreen mainScreen].bounds.size.width
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
+#define BOUNDS [UIScreen mainScreen].bounds
+
+#define NavRect CGRectMake(0, 20, WIDTH, 40)
+
+//定义颜色
+
+#define HEXCOLOR(rgbValue)      [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define WHITECOLOR [UIColor whiteColor]
+#define BlackColor HEXCOLOR(0x333333)
+#define CAOGREENCOLOR [UIColor colorWithRed:105/255.0 green:184/255.0 blue:59/255.0 alpha:1.0]
+#define LINECOLOR [UIColor colorWithRed:215/255.0 green:216/255.0 blue:221/255.0 alpha:1.0]
+#define REDCOLOR [UIColor colorWithRed:255/255.0 green:0 blue:55/255.0 alpha:1]
+#define TEXTCOLOR [UIColor colorWithRed:117/255.0 green:117/255.0 blue:117/255.0 alpha:1.0]
+#define MIMABGCOLOR [UIColor colorWithRed:63/255.0 green:94/255.0 blue:153/255.0 alpha:1.0]
+#define TIMECOLOR [UIColor colorWithRed:80/255.0 green:80/255.0 blue:80/255.0 alpha:1.0]
+#define BGCOLOR [UIColor colorWithRed:12/255.0 green:77/255.0 blue:146/255.0 alpha:1.0]
+#define SLIVERYCOLOR [UIColor colorWithRed:240/255.0 green:240/255.0 blue:241/255.0 alpha:1.0]
+#define BLUECOLOR [UIColor colorWithRed:97/255.0 green:177/255.0 blue:238/255.0 alpha:1.0]
+#define YELLOWCOLOR [UIColor colorWithRed:247/255.0 green:215/255.0 blue:33/255.0 alpha:1.0]
+#define CyanColor [UIColor colorWithRed:0/255.0 green:199/255.0 blue:217/255.0 alpha:1.0]
+#define NavColor [UIColor colorWithRed:27/255.0 green:37/255.0 blue:54/255.0 alpha:1.0]
+#define BGLINECOLOR [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1.0]
+
+
+
+// 系统版本
+#define iOS10 ([[UIDevice currentDevice].systemVersion doubleValue] >= 10.0)
+#define iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
+
+//Debug调试
+//#ifdef DEBUG
+#define NSLog(format, ...) printf("class: <%s:(%d) > method: %s \n%s\n", [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
+//#else
+//#define NSLog(format, ...)
+//#endif
+
+// 是否横屏
+#define IS_LANDSCAPE UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])
+
+
+#endif /* MSUPrefixHeader_pch */
