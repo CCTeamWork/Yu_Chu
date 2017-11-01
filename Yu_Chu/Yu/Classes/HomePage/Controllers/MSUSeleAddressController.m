@@ -9,9 +9,12 @@
 #import "MSUSeleAddressController.h"
 
 
+#import "MSUSeleLocaView.h"
+
 #import "MSUPrefixHeader.pch"
 #import "MSUHomeNavView.h"
-
+#import "MSUPathTools.h"
+#import "MSUStringTools.h"
 
 //#import <BaiduMapKit/BaiduMapAPI_Map/BMKMapView.h> //mapview 显示相关
 //#import <BaiduMapKit/BaiduMapAPI_Location/BMKLocationService.h> //定位相关
@@ -50,21 +53,26 @@
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArr;
 
+@property (nonatomic , strong) MSUSeleLocaView *locaView;
+
 @end
 
 @implementation MSUSeleAddressController
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = WHITECOLOR;
+    self.view.backgroundColor = REDCOLOR;
     
     MSUHomeNavView *nav = [[MSUHomeNavView alloc] initWithFrame:NavRect showNavWithNumber:1];
     [self.view addSubview:nav];
     [nav.backArrowBtn addTarget:self action:@selector(backArrowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, WIDTH, HEIGHT-60)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
     _scrollView.backgroundColor  = HEXCOLOR(0xffffff);
     _scrollView.scrollEnabled = YES;
     _scrollView.delegate = self;
@@ -90,6 +98,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    /// 状态栏字体颜色
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     self.localService.delegate = self;
@@ -126,15 +137,24 @@
 #pragma mark - 视图相关
 - (void)createTopView{
     UIView *bgView = [[UIView alloc] init];
-    bgView.backgroundColor = HEXCOLOR(0xf2f2f2);
-    bgView.frame = CGRectMake(0, 0, WIDTH, 40);
+    bgView.backgroundColor = HEXCOLOR(0xffffff);
+    bgView.frame = CGRectMake(0, 0, WIDTH, 39+23);
     [_scrollView addSubview:bgView];
+    
+    UIImageView *imaView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 6, WIDTH-28, 33)];
+    imaView.image = [MSUPathTools showImageWithContentOfFileByName:@""];
+    imaView.backgroundColor = HEXCOLOR(0xf2f2f2);
+    [bgView addSubview:imaView];
 
     UIButton *bgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     bgBtn.backgroundColor = [UIColor clearColor];
     [bgView addSubview:bgBtn];
-    bgBtn.frame = CGRectMake(0, 0, WIDTH, 40);
+    bgBtn.frame = CGRectMake(0, 0, WIDTH, 39);
     [bgBtn addTarget:self action:@selector(bgBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.locaView= [[MSUSeleLocaView alloc] initWithFrame:CGRectMake(0, 62, WIDTH, 170)];
+    _locaView.backgroundColor = HEXCOLOR(0xffffff);
+    [_scrollView addSubview:_locaView];
 }
 
 
@@ -335,6 +355,18 @@
     {
         [self.dataArr removeAllObjects];
         [self.dataArr addObjectsFromArray:result.poiList];
+        
+        
+        NSLog(@"--   %@",result.address);
+//        NSString *cityStr = [result.address substringToIndex:6];
+        [self.locaView.addreBtn setTitle:result.address forState:UIControlStateNormal];
+        CGSize sizea = [MSUStringTools danamicGetWidthFromText:result.address WithFont:16];
+        [self.locaView.addreBtn makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_locaView.top).offset(34);
+            make.left.equalTo(_locaView.left).offset(14);
+            make.width.equalTo(sizea.width+30);
+            make.height.equalTo(20);
+        }];
         
         if (isFirstLocation)
         {
