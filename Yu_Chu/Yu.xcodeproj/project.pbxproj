@@ -296,7 +296,6 @@
 				990AED3D1FA80BDE00F5D3E7 /* HomePage */,
 				990AED261FA80BA700F5D3E7 /* Framework */,
 				990AED271FA80BA700F5D3E7 /* GlobeClass */,
-				990AED281FA80BA700F5D3E7 /* Login */,
 				990AED2F1FA80BA700F5D3E7 /* PersonCenter */,
 				990AED361FA80BA700F5D3E7 /* Order */,
 			);
@@ -319,61 +318,6 @@
 				990AED781FA80F5500F5D3E7 /* MSUHomeNavView.m */,
 			);
 			path = GlobeClass;
-			sourceTree = "<group>";
-		};
-		990AED281FA80BA700F5D3E7 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				990AED291FA80BA700F5D3E7 /* Controllers */,
-				990AED2A1FA80BA700F5D3E7 /* Models */,
-				990AED2B1FA80BA700F5D3E7 /* Resource */,
-				990AED2E1FA80BA700F5D3E7 /* Views */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		990AED291FA80BA700F5D3E7 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		990AED2A1FA80BA700F5D3E7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		990AED2B1FA80BA700F5D3E7 /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-				990AED2C1FA80BA700F5D3E7 /* @2X */,
-				990AED2D1FA80BA700F5D3E7 /* @3X */,
-			);
-			path = Resource;
-			sourceTree = "<group>";
-		};
-		990AED2C1FA80BA700F5D3E7 /* @2X */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "@2X";
-			sourceTree = "<group>";
-		};
-		990AED2D1FA80BA700F5D3E7 /* @3X */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "@3X";
-			sourceTree = "<group>";
-		};
-		990AED2E1FA80BA700F5D3E7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		990AED2F1FA80BA700F5D3E7 /* PersonCenter */ = {
