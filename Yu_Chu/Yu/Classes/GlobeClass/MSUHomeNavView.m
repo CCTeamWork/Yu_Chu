@@ -41,7 +41,11 @@
                 [self createDanamicWithTittle:@"购物车" imaName:nil];
             }
                 break;
-
+            case 4:
+            {
+                /// 首页导航栏
+                [self createNearbyWithTittle:nil imageName:nil title:nil];
+            }
             default:
                 break;
                 
@@ -64,7 +68,7 @@
     [_LocationBtn setTitle:city forState:UIControlStateNormal];
     _LocationBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     _LocationBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [_LocationBtn setTitleColor:HEXCOLOR(0x333333) forState:UIControlStateNormal];
+    [_LocationBtn setTitleColor:HEXCOLOR(0xffffff) forState:UIControlStateNormal];
     [_LocationBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"state-location"] forState:UIControlStateNormal];
     _LocationBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
     [self addSubview:_LocationBtn];
@@ -76,17 +80,29 @@
         make.height.equalTo(20);
     }];
     
-    
-    UIImageView *imaView = [[UIImageView alloc] init];
-    imaView.backgroundColor = [UIColor redColor];
-    imaView.image = [MSUPathTools showImageWithContentOfFileByName:@""];
-    [self addSubview:imaView];
-    [imaView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.top).offset(5);
-        make.left.equalTo(self.left).offset(WIDTH *0.5 - 50);
-        make.width.equalTo(100);
-        make.height.equalTo(30);
+    UILabel *attentionLab = [[UILabel alloc] init];
+    attentionLab.text = @"两岸御厨";
+    attentionLab.font = [UIFont systemFontOfSize:16];
+    attentionLab.textAlignment = NSTextAlignmentCenter;
+    attentionLab.textColor = HEXCOLOR(0xffffff);
+    [self addSubview:attentionLab];
+    [attentionLab makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.top).offset(15);
+        make.left.equalTo(self.left).offset([UIScreen mainScreen].bounds.size.width * 0.5 - 100);
+        make.width.equalTo(200);
+        make.height.equalTo(20);
     }];
+    
+//    UIImageView *imaView = [[UIImageView alloc] init];
+//    imaView.backgroundColor = [UIColor redColor];
+//    imaView.image = [MSUPathTools showImageWithContentOfFileByName:@""];
+//    [self addSubview:imaView];
+//    [imaView makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.top).offset(5);
+//        make.left.equalTo(self.left).offset(WIDTH *0.5 - 50);
+//        make.width.equalTo(100);
+//        make.height.equalTo(30);
+//    }];
 }
 
 - (void)createNearbyWithTittle:(NSString *)tittle imageName:(NSString *)name title:(NSString *)rightTitle{
@@ -107,7 +123,7 @@
     _titeleLab.text = tittle;
     _titeleLab.textAlignment = NSTextAlignmentCenter;
     _titeleLab.font = [UIFont systemFontOfSize:18];
-    [_titeleLab setTextColor:HEXCOLOR(0x333333)];
+    [_titeleLab setTextColor:HEXCOLOR(0xffffff)];
     [self addSubview:_titeleLab];
     [_titeleLab makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.top).offset(0);

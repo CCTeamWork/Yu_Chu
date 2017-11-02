@@ -235,24 +235,33 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == _sugeTableView) {
-        [_search resignFirstResponder];
-        _search.text = @"";
-        _tableView.hidden = YES;
-        
-        BMKGeoCodeSearchOption *option = [[BMKGeoCodeSearchOption alloc] init];
-        option.city = self.cityList[indexPath.row];
-        option.address = self.dataList[indexPath.row];
-        BOOL flag = [_geocodesearch geoCode:option];
-        if(flag)
-        {
-            NSLog(@"geo检索发送成功");
+    if (tableView == _tableView) {
+//        [_search resignFirstResponder];
+//        _search.text = @"";
+//        _tableView.hidden = YES;
+//        
+//        BMKGeoCodeSearchOption *option = [[BMKGeoCodeSearchOption alloc] init];
+//        option.city = self.cityList[indexPath.row];
+//        option.address = self.dataList[indexPath.row];
+//        BOOL flag = [_geocodesearch geoCode:option];
+//        if(flag)
+//        {
+//            NSLog(@"geo检索发送成功");
+//        }
+//        else
+//        {
+//            NSLog(@"geo检索发送失败");
+//        }
+        if (self.selectSuccessBlock) {
+            self.selectSuccessBlock(self.dataArr[indexPath.row]);
         }
-        else
-        {
-            NSLog(@"geo检索发送失败");
+        
+    } else{
+        if (self.selectSuccessBlock) {
+            self.selectSuccessBlock(self.dataArr[indexPath.row]);
         }
     }
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
@@ -436,7 +445,7 @@
 
 - (UIView *)searchView{
     if (!_searchView) {
-        self.searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
+        self.searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
         [self.shareShadowView addSubview:_searchView];
         _searchView.backgroundColor = HEXCOLOR(0xffffff);
         
