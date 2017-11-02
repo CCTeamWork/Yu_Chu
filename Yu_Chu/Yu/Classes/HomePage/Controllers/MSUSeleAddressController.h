@@ -10,4 +10,7 @@
 
 @interface MSUSeleAddressController : UIViewController
 
+@property (nonatomic , copy) void (^selectSuccessBlock)(NSString *addressStr);
+
+
 @end
