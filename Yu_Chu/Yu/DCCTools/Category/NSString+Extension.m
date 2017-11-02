@@ -11,6 +11,14 @@
 
 @implementation NSString (Extension)
 
++ (CGFloat)calculateRowWidth:(NSString *)string andFont:(CGFloat)fontSize andHeight:(CGFloat)fontHeight{
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]};  //指定字号
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, fontHeight)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
+                   NSStringDrawingUsesFontLeading attributes:dic context:nil];
+    return rect.size.width;
+}
+
+
 /** 时间戳转时间*/
 + (NSDate *)changeTimeStringFormatWithtimeStamp:(NSString *)string{
     NSDate* detaildate=[NSDate dateWithTimeIntervalSince1970:[string doubleValue]/ 1000.0];

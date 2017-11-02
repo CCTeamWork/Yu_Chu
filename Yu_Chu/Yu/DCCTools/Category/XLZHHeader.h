@@ -11,7 +11,6 @@
 
 #import "AppDelegate.h"
 //#import "AppConfig.h"
-//#import "UIView+Helpers.h"
 #import "NSString+Extension.h"
 #import <ReactiveObjC/ReactiveObjC.h>
 #import "SVProgressHUD.h"
@@ -20,6 +19,9 @@
 #import "MJRefresh.h"
 #import "MJExtension.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UIView+Helpers.h"
+#import "UIButton+vertical.h"
+#import "DCCBaseNavgationView.h"
 
 //定义颜色 XLZH
 #define JQXXXLZHF4F4F4COLOR [UIColor colorWithHexString:@"#f4f4f4"]
@@ -44,6 +46,11 @@
 #define JQXXXLZH8E8E8ECLOLR [UIColor colorWithHexString:@"#8e8e8e"]
 #define JQXXXLZHF73749CLOLR [UIColor colorWithHexString:@"#f73749"]
 #define JQXXXLZHFF2D4BCLOLR [UIColor colorWithHexString:@"#ff2d4b"]
+#define JQXXXLZH272727CLOLR [UIColor colorWithHexString:@"#272727"]
+#define JQXXXLZHFAFAFACLOLR [UIColor colorWithHexString:@"#fafafa"]
+#define JQXXXLZHF6F6F6CLOLR [UIColor colorWithHexString:@"#f6f6f6"]
+#define JQXXXLZHB7B7B7CLOLR [UIColor colorWithHexString:@"#b7b7b7"]
+
 
 #define BasePath                [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 #define AdvertisingPath         [BasePath stringByAppendingString:@"/advertisingHomePage.plist"]
@@ -87,7 +94,8 @@
 #define STATUS_AND_NAVIGATION_HEIGHT        ((STATUS_BAR_HEIGHT) + (NAVIGATION_BAR_HEIGHT))
 //状态栏 ＋ 导航栏 高度 + iPhoneX 底部34
 #define DCC_STATUS_AND_NAVIGATION_HEIGHT    ((STATUS_BAR_HEIGHT) + (NAVIGATION_BAR_HEIGHT)+(IS_IPHONE_X?34:0))
-
+//TabBar + iPhoneX 底部34
+#define DCC_TabBar_AND_X_HEIGHT    (50)+(IS_IPHONE_X?34:0))
 //强引用
 #define WeakSelf                    __weak typeof(self) weakSelf = self
 //强引用

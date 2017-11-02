@@ -6,8 +6,7 @@
 //  Copyright © 2017年 何龙飞. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface MSUPersonCenterController : UIViewController
+#import "DCCBaseViewController.h"
+@interface MSUPersonCenterController : DCCBaseViewController
 
 @end
