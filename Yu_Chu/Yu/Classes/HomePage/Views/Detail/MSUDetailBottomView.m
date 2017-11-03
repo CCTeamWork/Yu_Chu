@@ -36,8 +36,8 @@
 - (void)createView{
     UIView *bgView = [[UIView alloc] init];
     bgView.backgroundColor = [UIColor clearColor];
-    bgView.clipsToBounds = YES;
     bgView.layer.cornerRadius = 59*0.5;
+    bgView.clipsToBounds = YES;
     bgView.layer.shouldRasterize = YES;
     bgView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     [self addSubview:bgView];
@@ -49,11 +49,12 @@
     }];
     
     self.carBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_carBtn setBackgroundImage:[[MSUPathTools showImageWithContentOfFileByName:@"tabbar_icon_shop_default"] stretchableImageWithLeftCapWidth:0 topCapHeight:0] forState:UIControlStateNormal];
+    [_carBtn setBackgroundImage:[[MSUPathTools showImageWithContentOfFileByName:@"tabbar_icon_shop_selected"] stretchableImageWithLeftCapWidth:0 topCapHeight:0] forState:UIControlStateSelected];
     _carBtn.layer.cornerRadius = 59*0.5;
     _carBtn.clipsToBounds = YES;
     _carBtn.layer.shouldRasterize = YES;
     _carBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    [_carBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"tabbar_icon_shop_selected"] forState:UIControlStateNormal];
     [bgView addSubview:_carBtn];
     [_carBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bgView.top).offset(0);
@@ -62,6 +63,29 @@
         make.height.equalTo(59);
     }];
 //    [_carBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    self.carNumLab = [[UILabel alloc] init];
+    _carNumLab.backgroundColor = HEXCOLOR(0xff2d4b);
+    _carNumLab.textAlignment = NSTextAlignmentCenter;
+    _carNumLab.clipsToBounds = YES;
+    _carNumLab.layer.cornerRadius = 7.5;
+    _carNumLab.layer.shouldRasterize = YES;
+    _carNumLab.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    _carNumLab.layer.borderColor = HEXCOLOR(0xffffff).CGColor;
+    _carNumLab.layer.borderWidth = 1;
+    _carNumLab.text = @"1";
+    _carNumLab.font = [UIFont systemFontOfSize:10];
+    _carNumLab.textColor = HEXCOLOR(0xffffff);
+    [self addSubview:_carNumLab];
+    [_carNumLab makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_carBtn.top).offset(5);
+        make.right.equalTo(_carBtn.right).offset(-5);
+        make.width.equalTo(15);
+        make.height.equalTo(15);
+    }];
+    _carNumLab.hidden = YES;
     
     self.showLab = [[UILabel alloc] init];
     _showLab.text = @"未选购商品";
@@ -102,7 +126,8 @@
     self.yunFLab.hidden = YES;
     
     self.buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _buyBtn.backgroundColor = HEXCOLOR(0xff2d4b);
+//    _buyBtn.backgroundColor = HEXCOLOR(0xff2d4b);
+    _buyBtn.backgroundColor = HEXCOLOR(0xcccccc);
     [_buyBtn setTitle:@"立即下单" forState:UIControlStateNormal];
       [_buyBtn setTitleColor:HEXCOLOR(0xffffff) forState:UIControlStateNormal];
     _buyBtn.titleLabel.font = [UIFont systemFontOfSize:14];

@@ -17,7 +17,7 @@
 #import "Masonry.h"
 
 #import "MSUPathTools.h"
-
+#import "MSUStringTools.h"
 
 #import "MSURightTableCell.h"
 
@@ -68,7 +68,7 @@
     [_introLab makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_nameLab.bottom).offset(10);
         make.left.equalTo(_shopImaView.right).offset(6);
-        make.width.equalTo(SelfWidth-74-8-72-6-28);
+        make.width.equalTo(SelfWidth-74-8-72-6-14);
         make.height.equalTo(30);
     }];
     
@@ -90,14 +90,54 @@
     [self.contentView addSubview:_addBtn];
     [_addBtn makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_priceLab.centerY).offset(0);
-        make.right.equalTo(self.contentView.right).offset(-28);
+        make.right.equalTo(self.contentView.right).offset(-14);
         make.width.equalTo(22);
         make.height.equalTo(22);
     }];
-//    [_addBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_addBtn addTarget:self action:@selector(addBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.numLab = [[UILabel alloc] init];
+    _numLab.text = @"1";
+    CGSize sizeA = [MSUStringTools danamicGetWidthFromText:self.numLab.text WithFont:15];
+    _numLab.font = [UIFont systemFontOfSize:15];
+    _numLab.textColor = HEXCOLOR(0xff2d4b);
+    _numLab.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:_numLab];
+    [_numLab makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(_addBtn.centerY).offset(0);
+        make.right.equalTo(_addBtn.left).offset(-10);
+        make.width.equalTo(sizeA.width);
+        make.height.equalTo(15);
+    }];
+    _numLab.hidden = YES;
+    
+    self.deleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_deleBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"shop_icon_subtract"] forState:UIControlStateNormal];
+    [self.contentView addSubview:_deleBtn];
+    [_deleBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_addBtn.top).offset(0);
+        make.right.equalTo(_numLab.left).offset(-10);
+        make.width.equalTo(22);
+        make.height.equalTo(22);
+    }];
+    [_deleBtn addTarget:self action:@selector(deleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    _deleBtn.hidden = YES;
     
 
     
+}
+
+- (void)addBtnClick:(UIButton *)sender{
+    if (self.addClickBlock) {
+        self.addClickBlock(sender);
+    }
+}
+
+- (void)deleBtnClick:(UIButton *)sender{
+    if (self.deleClickBlock) {
+        self.deleClickBlock(sender);
+    }
 }
 
 @end

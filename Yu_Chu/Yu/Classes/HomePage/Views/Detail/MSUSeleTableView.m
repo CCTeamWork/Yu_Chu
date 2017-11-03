@@ -21,9 +21,13 @@
 #import "MSULeftTableCell.h"
 #import "MSURightTableCell.h"
 
+#import "MSUStringTools.h"
+
 @interface MSUSeleTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic , assign) BOOL isScrollDown;
+
+@property (nonatomic , assign) NSInteger goodNum;
 
 @end
 
@@ -68,7 +72,7 @@
     self.rightTableView.dataSource = self;
     self.rightTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.rightTableView.panGestureRecognizer.delaysTouchesBegan = self.rightTableView.delaysContentTouches;
-    _rightTableView.rowHeight = 104;
+    _rightTableView.rowHeight = 119;
     [_rightTableView registerClass:[MSURightTableCell class] forCellReuseIdentifier:@"rightCell"];
     [_rightTableView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.top).offset(0);
@@ -145,6 +149,45 @@
     } else{
         MSURightTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"rightCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        __weak typeof(cell) weakCell = cell;
+        __weak typeof(self) weakSelf = self;
+        self.goodNum = 0;
+        cell.addClickBlock = ^(UIButton *btn) {
+
+            __strong typeof(weakCell) strongCell = weakCell;
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            
+            strongCell.numLab.hidden = NO;
+            strongCell.deleBtn.hidden = NO;
+            strongSelf.goodNum++;
+            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",strongSelf.goodNum];
+//            CGSize sizeA = [MSUStringTools danamicGetWidthFromText:strongCell.numLab.text WithFont:15];
+//            strongCell.numLab.frame = CGRectMake(SelfWidth-46-sizeA.width, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>);
+            
+            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsPrice:goodsNum:)]) {
+                [self.delegate seleDelegateToCaculateWithGoodsPrice:strongCell.priceLab.text goodsNum:[strongCell.numLab.text integerValue]];
+            }
+        };
+        
+       
+        cell.deleClickBlock = ^(UIButton *btn) {
+            __strong typeof(weakCell) strongCell = weakCell;
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            
+            weakSelf.goodNum--;
+            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",strongSelf.goodNum];
+            if (weakSelf.goodNum == 0) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    weakCell.numLab.hidden = YES;
+                    weakCell.deleBtn.hidden = YES;
+                }];
+            }
+            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsPrice:goodsNum:)]) {
+                [strongSelf.delegate seleDelegateToCaculateWithGoodsPrice:strongCell.priceLab.text goodsNum:[strongCell.numLab.text integerValue]];
+            }
+
+        };
         
         return cell;
 
