@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		047631831FAB469F003CE6DB /* FSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631801FAB469F003CE6DB /* FSTextView.m */; };
+		047631841FAB469F003CE6DB /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631821FAB469F003CE6DB /* UIView+Helpers.m */; };
+		0476318A1FAB46B1003CE6DB /* DCCBaseNavgationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631871FAB46B1003CE6DB /* DCCBaseNavgationView.m */; };
+		0476318B1FAB46B1003CE6DB /* DCCRedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631891FAB46B1003CE6DB /* DCCRedTableViewCell.m */; };
+		047631991FAB46C9003CE6DB /* chushi.png in Resources */ = {isa = PBXBuildFile; fileRef = 0476318C1FAB46C8003CE6DB /* chushi.png */; };
+		0476319A1FAB46C9003CE6DB /* DCCUseRulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0476318D1FAB46C8003CE6DB /* DCCUseRulesViewController.m */; };
+		0476319B1FAB46C9003CE6DB /* DCCMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0476318E1FAB46C8003CE6DB /* DCCMoreViewController.m */; };
+		0476319C1FAB46C9003CE6DB /* DCCAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */; };
+		0476319D1FAB46C9003CE6DB /* DCCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631931FAB46C9003CE6DB /* DCCBaseViewController.m */; };
+		0476319E1FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */; };
+		0476319F1FAB46C9003CE6DB /* DCCExchangeRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */; };
 		04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */; };
 		04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471C1FA9B1040075D2E1 /* NSDictionary+ValueCheck.m */; };
 		04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471E1FA9B1040075D2E1 /* NSString+Extension.m */; };
@@ -14,7 +25,6 @@
 		04B547331FA9B1040075D2E1 /* UIColor+Expend.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B547221FA9B1040075D2E1 /* UIColor+Expend.m */; };
 		04B547341FA9B1040075D2E1 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B547241FA9B1040075D2E1 /* UIImage+Extension.m */; };
 		04B547351FA9B1040075D2E1 /* UITextField+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B547261FA9B1040075D2E1 /* UITextField+Extension.m */; };
-		04B547361FA9B1040075D2E1 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B547281FA9B1040075D2E1 /* UIViewExt.m */; };
 		04B547371FA9B1040075D2E1 /* XLTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5472A1FA9B1040075D2E1 /* XLTool.m */; };
 		04B547381FA9B1040075D2E1 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5472E1FA9B1040075D2E1 /* RequestManager.m */; };
 		04B5474F1FA9DDDD0075D2E1 /* address_icon_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B5473C1FA9DDDD0075D2E1 /* address_icon_edit@2x.png */; };
@@ -130,6 +140,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0476317F1FAB469F003CE6DB /* FSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTextView.h; sourceTree = "<group>"; };
+		047631801FAB469F003CE6DB /* FSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTextView.m; sourceTree = "<group>"; };
+		047631811FAB469F003CE6DB /* UIView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helpers.h"; sourceTree = "<group>"; };
+		047631821FAB469F003CE6DB /* UIView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helpers.m"; sourceTree = "<group>"; };
+		047631861FAB46B1003CE6DB /* DCCBaseNavgationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCBaseNavgationView.h; sourceTree = "<group>"; };
+		047631871FAB46B1003CE6DB /* DCCBaseNavgationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCBaseNavgationView.m; sourceTree = "<group>"; };
+		047631881FAB46B1003CE6DB /* DCCRedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCRedTableViewCell.h; sourceTree = "<group>"; };
+		047631891FAB46B1003CE6DB /* DCCRedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCRedTableViewCell.m; sourceTree = "<group>"; };
+		0476318C1FAB46C8003CE6DB /* chushi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chushi.png; sourceTree = "<group>"; };
+		0476318D1FAB46C8003CE6DB /* DCCUseRulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCUseRulesViewController.m; sourceTree = "<group>"; };
+		0476318E1FAB46C8003CE6DB /* DCCMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCMoreViewController.m; sourceTree = "<group>"; };
+		0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCAboutUsViewController.m; sourceTree = "<group>"; };
+		047631901FAB46C8003CE6DB /* DCCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCBaseViewController.h; sourceTree = "<group>"; };
+		047631911FAB46C9003CE6DB /* DCCMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMoreViewController.h; sourceTree = "<group>"; };
+		047631921FAB46C9003CE6DB /* DCCUseRulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCUseRulesViewController.h; sourceTree = "<group>"; };
+		047631931FAB46C9003CE6DB /* DCCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCBaseViewController.m; sourceTree = "<group>"; };
+		047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCMyRedEnvelopeViewController.m; sourceTree = "<group>"; };
+		047631951FAB46C9003CE6DB /* DCCAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCAboutUsViewController.h; sourceTree = "<group>"; };
+		047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCExchangeRedViewController.m; sourceTree = "<group>"; };
+		047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCExchangeRedViewController.h; sourceTree = "<group>"; };
+		047631981FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMyRedEnvelopeViewController.h; sourceTree = "<group>"; };
 		04B547191FA9B1040075D2E1 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CL.h"; sourceTree = "<group>"; };
 		04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CL.m"; sourceTree = "<group>"; };
 		04B5471B1FA9B1040075D2E1 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
@@ -144,8 +175,6 @@
 		04B547241FA9B1040075D2E1 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		04B547251FA9B1040075D2E1 /* UITextField+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extension.h"; sourceTree = "<group>"; };
 		04B547261FA9B1040075D2E1 /* UITextField+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extension.m"; sourceTree = "<group>"; };
-		04B547271FA9B1040075D2E1 /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
-		04B547281FA9B1040075D2E1 /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExt.m; sourceTree = "<group>"; };
 		04B547291FA9B1040075D2E1 /* XLTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLTool.h; sourceTree = "<group>"; };
 		04B5472A1FA9B1040075D2E1 /* XLTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLTool.m; sourceTree = "<group>"; };
 		04B5472B1FA9B1040075D2E1 /* XLZHHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLZHHeader.h; sourceTree = "<group>"; };
@@ -331,6 +360,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0476317E1FAB469F003CE6DB /* FSTextView */ = {
+			isa = PBXGroup;
+			children = (
+				0476317F1FAB469F003CE6DB /* FSTextView.h */,
+				047631801FAB469F003CE6DB /* FSTextView.m */,
+			);
+			path = FSTextView;
+			sourceTree = "<group>";
+		};
+		047631851FAB46B1003CE6DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				047631861FAB46B1003CE6DB /* DCCBaseNavgationView.h */,
+				047631871FAB46B1003CE6DB /* DCCBaseNavgationView.m */,
+				047631881FAB46B1003CE6DB /* DCCRedTableViewCell.h */,
+				047631891FAB46B1003CE6DB /* DCCRedTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		04B547171FA9B1040075D2E1 /* DCCTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +392,9 @@
 		04B547181FA9B1040075D2E1 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				0476317E1FAB469F003CE6DB /* FSTextView */,
+				047631811FAB469F003CE6DB /* UIView+Helpers.h */,
+				047631821FAB469F003CE6DB /* UIView+Helpers.m */,
 				04B547191FA9B1040075D2E1 /* NSDate+CL.h */,
 				04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */,
 				04B5471B1FA9B1040075D2E1 /* NSDictionary+ValueCheck.h */,
@@ -357,8 +409,6 @@
 				04B547241FA9B1040075D2E1 /* UIImage+Extension.m */,
 				04B547251FA9B1040075D2E1 /* UITextField+Extension.h */,
 				04B547261FA9B1040075D2E1 /* UITextField+Extension.m */,
-				04B547271FA9B1040075D2E1 /* UIViewExt.h */,
-				04B547281FA9B1040075D2E1 /* UIViewExt.m */,
 				04B547291FA9B1040075D2E1 /* XLTool.h */,
 				04B5472A1FA9B1040075D2E1 /* XLTool.m */,
 				04B5472B1FA9B1040075D2E1 /* XLZHHeader.h */,
@@ -677,6 +727,7 @@
 		990AED2F1FA80BA700F5D3E7 /* PersonCenter */ = {
 			isa = PBXGroup;
 			children = (
+				047631851FAB46B1003CE6DB /* Views */,
 				990AED301FA80BA700F5D3E7 /* Controllers */,
 			);
 			path = PersonCenter;
@@ -685,6 +736,19 @@
 		990AED301FA80BA700F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0476318C1FAB46C8003CE6DB /* chushi.png */,
+				047631951FAB46C9003CE6DB /* DCCAboutUsViewController.h */,
+				0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */,
+				047631901FAB46C8003CE6DB /* DCCBaseViewController.h */,
+				047631931FAB46C9003CE6DB /* DCCBaseViewController.m */,
+				047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */,
+				047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */,
+				047631911FAB46C9003CE6DB /* DCCMoreViewController.h */,
+				0476318E1FAB46C8003CE6DB /* DCCMoreViewController.m */,
+				047631981FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.h */,
+				047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */,
+				047631921FAB46C9003CE6DB /* DCCUseRulesViewController.h */,
+				0476318D1FAB46C8003CE6DB /* DCCUseRulesViewController.m */,
 				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
 				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
 			);
@@ -922,6 +986,7 @@
 				04B547531FA9DDDD0075D2E1 /* state-location@2x.png in Resources */,
 				99026D751FAC4CA900A011F1 /* tabbar_icon_shop_default@3x.png in Resources */,
 				99026D641FAC3E8000A011F1 /* shop_icon_place@2x.png in Resources */,
+				047631991FAB46C9003CE6DB /* chushi.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,17 +1066,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				990AED731FA80E7100F5D3E7 /* MSUPathTools.m in Sources */,
+				0476319C1FAB46C9003CE6DB /* DCCAboutUsViewController.m in Sources */,
 				9900EB601FAAC4E00072F03C /* MSUScrollHeaderView.m in Sources */,
 				990AECF11FA8048E00F5D3E7 /* AppDelegate.m in Sources */,
 				990AED4C1FA80C4300F5D3E7 /* MSUOrderController.m in Sources */,
-				04B547361FA9B1040075D2E1 /* UIViewExt.m in Sources */,
 				99026D571FAC3C5D00A011F1 /* MSUSellerView.m in Sources */,
 				99026D5A1FAC3CF200A011F1 /* MSUSellerTableCell.m in Sources */,
+				047631831FAB469F003CE6DB /* FSTextView.m in Sources */,
 				990AED5C1FA80D8400F5D3E7 /* MSUAFNRequest.m in Sources */,
 				99026D411FAC0A2400A011F1 /* MSUDetailCommentView.m in Sources */,
 				04B547341FA9B1040075D2E1 /* UIImage+Extension.m in Sources */,
+				0476319E1FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m in Sources */,
+				0476319A1FAB46C9003CE6DB /* DCCUseRulesViewController.m in Sources */,
 				04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */,
 				99026D6E1FAC469A00A011F1 /* MSUShopCarView.m in Sources */,
+				0476318B1FAB46B1003CE6DB /* DCCRedTableViewCell.m in Sources */,
 				04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */,
 				9900EB811FAAF1ED0072F03C /* MSURightTableCell.m in Sources */,
 				9900EB561FAAAF940072F03C /* MSUHomeScrollView.m in Sources */,
@@ -1030,13 +1099,17 @@
 				9900EB7B1FAAEEBA0072F03C /* MSUSeleTableView.m in Sources */,
 				990AED701FA80E2200F5D3E7 /* SVRadialGradientLayer.m in Sources */,
 				9900EB591FAAB2E30072F03C /* MSUHomeTableCell.m in Sources */,
+				0476319B1FAB46C9003CE6DB /* DCCMoreViewController.m in Sources */,
 				9900EB881FAB13CB0072F03C /* MSUDetailBottomView.m in Sources */,
 				04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */,
+				0476319D1FAB46C9003CE6DB /* DCCBaseViewController.m in Sources */,
 				04B5475A1FA9DDDD0075D2E1 /* MSUSeleAddressController.m in Sources */,
 				990AED491FA80C0F00F5D3E7 /* MSUPersonCenterController.m in Sources */,
 				04B547321FA9B1040075D2E1 /* UIButton+vertical.m in Sources */,
 				9900EB6D1FAACC2B0072F03C /* TQLocationConverter.m in Sources */,
 				9900EB6E1FAACC2B0072F03C /* ZCChinaLocation.m in Sources */,
+				047631841FAB469F003CE6DB /* UIView+Helpers.m in Sources */,
+				0476319F1FAB46C9003CE6DB /* DCCExchangeRedViewController.m in Sources */,
 				990AED221FA804D000F5D3E7 /* MSUTabbarController.m in Sources */,
 				99026D531FAC379C00A011F1 /* MSUCommentTopView.m in Sources */,
 				9900EB6C1FAACC2B0072F03C /* GTMBase64.m in Sources */,
@@ -1046,6 +1119,7 @@
 				990AED561FA80C7E00F5D3E7 /* MSUShopCarController.m in Sources */,
 				99026D711FAC49F500A011F1 /* MSUCarTableCell.m in Sources */,
 				99026D4C1FAC130200A011F1 /* MSUDetaiCommentTableCell.m in Sources */,
+				0476318A1FAB46B1003CE6DB /* DCCBaseNavgationView.m in Sources */,
 				990AED791FA80F5500F5D3E7 /* MSUHomeNavView.m in Sources */,
 				990AED6D1FA80E2200F5D3E7 /* SVProgressAnimatedView.m in Sources */,
 				04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */,
