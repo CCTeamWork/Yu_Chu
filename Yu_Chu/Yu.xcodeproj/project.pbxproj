@@ -18,6 +18,15 @@
 		0476319D1FAB46C9003CE6DB /* DCCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631931FAB46C9003CE6DB /* DCCBaseViewController.m */; };
 		0476319E1FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */; };
 		0476319F1FAB46C9003CE6DB /* DCCExchangeRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */; };
+		047631A21FABF67B003CE6DB /* DCCIdeaFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631A11FABF67B003CE6DB /* DCCIdeaFeedbackViewController.m */; };
+		047631A51FABFD96003CE6DB /* DCCMyIntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631A41FABFD96003CE6DB /* DCCMyIntegralViewController.m */; };
+		047631A81FAC0569003CE6DB /* DCCMyEvaluateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631A71FAC0569003CE6DB /* DCCMyEvaluateViewController.m */; };
+		047631AB1FAC0D30003CE6DB /* DCCEvaluateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631AA1FAC0D30003CE6DB /* DCCEvaluateTableViewCell.m */; };
+		047631AE1FAC36D9003CE6DB /* DCCMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631AD1FAC36D9003CE6DB /* DCCMessageViewController.m */; };
+		047631B11FAC3D01003CE6DB /* DCCMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631B01FAC3D01003CE6DB /* DCCMessageTableViewCell.m */; };
+		047631B41FAC47E0003CE6DB /* DCCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631B31FAC47E0003CE6DB /* DCCLocationViewController.m */; };
+		047631B71FAC49A1003CE6DB /* DCCLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631B61FAC49A1003CE6DB /* DCCLocationTableViewCell.m */; };
+		047631BA1FAC52D2003CE6DB /* DCCAddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631B91FAC52D2003CE6DB /* DCCAddLocationViewController.m */; };
 		04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */; };
 		04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471C1FA9B1040075D2E1 /* NSDictionary+ValueCheck.m */; };
 		04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471E1FA9B1040075D2E1 /* NSString+Extension.m */; };
@@ -134,6 +143,24 @@
 		047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCExchangeRedViewController.m; sourceTree = "<group>"; };
 		047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCExchangeRedViewController.h; sourceTree = "<group>"; };
 		047631981FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMyRedEnvelopeViewController.h; sourceTree = "<group>"; };
+		047631A01FABF67B003CE6DB /* DCCIdeaFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCIdeaFeedbackViewController.h; sourceTree = "<group>"; };
+		047631A11FABF67B003CE6DB /* DCCIdeaFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCIdeaFeedbackViewController.m; sourceTree = "<group>"; };
+		047631A31FABFD96003CE6DB /* DCCMyIntegralViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCMyIntegralViewController.h; sourceTree = "<group>"; };
+		047631A41FABFD96003CE6DB /* DCCMyIntegralViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCMyIntegralViewController.m; sourceTree = "<group>"; };
+		047631A61FAC0569003CE6DB /* DCCMyEvaluateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCMyEvaluateViewController.h; sourceTree = "<group>"; };
+		047631A71FAC0569003CE6DB /* DCCMyEvaluateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCMyEvaluateViewController.m; sourceTree = "<group>"; };
+		047631A91FAC0D30003CE6DB /* DCCEvaluateTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCEvaluateTableViewCell.h; sourceTree = "<group>"; };
+		047631AA1FAC0D30003CE6DB /* DCCEvaluateTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCEvaluateTableViewCell.m; sourceTree = "<group>"; };
+		047631AC1FAC36D9003CE6DB /* DCCMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCMessageViewController.h; sourceTree = "<group>"; };
+		047631AD1FAC36D9003CE6DB /* DCCMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCMessageViewController.m; sourceTree = "<group>"; };
+		047631AF1FAC3D01003CE6DB /* DCCMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCMessageTableViewCell.h; sourceTree = "<group>"; };
+		047631B01FAC3D01003CE6DB /* DCCMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCMessageTableViewCell.m; sourceTree = "<group>"; };
+		047631B21FAC47E0003CE6DB /* DCCLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCLocationViewController.h; sourceTree = "<group>"; };
+		047631B31FAC47E0003CE6DB /* DCCLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCLocationViewController.m; sourceTree = "<group>"; };
+		047631B51FAC49A1003CE6DB /* DCCLocationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCLocationTableViewCell.h; sourceTree = "<group>"; };
+		047631B61FAC49A1003CE6DB /* DCCLocationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCLocationTableViewCell.m; sourceTree = "<group>"; };
+		047631B81FAC52D2003CE6DB /* DCCAddLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCAddLocationViewController.h; sourceTree = "<group>"; };
+		047631B91FAC52D2003CE6DB /* DCCAddLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCAddLocationViewController.m; sourceTree = "<group>"; };
 		04B547191FA9B1040075D2E1 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CL.h"; sourceTree = "<group>"; };
 		04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CL.m"; sourceTree = "<group>"; };
 		04B5471B1FA9B1040075D2E1 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
@@ -315,6 +342,12 @@
 				047631871FAB46B1003CE6DB /* DCCBaseNavgationView.m */,
 				047631881FAB46B1003CE6DB /* DCCRedTableViewCell.h */,
 				047631891FAB46B1003CE6DB /* DCCRedTableViewCell.m */,
+				047631A91FAC0D30003CE6DB /* DCCEvaluateTableViewCell.h */,
+				047631AA1FAC0D30003CE6DB /* DCCEvaluateTableViewCell.m */,
+				047631AF1FAC3D01003CE6DB /* DCCMessageTableViewCell.h */,
+				047631B01FAC3D01003CE6DB /* DCCMessageTableViewCell.m */,
+				047631B51FAC49A1003CE6DB /* DCCLocationTableViewCell.h */,
+				047631B61FAC49A1003CE6DB /* DCCLocationTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -625,11 +658,11 @@
 		990AED301FA80BA700F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0476318C1FAB46C8003CE6DB /* chushi.png */,
-				047631951FAB46C9003CE6DB /* DCCAboutUsViewController.h */,
-				0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */,
+				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
+				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
 				047631901FAB46C8003CE6DB /* DCCBaseViewController.h */,
 				047631931FAB46C9003CE6DB /* DCCBaseViewController.m */,
+				0476318C1FAB46C8003CE6DB /* chushi.png */,
 				047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */,
 				047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */,
 				047631911FAB46C9003CE6DB /* DCCMoreViewController.h */,
@@ -638,8 +671,20 @@
 				047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */,
 				047631921FAB46C9003CE6DB /* DCCUseRulesViewController.h */,
 				0476318D1FAB46C8003CE6DB /* DCCUseRulesViewController.m */,
-				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
-				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
+				047631951FAB46C9003CE6DB /* DCCAboutUsViewController.h */,
+				0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */,
+				047631A01FABF67B003CE6DB /* DCCIdeaFeedbackViewController.h */,
+				047631A11FABF67B003CE6DB /* DCCIdeaFeedbackViewController.m */,
+				047631A31FABFD96003CE6DB /* DCCMyIntegralViewController.h */,
+				047631A41FABFD96003CE6DB /* DCCMyIntegralViewController.m */,
+				047631A61FAC0569003CE6DB /* DCCMyEvaluateViewController.h */,
+				047631A71FAC0569003CE6DB /* DCCMyEvaluateViewController.m */,
+				047631AC1FAC36D9003CE6DB /* DCCMessageViewController.h */,
+				047631AD1FAC36D9003CE6DB /* DCCMessageViewController.m */,
+				047631B21FAC47E0003CE6DB /* DCCLocationViewController.h */,
+				047631B31FAC47E0003CE6DB /* DCCLocationViewController.m */,
+				047631B81FAC52D2003CE6DB /* DCCAddLocationViewController.h */,
+				047631B91FAC52D2003CE6DB /* DCCAddLocationViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -883,6 +928,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Yu/Pods-Yu-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -934,6 +980,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047631BA1FAC52D2003CE6DB /* DCCAddLocationViewController.m in Sources */,
 				990AED731FA80E7100F5D3E7 /* MSUPathTools.m in Sources */,
 				0476319C1FAB46C9003CE6DB /* DCCAboutUsViewController.m in Sources */,
 				9900EB601FAAC4E00072F03C /* MSUScrollHeaderView.m in Sources */,
@@ -941,10 +988,12 @@
 				990AED4C1FA80C4300F5D3E7 /* MSUOrderController.m in Sources */,
 				047631831FAB469F003CE6DB /* FSTextView.m in Sources */,
 				990AED5C1FA80D8400F5D3E7 /* MSUAFNRequest.m in Sources */,
+				047631A21FABF67B003CE6DB /* DCCIdeaFeedbackViewController.m in Sources */,
 				04B547341FA9B1040075D2E1 /* UIImage+Extension.m in Sources */,
 				0476319E1FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m in Sources */,
 				0476319A1FAB46C9003CE6DB /* DCCUseRulesViewController.m in Sources */,
 				04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */,
+				047631B11FAC3D01003CE6DB /* DCCMessageTableViewCell.m in Sources */,
 				0476318B1FAB46B1003CE6DB /* DCCRedTableViewCell.m in Sources */,
 				04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */,
 				9900EB811FAAF1ED0072F03C /* MSURightTableCell.m in Sources */,
@@ -952,17 +1001,22 @@
 				04B547351FA9B1040075D2E1 /* UITextField+Extension.m in Sources */,
 				990AECEE1FA8048E00F5D3E7 /* main.m in Sources */,
 				04B547331FA9B1040075D2E1 /* UIColor+Expend.m in Sources */,
+				047631AE1FAC36D9003CE6DB /* DCCMessageViewController.m in Sources */,
 				9900EB7E1FAAEED20072F03C /* MSULeftTableCell.m in Sources */,
 				990AED6B1FA80E2200F5D3E7 /* MSUHUD.m in Sources */,
+				047631B71FAC49A1003CE6DB /* DCCLocationTableViewCell.m in Sources */,
 				990AED591FA80CAC00F5D3E7 /* MSUNaviBaseController.m in Sources */,
 				04B547371FA9B1040075D2E1 /* XLTool.m in Sources */,
 				04B547381FA9B1040075D2E1 /* RequestManager.m in Sources */,
 				9900EB7A1FAAEEBA0072F03C /* MSUDetailTopView.m in Sources */,
 				990AED761FA80E7C00F5D3E7 /* MSUStringTools.m in Sources */,
+				047631B41FAC47E0003CE6DB /* DCCLocationViewController.m in Sources */,
 				9900EB631FAACB040072F03C /* MSUShopDetailController.m in Sources */,
 				990AED871FA8189D00F5D3E7 /* MSUShadowView.m in Sources */,
 				9900EB7B1FAAEEBA0072F03C /* MSUSeleTableView.m in Sources */,
+				047631AB1FAC0D30003CE6DB /* DCCEvaluateTableViewCell.m in Sources */,
 				990AED701FA80E2200F5D3E7 /* SVRadialGradientLayer.m in Sources */,
+				047631A51FABFD96003CE6DB /* DCCMyIntegralViewController.m in Sources */,
 				9900EB591FAAB2E30072F03C /* MSUHomeTableCell.m in Sources */,
 				0476319B1FAB46C9003CE6DB /* DCCMoreViewController.m in Sources */,
 				9900EB881FAB13CB0072F03C /* MSUDetailBottomView.m in Sources */,
@@ -982,6 +1036,7 @@
 				990AED6C1FA80E2200F5D3E7 /* SVIndefiniteAnimatedView.m in Sources */,
 				990AED561FA80C7E00F5D3E7 /* MSUShopCarController.m in Sources */,
 				0476318A1FAB46B1003CE6DB /* DCCBaseNavgationView.m in Sources */,
+				047631A81FAC0569003CE6DB /* DCCMyEvaluateViewController.m in Sources */,
 				990AED791FA80F5500F5D3E7 /* MSUHomeNavView.m in Sources */,
 				990AED6D1FA80E2200F5D3E7 /* SVProgressAnimatedView.m in Sources */,
 				04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */,

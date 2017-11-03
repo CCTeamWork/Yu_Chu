@@ -11,7 +11,7 @@
 #import "MSUTabbarController.h"
 #import "MSUPrefixHeader.pch"
 #import "MSUPathTools.h"
-
+#import "IQKeyboardManager.h"
 #import <BaiduMapAPI/BMapKit.h>
 
 
@@ -41,7 +41,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = WHITECOLOR;
     [self.window makeKeyAndVisible];
-    
+    //注册键盘修改
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     //本地缓存的版本号  第一次启动的时候本地是没有缓存版本号的。
     NSString *versionCache = [[NSUserDefaults standardUserDefaults] objectForKey:@"VersionCache"];
     //当前应用版本号

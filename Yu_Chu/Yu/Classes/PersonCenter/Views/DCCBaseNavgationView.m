@@ -49,4 +49,14 @@
              [target.navigationController popViewControllerAnimated:YES];
      }];
 }
+- (void)redBackGroundSetTitle:(NSString *)title andBackGroundColor:(UIColor *)color andTarget:(UIViewController *)target{
+    self.titleLab.text = title;
+    self.titleLab.textColor = JQXXXLZHFFFFFFCLOLR;
+    self.backgroundColor = color;
+    [self.backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [[self.backBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
+     subscribeNext:^(__kindof UIControl * _Nullable x) {
+         [target.navigationController popViewControllerAnimated:YES];
+     }];
+}
 @end

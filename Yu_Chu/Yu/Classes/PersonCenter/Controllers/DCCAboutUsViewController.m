@@ -46,6 +46,7 @@
     FSTextView *textV = [[FSTextView alloc] initWithFrame:CGRectMake(33, underLV.frameMaxY+25, kScreenWidth-66, 100)];
     textV.textColor = JQXXXLZHB7B7B7CLOLR;
     textV.text = @"两岸御厨，于 2017 年正式上线，是知名浙江两岸咖啡集团协力开发之网上订餐平台．秉持”美味匠心，食在安心”的品牌精神，不惜耗资千万元在杭州设立中央厨房，聘请数十位专业厨师致力于研发最美味之饭菜，确保生产质量并严格遵守食品安全规范．严选新鲜食材、当日烹煮配送，是两岸御厨永远的坚持。让大家吃的放心、吃的开心，则是两岸御厨永远的心愿。";
+    textV.editable = NO;
     [self.view addSubview:textV];
     textV.frameSizeHeight = textV.contentSize.height;
     

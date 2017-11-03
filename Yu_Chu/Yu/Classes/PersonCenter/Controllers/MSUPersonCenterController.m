@@ -11,7 +11,11 @@
 #import "UIButton+vertical.h"
 #import "DCCMyRedEnvelopeViewController.h"
 #import "DCCMoreViewController.h"
-
+#import "DCCIdeaFeedbackViewController.h"
+#import "DCCMyIntegralViewController.h"
+#import "DCCMyEvaluateViewController.h"
+#import "DCCMessageViewController.h"
+#import "DCCLocationViewController.h"
 
 
 @interface MSUPersonCenterController (){
@@ -29,7 +33,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [SVProgressHUD setMinimumDismissTimeInterval:1];
-
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom]; //样式使用自定义
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];// 整个后面的背景选择
+    [SVProgressHUD setBackgroundColor:[UIColor blackColor]];// 弹出框颜色
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];// 弹出框内容颜色
     
     [self initAllData];
     
@@ -96,7 +103,8 @@
     [messageBtn setImage:[UIImage imageNamed:@"mine_icon_message"] forState:UIControlStateNormal];
     [[messageBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x ){
         //点击按钮进入消息页面
-        
+        DCCMessageViewController *vc = [[DCCMessageViewController alloc] init];
+        [self pushToViewcontroller:vc];
     }];
     [topBackView addSubview:messageBtn];
     
@@ -153,18 +161,26 @@
         }
         case 1001:{
             //跳转到收获地址页面
+            DCCLocationViewController *vc = [[DCCLocationViewController alloc] init];
+            [self pushToViewcontroller:vc];
             break;
         }
         case 1002:{
             //跳转到我的评价
+            DCCMyEvaluateViewController *vc = [[DCCMyEvaluateViewController alloc] init];
+            [self pushToViewcontroller:vc];
             break;
         }
         case 1003:{
             //跳转到我的积分
+            DCCMyIntegralViewController *vc = [[DCCMyIntegralViewController alloc] init];
+            [self pushToViewcontroller:vc];
             break;
         }
         case 1004:{
             //跳转到意见反馈页面
+            DCCIdeaFeedbackViewController *vc = [[DCCIdeaFeedbackViewController alloc] init];
+            [self pushToViewcontroller:vc];
             break;
         }
         case 1005:{
@@ -178,12 +194,15 @@
     }
 }
 
-#pragma mark 生命周期
--(void)viewWillAppear:(BOOL)animated{
+#pragma mark 页面的出现和消失
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear: animated];
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

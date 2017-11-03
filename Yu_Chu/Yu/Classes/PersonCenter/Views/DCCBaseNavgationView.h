@@ -17,4 +17,6 @@
 
 - (void)setTitle:(NSString *)title andBackGroundColor:(UIColor *)color andTarget:(UIViewController *)target;
 
+- (void)redBackGroundSetTitle:(NSString *)title andBackGroundColor:(UIColor *)color andTarget:(UIViewController *)target;
+
 @end
