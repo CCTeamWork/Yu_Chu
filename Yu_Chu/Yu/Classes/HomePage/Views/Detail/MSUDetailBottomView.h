@@ -11,6 +11,7 @@
 @interface MSUDetailBottomView : UIView
 
 @property (nonatomic , strong) UIButton *carBtn;
+@property (nonatomic , strong) UILabel *carNumLab;
 
 @property (nonatomic , strong) UILabel *showLab;
 

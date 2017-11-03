@@ -38,7 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     /// 状态栏字体颜色
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 

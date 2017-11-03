@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MSUSeleTableViewDelegate <NSObject>
+
+- (void)seleDelegateToCaculateWithGoodsPrice:(NSString *)price goodsNum:(NSInteger)num;
+
+@end
+
 @interface MSUSeleTableView : UIView
+
+@property (nonatomic , weak) id<MSUSeleTableViewDelegate> delegate;
 
 @property (nonatomic , strong) UITableView *leftTableView;
 

@@ -142,7 +142,7 @@
     [_scrollView addSubview:bgView];
     
     UIImageView *imaView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 6, WIDTH-28, 33)];
-    imaView.image = [MSUPathTools showImageWithContentOfFileByName:@""];
+    imaView.image = [MSUPathTools showImageWithContentOfFileByName:@"address_frame"];
     imaView.backgroundColor = HEXCOLOR(0xf2f2f2);
     [bgView addSubview:imaView];
 
