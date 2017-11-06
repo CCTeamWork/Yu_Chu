@@ -22,6 +22,7 @@ PODS:
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - MJRefresh
   - ReactiveObjC
   - SDWebImage
+  - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -40,7 +42,8 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: c7d8a6080da5159510380a0f4bc9f4da0b05e31f
+PODFILE CHECKSUM: 46cb262fc7774744017e84df319b011eb6284003
 
 COCOAPODS: 1.4.0.beta.1

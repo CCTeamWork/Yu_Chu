@@ -41,6 +41,14 @@
     }
     return _titleLab;
 }
+- (void)loginSetTitle:(NSString *)title andBackGroundColor:(UIColor *)color andTarget:(UIViewController *)target{
+    self.titleLab.text = title;
+    self.titleLab.textColor = JQXXXLZHFFFFFFCLOLR;
+    self.backgroundColor = color;
+    [self.backBtn setImage:[UIImage imageNamed:@"nav_close"] forState:UIControlStateNormal];
+    
+    
+}
 - (void)setTitle:(NSString *)title andBackGroundColor:(UIColor *)color andTarget:(UIViewController *)target{
     self.titleLab.text = title;
     self.backgroundColor = color;

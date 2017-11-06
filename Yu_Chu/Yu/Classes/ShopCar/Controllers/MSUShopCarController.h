@@ -10,4 +10,6 @@
 
 @interface MSUShopCarController : DCCBaseViewController
 
+@property (nonatomic, copy)void (^callBackClimpShopOwnerORDetail)(NSInteger lab);//lab==0跳转到商家 
+
 @end

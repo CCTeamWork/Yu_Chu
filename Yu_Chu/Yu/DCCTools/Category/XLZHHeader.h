@@ -50,7 +50,14 @@
 #define JQXXXLZHFAFAFACLOLR [UIColor colorWithHexString:@"#fafafa"]
 #define JQXXXLZHF6F6F6CLOLR [UIColor colorWithHexString:@"#f6f6f6"]
 #define JQXXXLZHB7B7B7CLOLR [UIColor colorWithHexString:@"#b7b7b7"]
+#define JQXXXLZH000000CLOLR [UIColor colorWithHexString:@"#000000"]
+#define JQXXXLZHD2D2D2CLOLR [UIColor colorWithHexString:@"#d2d2d2"]
+#define JQXXXLZH7ECEF4CLOLR [UIColor colorWithHexString:@"#7ecef4"]
+#define JQXXXLZHFFFADACLOLR [UIColor colorWithHexString:@"#fffada"]
 
+
+
+#define PlaceHolderIMG      [UIImage imageNamed:@"placeHolder"]
 
 #define BasePath                [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 #define AdvertisingPath         [BasePath stringByAppendingString:@"/advertisingHomePage.plist"]

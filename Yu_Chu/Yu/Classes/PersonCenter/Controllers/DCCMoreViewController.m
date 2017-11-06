@@ -106,6 +106,10 @@
     [[outLogoIn rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(id x) {
          //退出登录
+         kAppDelegate.token = @"";
+         [UserDefaults setObject:@"" forKey:@"token"];
+         [NotificationCenter postNotificationName:@"outLogin" object:nil];
+         [self.navigationController popViewControllerAnimated:YES];
      }];
     [self.view addSubview:outLogoIn];
 }

@@ -9,4 +9,5 @@ pod "MJRefresh"
 
 pod "ReactiveObjC"
 pod 'IQKeyboardManager','~> 5.0.3'
+pod "YYText"
 end

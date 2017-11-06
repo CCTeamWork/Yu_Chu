@@ -27,6 +27,9 @@
 		047631D31FAC91D6003CE6DB /* DCCMyIntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631CA1FAC91D5003CE6DB /* DCCMyIntegralViewController.m */; };
 		047631D41FAC91D6003CE6DB /* DCCAddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */; };
 		047631D51FAC91D6003CE6DB /* DCCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631CD1FAC91D5003CE6DB /* DCCLocationViewController.m */; };
+		047631D81FAC95A0003CE6DB /* DCCLoginpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631D71FAC95A0003CE6DB /* DCCLoginpageViewController.m */; };
+		047631DC1FADB657003CE6DB /* DCCShoppingCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631DB1FADB657003CE6DB /* DCCShoppingCarTableViewCell.m */; };
+		047631DF1FB013CB003CE6DB /* DCCConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631DE1FB013CB003CE6DB /* DCCConfirmOrderViewController.m */; };
 		04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */; };
 		04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471C1FA9B1040075D2E1 /* NSDictionary+ValueCheck.m */; };
 		04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471E1FA9B1040075D2E1 /* NSString+Extension.m */; };
@@ -188,6 +191,12 @@
 		047631CD1FAC91D5003CE6DB /* DCCLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCLocationViewController.m; sourceTree = "<group>"; };
 		047631CE1FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCIdeaFeedbackViewController.h; sourceTree = "<group>"; };
 		047631CF1FAC91D5003CE6DB /* DCCLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCLocationViewController.h; sourceTree = "<group>"; };
+		047631D61FAC95A0003CE6DB /* DCCLoginpageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCLoginpageViewController.h; sourceTree = "<group>"; };
+		047631D71FAC95A0003CE6DB /* DCCLoginpageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCLoginpageViewController.m; sourceTree = "<group>"; };
+		047631DA1FADB657003CE6DB /* DCCShoppingCarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCShoppingCarTableViewCell.h; sourceTree = "<group>"; };
+		047631DB1FADB657003CE6DB /* DCCShoppingCarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCShoppingCarTableViewCell.m; sourceTree = "<group>"; };
+		047631DD1FB013CB003CE6DB /* DCCConfirmOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCConfirmOrderViewController.h; sourceTree = "<group>"; };
+		047631DE1FB013CB003CE6DB /* DCCConfirmOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCConfirmOrderViewController.m; sourceTree = "<group>"; };
 		04B547191FA9B1040075D2E1 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CL.h"; sourceTree = "<group>"; };
 		04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CL.m"; sourceTree = "<group>"; };
 		04B5471B1FA9B1040075D2E1 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
@@ -409,6 +418,15 @@
 				047631871FAB46B1003CE6DB /* DCCBaseNavgationView.m */,
 				047631881FAB46B1003CE6DB /* DCCRedTableViewCell.h */,
 				047631891FAB46B1003CE6DB /* DCCRedTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		047631D91FADB63D003CE6DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				047631DA1FADB657003CE6DB /* DCCShoppingCarTableViewCell.h */,
+				047631DB1FADB657003CE6DB /* DCCShoppingCarTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -769,12 +787,18 @@
 		990AED301FA80BA700F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				047631CC1FAC91D5003CE6DB /* DCCAddLocationViewController.h */,
-				047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */,
+				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
+				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
+				047631901FAB46C8003CE6DB /* DCCBaseViewController.h */,
+				047631931FAB46C9003CE6DB /* DCCBaseViewController.m */,
+				047631D61FAC95A0003CE6DB /* DCCLoginpageViewController.h */,
+				047631D71FAC95A0003CE6DB /* DCCLoginpageViewController.m */,
 				047631CE1FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.h */,
 				047631C71FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.m */,
 				047631CF1FAC91D5003CE6DB /* DCCLocationViewController.h */,
 				047631CD1FAC91D5003CE6DB /* DCCLocationViewController.m */,
+				047631CC1FAC91D5003CE6DB /* DCCAddLocationViewController.h */,
+				047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */,
 				047631C41FAC91D4003CE6DB /* DCCMessageViewController.h */,
 				047631C91FAC91D5003CE6DB /* DCCMessageViewController.m */,
 				047631C51FAC91D4003CE6DB /* DCCMyEvaluateViewController.h */,
@@ -784,8 +808,6 @@
 				0476318C1FAB46C8003CE6DB /* chushi.png */,
 				047631951FAB46C9003CE6DB /* DCCAboutUsViewController.h */,
 				0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */,
-				047631901FAB46C8003CE6DB /* DCCBaseViewController.h */,
-				047631931FAB46C9003CE6DB /* DCCBaseViewController.m */,
 				047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */,
 				047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */,
 				047631911FAB46C9003CE6DB /* DCCMoreViewController.h */,
@@ -794,8 +816,6 @@
 				047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */,
 				047631921FAB46C9003CE6DB /* DCCUseRulesViewController.h */,
 				0476318D1FAB46C8003CE6DB /* DCCUseRulesViewController.m */,
-				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
-				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -831,6 +851,7 @@
 		990AED4D1FA80C6E00F5D3E7 /* ShopCar */ = {
 			isa = PBXGroup;
 			children = (
+				047631D91FADB63D003CE6DB /* Views */,
 				990AED4E1FA80C6E00F5D3E7 /* Controllers */,
 			);
 			path = ShopCar;
@@ -841,6 +862,8 @@
 			children = (
 				990AED541FA80C7E00F5D3E7 /* MSUShopCarController.h */,
 				990AED551FA80C7E00F5D3E7 /* MSUShopCarController.m */,
+				047631DD1FB013CB003CE6DB /* DCCConfirmOrderViewController.h */,
+				047631DE1FB013CB003CE6DB /* DCCConfirmOrderViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -947,11 +970,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "何龙飞";
+				ORGANIZATIONNAME = DCC;
 				TargetAttributes = {
 					990AECE81FA8048E00F5D3E7 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = VF4Q39SD8Y;
+						DevelopmentTeam = BQTRH34XZT;
 						ProvisioningStyle = Automatic;
 					};
 					990AED011FA8048E00F5D3E7 = {
@@ -1059,6 +1082,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Yu/Pods-Yu-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1135,6 +1159,7 @@
 				047631D01FAC91D6003CE6DB /* DCCMyEvaluateViewController.m in Sources */,
 				9900EB561FAAAF940072F03C /* MSUHomeScrollView.m in Sources */,
 				04B547351FA9B1040075D2E1 /* UITextField+Extension.m in Sources */,
+				047631DF1FB013CB003CE6DB /* DCCConfirmOrderViewController.m in Sources */,
 				990AECEE1FA8048E00F5D3E7 /* main.m in Sources */,
 				04B547331FA9B1040075D2E1 /* UIColor+Expend.m in Sources */,
 				9900EB7E1FAAEED20072F03C /* MSULeftTableCell.m in Sources */,
@@ -1168,10 +1193,12 @@
 				047631D31FAC91D6003CE6DB /* DCCMyIntegralViewController.m in Sources */,
 				04B547591FA9DDDD0075D2E1 /* MSUHomePageController.m in Sources */,
 				990AED6F1FA80E2200F5D3E7 /* SVProgressHUD.m in Sources */,
+				047631DC1FADB657003CE6DB /* DCCShoppingCarTableViewCell.m in Sources */,
 				990AED6C1FA80E2200F5D3E7 /* SVIndefiniteAnimatedView.m in Sources */,
 				990AED561FA80C7E00F5D3E7 /* MSUShopCarController.m in Sources */,
 				99026D711FAC49F500A011F1 /* MSUCarTableCell.m in Sources */,
 				99026D4C1FAC130200A011F1 /* MSUDetaiCommentTableCell.m in Sources */,
+				047631D81FAC95A0003CE6DB /* DCCLoginpageViewController.m in Sources */,
 				0476318A1FAB46B1003CE6DB /* DCCBaseNavgationView.m in Sources */,
 				990AED791FA80F5500F5D3E7 /* MSUHomeNavView.m in Sources */,
 				990AED6D1FA80E2200F5D3E7 /* SVProgressAnimatedView.m in Sources */,
@@ -1320,7 +1347,7 @@
 			baseConfigurationReference = C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VF4Q39SD8Y;
+				DEVELOPMENT_TEAM = BQTRH34XZT;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1340,7 +1367,7 @@
 			baseConfigurationReference = 6D7E88C8E44E308C234712D9 /* Pods-Yu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VF4Q39SD8Y;
+				DEVELOPMENT_TEAM = BQTRH34XZT;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
