@@ -12,6 +12,9 @@
 
 - (void)seleDelegateToCaculateWithGoodsPrice:(NSString *)price goodsNum:(NSInteger)num;
 
+- (void)seleRightDelegateToPush;
+
+
 @end
 
 @interface MSUSeleTableView : UIView

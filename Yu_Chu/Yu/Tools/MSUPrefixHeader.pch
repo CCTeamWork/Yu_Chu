@@ -43,7 +43,7 @@
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BOUNDS [UIScreen mainScreen].bounds
 
-#define NavRect CGRectMake(0, 20, WIDTH, 40)
+#define NavRect CGRectMake(0, 20, WIDTH, 44)
 
 //定义颜色
 

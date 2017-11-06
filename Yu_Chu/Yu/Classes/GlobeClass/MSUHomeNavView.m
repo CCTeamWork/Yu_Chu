@@ -26,7 +26,7 @@
             case 1:
             {
                 /// 首页导航栏
-                [self createNearbyWithTittle:@"选择收货地址" imageName:nil title:nil];
+                [self createNearbyWithTittle:@"选择收货地址" imageName:@"back" title:nil];
             }
                 break;
             case 2:
@@ -44,8 +44,58 @@
             case 4:
             {
                 /// 首页导航栏
-                [self createNearbyWithTittle:nil imageName:nil title:nil];
+                [self createNearbyWithTittle:nil imageName:@"back" title:nil];
             }
+                break;
+            case 5:
+            {
+                /// 首页导航栏
+                [self createNearbyWithTittle:nil imageName:@"nav_icon_back" title:nil];
+            }
+                break;
+            case 6:
+            {
+                /// 首页导航栏
+                [self createNearbyWithTittle:@"评价" imageName:@"back" title:nil];
+            }
+                break;
+            case 7:
+            {
+                /// 首页导航栏
+                [self createNearbyWithTittle:@"感谢评价" imageName:@"back" title:nil];
+            }
+                break;
+                
+            case 8:
+            {
+                /// 首页导航栏
+                [self createNearbyWithTittle:@"下单成功" imageName:@"nav_close" title:nil];
+            }
+                break;
+            case 9:
+            {
+                /// 首页导航栏
+                [self createDanamicWithTittle:@"支付成功" imaName:@"完成"];
+            }
+                break;
+            case 10:
+            {
+                /// 首页导航栏
+                [self createNearbyWithTittle:@"确认订单" imageName:@"back" title:nil];
+            }
+                break;
+            case 11:
+            {
+                /// 首页导航栏
+                [self createNearbyWithTittle:@"订单取消" imageName:@"nav_close" title:nil];
+            }
+                break;
+            case 12:
+            {
+                /// 首页导航栏
+                [self createaaaWithTittle:@"nav_close" imaName:@"nav_phone"];
+            }
+                break;
             default:
                 break;
                 
@@ -109,7 +159,7 @@
     // 左箭头
     self.backArrowBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     //    _backArrowBtn.backgroundColor = [UIColor blueColor];
-    [_backArrowBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"back"] forState:UIControlStateNormal];
+    [_backArrowBtn setImage:[MSUPathTools showImageWithContentOfFileByName:name] forState:UIControlStateNormal];
     [self addSubview:_backArrowBtn];
     [_backArrowBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.top).offset(8);
@@ -132,21 +182,21 @@
         make.height.equalTo(40);
     }];
     
-    if (name) {
-        // 地图按钮
-        self.positionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_positionBtn setImage:[MSUPathTools showImageWithContentOfFileByName:name] forState:UIControlStateNormal];
-        [_positionBtn setTitle:rightTitle forState:UIControlStateNormal];
-        [_positionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _positionBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [self addSubview:_positionBtn];
-        [_positionBtn makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.top).offset(9.5);
-            make.right.equalTo(self.right).offset(-19);
-            make.width.equalTo(30);
-            make.height.equalTo(21);
-        }];
-    }
+//    if (name) {
+//        // 地图按钮
+//        self.positionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_positionBtn setImage:[MSUPathTools showImageWithContentOfFileByName:name] forState:UIControlStateNormal];
+//        [_positionBtn setTitle:rightTitle forState:UIControlStateNormal];
+//        [_positionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        _positionBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//        [self addSubview:_positionBtn];
+//        [_positionBtn makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.top).offset(9.5);
+//            make.right.equalTo(self.right).offset(-19);
+//            make.width.equalTo(30);
+//            make.height.equalTo(21);
+//        }];
+//    }
 }
 
 
@@ -162,6 +212,33 @@
         make.left.equalTo(self.left).offset(WIDTH * 0.5 - 40);
         make.width.equalTo(80);
         make.height.equalTo(40);
+    }];
+    // 搜索按钮
+    self.homeSearchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [_homeSearchBtn setImage:[MSUPathTools showImageWithContentOfFileByName:imaName] forState:UIControlStateNormal];
+    [_homeSearchBtn setTitle:imaName forState:UIControlStateNormal];
+    [_homeSearchBtn setTitleColor:HEXCOLOR(0xffffff) forState:UIControlStateNormal];
+    _homeSearchBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self addSubview:_homeSearchBtn];
+    [_homeSearchBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.top).offset(10);
+        make.right.equalTo(self.right).offset(-19);
+        make.width.equalTo(20);
+        make.height.equalTo(20);
+    }];
+}
+
+- (void)createaaaWithTittle:(NSString *)tittle imaName:(NSString *)imaName{
+    // 左箭头
+    self.backArrowBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    _backArrowBtn.backgroundColor = [UIColor blueColor];
+    [_backArrowBtn setImage:[MSUPathTools showImageWithContentOfFileByName:tittle] forState:UIControlStateNormal];
+    [self addSubview:_backArrowBtn];
+    [_backArrowBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.top).offset(8);
+        make.left.equalTo(self.left).offset(14);
+        make.width.equalTo(24);
+        make.height.equalTo(24);
     }];
     // 搜索按钮
     self.homeSearchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
