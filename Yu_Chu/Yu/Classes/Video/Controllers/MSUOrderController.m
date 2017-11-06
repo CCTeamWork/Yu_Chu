@@ -7,15 +7,25 @@
 //
 
 #import "MSUOrderController.h"
+#import "MSUCoomentController.h"
+#import "MSUOrderStatusController.h"
+#import "MSUOrderCompleteController.h"
 
 #import "MSUPrefixHeader.pch"
 #import "MSUHomeNavView.h"
 
-@interface MSUOrderController ()<UIScrollViewDelegate>
+#import "MSUAllOrderView.h"
+#import "MSUWaitCommentView.h"
+
+@interface MSUOrderController ()<UIScrollViewDelegate,MSUAllOrderViewDelegate,MSUWaitCommentViewDelegate>
 
 @property (nonatomic , strong) UIScrollView *scrollView;
 
 @property (nonatomic , strong) UIView *lineView ;
+
+@property (nonatomic , strong) MSUAllOrderView *allView;
+
+@property (nonatomic , strong) MSUWaitCommentView *waitView;
 
 @end
 
@@ -32,8 +42,8 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:255/255.0 green:0 blue:55/255.0 alpha:1];
     
-    MSUHomeNavView *nav = [[MSUHomeNavView alloc] initWithFrame:NavRect showNavWithNumber:2];
-    [self.view addSubview:nav];
+//    MSUHomeNavView *nav = [[MSUHomeNavView alloc] initWithFrame:NavRect showNavWithNumber:2];
+//    [self.view addSubview:nav];
     
     
     [self createTopView];
@@ -42,29 +52,29 @@
 
 - (void)createTopView{
     UIView *bgView = [[UIView alloc] init];
-    bgView.frame = CGRectMake(0, 60, WIDTH, HEIGHT-60);
-    bgView.backgroundColor = HEXCOLOR(0xffffff);
+    bgView.frame = CGRectMake(0, 20, WIDTH, HEIGHT-64);
+    bgView.backgroundColor = REDCOLOR;
     [self.view addSubview:bgView];
     
     NSArray *titArr  = @[@"全部订单",@"待评价"];
     for (NSInteger i = 0; i < 2; i++) {
         UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        menuBtn.frame = CGRectMake(WIDTH*0.25-30+WIDTH*0.5*i, 13, 60, 14);
+        menuBtn.frame = CGRectMake(WIDTH*0.5-24-70+(48+70)*i, 0, 70, 44);
         [menuBtn setTitle:titArr[i] forState:UIControlStateNormal];
-        [menuBtn setTitleColor:HEXCOLOR(0x333333) forState:UIControlStateNormal];
+        [menuBtn setTitleColor:HEXCOLOR(0xffffff) forState:UIControlStateNormal];
         [menuBtn setTitleColor:REDCOLOR forState:UIControlStateSelected];
-        menuBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        menuBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         menuBtn.tag = 1542 + i;
         [menuBtn addTarget:self action:@selector(menuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [bgView addSubview:menuBtn];
     }
     
     self.lineView = [[UIView alloc] init];
-    _lineView.frame = CGRectMake(WIDTH*0.25-30, 37, 60, 3);
-    _lineView.backgroundColor = REDCOLOR;
+    _lineView.frame = CGRectMake(WIDTH*0.5-24-60, 37, 60, 3);
+    _lineView.backgroundColor = HEXCOLOR(0xffffff);
     [bgView addSubview:_lineView];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, WIDTH, HEIGHT)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, WIDTH, HEIGHT)];
     _scrollView.backgroundColor  = HEXCOLOR(0xf2f2f2);
     _scrollView.scrollEnabled = YES;
     _scrollView.delegate = self;
@@ -73,6 +83,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [bgView addSubview:_scrollView];
     
+    self.allView.hidden = NO;
+    
 }
 
 #pragma mark - 点击事件
@@ -80,15 +92,57 @@
     
     [UIView animateWithDuration:0.25 animations:^{
         NSInteger a = sender.tag - 1542;
-        _lineView.frame = CGRectMake(WIDTH*0.25-30 + a*WIDTH*0.5, 37, 60, 3);
+        _lineView.frame = CGRectMake(WIDTH*0.5-24-60 + a*(48+60), 37, 60, 3);
     }];
     
     if (sender.tag == 1542) {
-        
+        _scrollView.contentOffset = CGPointMake(0,0);
     } else{
-    
+        _scrollView.contentOffset = CGPointMake(WIDTH, 0);
+        self.waitView.hidden = NO;
     }
 }
 
+
+#pragma mark - 初始化
+- (MSUAllOrderView *)allView{
+    if (!_allView) {
+        self.allView = [[MSUAllOrderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64-49)];
+        _allView.backgroundColor = HEXCOLOR(0xf2f2f2);
+        [_scrollView addSubview:_allView];
+        _allView.delegate = self;
+    }
+    return _allView;
+}
+
+- (MSUWaitCommentView *)waitView{
+    if (!_waitView) {
+        self.waitView = [[MSUWaitCommentView alloc] initWithFrame:CGRectMake(WIDTH, 0, WIDTH, HEIGHT-64-49)];
+        _waitView.backgroundColor = HEXCOLOR(0xf2f2f2);
+        [_scrollView addSubview:_waitView];
+        _waitView.delegate = self;
+    }
+    return _waitView;
+}
+
+#pragma - 代理
+- (void)commentClick{
+    self.hidesBottomBarWhenPushed = YES;
+    MSUCoomentController *coo = [[MSUCoomentController alloc] init];
+    [self.navigationController pushViewController:coo animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+}
+
+- (void)topTableViewCellDidSelect{
+    self.hidesBottomBarWhenPushed = YES;
+    MSUOrderStatusController *status = [[MSUOrderStatusController alloc] init];
+    [self presentViewController:status animated:YES completion:nil];
+}
+
+- (void)bottomTableViewCellDidSelect{
+    self.hidesBottomBarWhenPushed = YES;
+    MSUOrderCompleteController *status = [[MSUOrderCompleteController alloc] init];
+    [self presentViewController:status animated:YES completion:nil];
+}
 
 @end

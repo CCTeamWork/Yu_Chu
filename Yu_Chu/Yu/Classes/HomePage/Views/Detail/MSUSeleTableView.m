@@ -199,6 +199,10 @@
         
         [_rightTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.row] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 
+    } else{
+        if (self.delegate && [_delegate respondsToSelector:@selector(seleRightDelegateToPush)]) {
+            [self.delegate seleRightDelegateToPush];
+        }
     }
 }
 

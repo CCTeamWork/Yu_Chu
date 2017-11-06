@@ -7,6 +7,7 @@
 //
 
 #import "MSUShopDetailController.h"
+#import "MSUOrderDetailController.h"
 
 #import "MSUHomeNavView.h"
 #import "MSUPrefixHeader.pch"
@@ -212,6 +213,12 @@
     _bottomView.carBtn.selected = YES;
     _bottomView.carNumLab.hidden = NO;
 
+}
+
+- (void)seleRightDelegateToPush{
+    self.hidesBottomBarWhenPushed = YES;
+    MSUOrderDetailController *order = [[MSUOrderDetailController alloc] init];
+    [self.navigationController pushViewController:order animated:YES];
 }
 
 
