@@ -89,6 +89,7 @@
     if (cell == nil) {
         cell = [[DCCRedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"redCell"];
     }
+    cell.selectionStyle = UITableViewCellSeparatorStyleNone;
     return cell;
 }
 #pragma mark 页面的出现和消失

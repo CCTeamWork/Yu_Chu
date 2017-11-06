@@ -95,19 +95,19 @@
         }
     }
     
-    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(14, kScreenHeight-36-36, kScreenWidth-28, 36)];
-    [okBtn setBackgroundColor:JQXXXLZHFF2D4BCLOLR];
-    [okBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-    [okBtn setTitleColor:JQXXXLZHFFFFFFCLOLR forState:UIControlStateNormal];
-    okBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    okBtn.contentHorizontalAlignment = 0;
-    okBtn.contentVerticalAlignment = 0;
-    okBtn.layer.cornerRadius = 2.5;
-    [[okBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
+    UIButton *outLogoIn = [[UIButton alloc] initWithFrame:CGRectMake(14, kScreenHeight-36-36, kScreenWidth-28, 36)];
+    [outLogoIn setBackgroundColor:JQXXXLZHFF2D4BCLOLR];
+    [outLogoIn setTitle:@"退出登录" forState:UIControlStateNormal];
+    [outLogoIn setTitleColor:JQXXXLZHFFFFFFCLOLR forState:UIControlStateNormal];
+    outLogoIn.titleLabel.font = [UIFont systemFontOfSize:15];
+    outLogoIn.contentHorizontalAlignment = 0;
+    outLogoIn.contentVerticalAlignment = 0;
+    outLogoIn.layer.cornerRadius = 2.5;
+    [[outLogoIn rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(id x) {
          //退出登录
      }];
-    [self.view addSubview:okBtn];
+    [self.view addSubview:outLogoIn];
 }
 #pragma mark 页面的出现和消失
 - (void)viewWillAppear:(BOOL)animated {

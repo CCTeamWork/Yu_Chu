@@ -18,6 +18,15 @@
 		0476319D1FAB46C9003CE6DB /* DCCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631931FAB46C9003CE6DB /* DCCBaseViewController.m */; };
 		0476319E1FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */; };
 		0476319F1FAB46C9003CE6DB /* DCCExchangeRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */; };
+		047631C11FAC91BC003CE6DB /* DCCMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631BC1FAC91BB003CE6DB /* DCCMessageTableViewCell.m */; };
+		047631C21FAC91BC003CE6DB /* DCCLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631BD1FAC91BB003CE6DB /* DCCLocationTableViewCell.m */; };
+		047631C31FAC91BC003CE6DB /* DCCEvaluateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631C01FAC91BC003CE6DB /* DCCEvaluateTableViewCell.m */; };
+		047631D01FAC91D6003CE6DB /* DCCMyEvaluateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631C61FAC91D4003CE6DB /* DCCMyEvaluateViewController.m */; };
+		047631D11FAC91D6003CE6DB /* DCCIdeaFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631C71FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.m */; };
+		047631D21FAC91D6003CE6DB /* DCCMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631C91FAC91D5003CE6DB /* DCCMessageViewController.m */; };
+		047631D31FAC91D6003CE6DB /* DCCMyIntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631CA1FAC91D5003CE6DB /* DCCMyIntegralViewController.m */; };
+		047631D41FAC91D6003CE6DB /* DCCAddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */; };
+		047631D51FAC91D6003CE6DB /* DCCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631CD1FAC91D5003CE6DB /* DCCLocationViewController.m */; };
 		04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */; };
 		04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471C1FA9B1040075D2E1 /* NSDictionary+ValueCheck.m */; };
 		04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471E1FA9B1040075D2E1 /* NSString+Extension.m */; };
@@ -193,6 +202,24 @@
 		047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCExchangeRedViewController.m; sourceTree = "<group>"; };
 		047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCExchangeRedViewController.h; sourceTree = "<group>"; };
 		047631981FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMyRedEnvelopeViewController.h; sourceTree = "<group>"; };
+		047631BB1FAC91BB003CE6DB /* DCCEvaluateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCEvaluateTableViewCell.h; sourceTree = "<group>"; };
+		047631BC1FAC91BB003CE6DB /* DCCMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCMessageTableViewCell.m; sourceTree = "<group>"; };
+		047631BD1FAC91BB003CE6DB /* DCCLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCLocationTableViewCell.m; sourceTree = "<group>"; };
+		047631BE1FAC91BB003CE6DB /* DCCMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMessageTableViewCell.h; sourceTree = "<group>"; };
+		047631BF1FAC91BB003CE6DB /* DCCLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCLocationTableViewCell.h; sourceTree = "<group>"; };
+		047631C01FAC91BC003CE6DB /* DCCEvaluateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCEvaluateTableViewCell.m; sourceTree = "<group>"; };
+		047631C41FAC91D4003CE6DB /* DCCMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMessageViewController.h; sourceTree = "<group>"; };
+		047631C51FAC91D4003CE6DB /* DCCMyEvaluateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMyEvaluateViewController.h; sourceTree = "<group>"; };
+		047631C61FAC91D4003CE6DB /* DCCMyEvaluateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCMyEvaluateViewController.m; sourceTree = "<group>"; };
+		047631C71FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCIdeaFeedbackViewController.m; sourceTree = "<group>"; };
+		047631C81FAC91D5003CE6DB /* DCCMyIntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCMyIntegralViewController.h; sourceTree = "<group>"; };
+		047631C91FAC91D5003CE6DB /* DCCMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCMessageViewController.m; sourceTree = "<group>"; };
+		047631CA1FAC91D5003CE6DB /* DCCMyIntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCMyIntegralViewController.m; sourceTree = "<group>"; };
+		047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCAddLocationViewController.m; sourceTree = "<group>"; };
+		047631CC1FAC91D5003CE6DB /* DCCAddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCAddLocationViewController.h; sourceTree = "<group>"; };
+		047631CD1FAC91D5003CE6DB /* DCCLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCLocationViewController.m; sourceTree = "<group>"; };
+		047631CE1FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCIdeaFeedbackViewController.h; sourceTree = "<group>"; };
+		047631CF1FAC91D5003CE6DB /* DCCLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCLocationViewController.h; sourceTree = "<group>"; };
 		04B547191FA9B1040075D2E1 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CL.h"; sourceTree = "<group>"; };
 		04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CL.m"; sourceTree = "<group>"; };
 		04B5471B1FA9B1040075D2E1 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
@@ -456,6 +483,12 @@
 		047631851FAB46B1003CE6DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				047631BB1FAC91BB003CE6DB /* DCCEvaluateTableViewCell.h */,
+				047631C01FAC91BC003CE6DB /* DCCEvaluateTableViewCell.m */,
+				047631BF1FAC91BB003CE6DB /* DCCLocationTableViewCell.h */,
+				047631BD1FAC91BB003CE6DB /* DCCLocationTableViewCell.m */,
+				047631BE1FAC91BB003CE6DB /* DCCMessageTableViewCell.h */,
+				047631BC1FAC91BB003CE6DB /* DCCMessageTableViewCell.m */,
 				047631861FAB46B1003CE6DB /* DCCBaseNavgationView.h */,
 				047631871FAB46B1003CE6DB /* DCCBaseNavgationView.m */,
 				047631881FAB46B1003CE6DB /* DCCRedTableViewCell.h */,
@@ -827,6 +860,18 @@
 		990AED301FA80BA700F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				047631CC1FAC91D5003CE6DB /* DCCAddLocationViewController.h */,
+				047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */,
+				047631CE1FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.h */,
+				047631C71FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.m */,
+				047631CF1FAC91D5003CE6DB /* DCCLocationViewController.h */,
+				047631CD1FAC91D5003CE6DB /* DCCLocationViewController.m */,
+				047631C41FAC91D4003CE6DB /* DCCMessageViewController.h */,
+				047631C91FAC91D5003CE6DB /* DCCMessageViewController.m */,
+				047631C51FAC91D4003CE6DB /* DCCMyEvaluateViewController.h */,
+				047631C61FAC91D4003CE6DB /* DCCMyEvaluateViewController.m */,
+				047631C81FAC91D5003CE6DB /* DCCMyIntegralViewController.h */,
+				047631CA1FAC91D5003CE6DB /* DCCMyIntegralViewController.m */,
 				0476318C1FAB46C8003CE6DB /* chushi.png */,
 				047631951FAB46C9003CE6DB /* DCCAboutUsViewController.h */,
 				0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */,
@@ -1275,6 +1320,7 @@
 				990FF7A81FB00BBE007DFD29 /* MSUOrderBottomTableCell.m in Sources */,
 				990451381FB04E8800257C94 /* MSUDeatailTableCell.m in Sources */,
 				9900EB601FAAC4E00072F03C /* MSUScrollHeaderView.m in Sources */,
+				047631D21FAC91D6003CE6DB /* DCCMessageViewController.m in Sources */,
 				990AECF11FA8048E00F5D3E7 /* AppDelegate.m in Sources */,
 				990AED4C1FA80C4300F5D3E7 /* MSUOrderController.m in Sources */,
 				99026D571FAC3C5D00A011F1 /* MSUSellerView.m in Sources */,
@@ -1285,13 +1331,17 @@
 				99026D411FAC0A2400A011F1 /* MSUDetailCommentView.m in Sources */,
 				990FF7A51FB00476007DFD29 /* MSUOrderTopTableCell.m in Sources */,
 				04B547341FA9B1040075D2E1 /* UIImage+Extension.m in Sources */,
+				047631D51FAC91D6003CE6DB /* DCCLocationViewController.m in Sources */,
+				047631D41FAC91D6003CE6DB /* DCCAddLocationViewController.m in Sources */,
 				0476319E1FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m in Sources */,
+				047631D11FAC91D6003CE6DB /* DCCIdeaFeedbackViewController.m in Sources */,
 				0476319A1FAB46C9003CE6DB /* DCCUseRulesViewController.m in Sources */,
 				04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */,
 				99026D6E1FAC469A00A011F1 /* MSUShopCarView.m in Sources */,
 				0476318B1FAB46B1003CE6DB /* DCCRedTableViewCell.m in Sources */,
 				04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */,
 				9900EB811FAAF1ED0072F03C /* MSURightTableCell.m in Sources */,
+				047631D01FAC91D6003CE6DB /* DCCMyEvaluateViewController.m in Sources */,
 				9900EB561FAAAF940072F03C /* MSUHomeScrollView.m in Sources */,
 				04B547351FA9B1040075D2E1 /* UITextField+Extension.m in Sources */,
 				990AECEE1FA8048E00F5D3E7 /* main.m in Sources */,
@@ -1311,6 +1361,8 @@
 				9900EB7B1FAAEEBA0072F03C /* MSUSeleTableView.m in Sources */,
 				990AED701FA80E2200F5D3E7 /* SVRadialGradientLayer.m in Sources */,
 				9900EB591FAAB2E30072F03C /* MSUHomeTableCell.m in Sources */,
+				047631C11FAC91BC003CE6DB /* DCCMessageTableViewCell.m in Sources */,
+				047631C21FAC91BC003CE6DB /* DCCLocationTableViewCell.m in Sources */,
 				0476319B1FAB46C9003CE6DB /* DCCMoreViewController.m in Sources */,
 				9900EB881FAB13CB0072F03C /* MSUDetailBottomView.m in Sources */,
 				990FF79A1FAFF4CE007DFD29 /* MSUOrderBottomView.m in Sources */,
@@ -1334,6 +1386,7 @@
 				990FF7BC1FB02B18007DFD29 /* MSUThankComView.m in Sources */,
 				990FF7971FAFF226007DFD29 /* MSUOrderTopView.m in Sources */,
 				9900EB6C1FAACC2B0072F03C /* GTMBase64.m in Sources */,
+				047631D31FAC91D6003CE6DB /* DCCMyIntegralViewController.m in Sources */,
 				04B547591FA9DDDD0075D2E1 /* MSUHomePageController.m in Sources */,
 				990AED6F1FA80E2200F5D3E7 /* SVProgressHUD.m in Sources */,
 				990FF7931FAFEDB4007DFD29 /* MSUOrderDetailController.m in Sources */,
@@ -1347,6 +1400,7 @@
 				990FF7AE1FB018B2007DFD29 /* MSUCoomentController.m in Sources */,
 				990AED6D1FA80E2200F5D3E7 /* SVProgressAnimatedView.m in Sources */,
 				04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */,
+				047631C31FAC91BC003CE6DB /* DCCEvaluateTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
