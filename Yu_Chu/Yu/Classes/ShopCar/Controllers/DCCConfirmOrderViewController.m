@@ -9,6 +9,8 @@
 #import "DCCConfirmOrderViewController.h"
 #import "XLZHHeader.h"
 #import "Masonry.h"
+#import "DCCLocationViewController.h"
+#import "DCCMyRedEnvelopeViewController.h"
 
 @interface DCCConfirmOrderViewController (){
     UIScrollView *_mainScrollerView;
@@ -93,11 +95,11 @@
     UILabel *discountInfoLab = [[UILabel alloc] initWithFrame:CGRectMake(0,arriveLcationLab.frameMaxY ,kScreenWidth-106, 50 )];
     discountInfoLab.text = @"  待支付 ¥24 | 优惠 ¥14";
     discountInfoLab.backgroundColor = JQXXXLZH272727CLOLR;
-    discountInfoLab.backgroundColor = JQXXXLZHFAFAFACLOLR;
+    discountInfoLab.backgroundColor = JQXXXLZHF4F4F4COLOR;
     discountInfoLab.font = [UIFont systemFontOfSize:12];
     [self.view addSubview:discountInfoLab];
     
-    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(discountInfoLab.frameMaxX, discountInfoLab.frameOriginY+12, 106, 50)];
+    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(discountInfoLab.frameMaxX, discountInfoLab.frameOriginY, 106, 50)];
     [okBtn setTitle:@"提交订单" forState:UIControlStateNormal];
     [okBtn setTitleColor:JQXXXLZHFFFFFFCLOLR forState:UIControlStateNormal];
     okBtn.contentHorizontalAlignment = 0;
@@ -366,14 +368,18 @@
 }
 #pragma mark ONClick
 - (void)climpLocationListPage{
-    
+    DCCLocationViewController *vc = [[DCCLocationViewController alloc] init];
+    vc.isSelected = YES;
+    [self secondPushToViewcontroller:vc];
 }
 
 - (void)selectTime{
-    
+    //选择配送时间
 }
 - (void)climpRedPage{
-    
+    DCCMyRedEnvelopeViewController *vc = [[DCCMyRedEnvelopeViewController alloc] init];
+    vc.isSelected = YES;
+    [self secondPushToViewcontroller:vc];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

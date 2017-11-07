@@ -55,6 +55,8 @@ typedef NS_ENUM(NSInteger, VerticalLayoutType) {
              insets:(UIEdgeInsets)insets
 andReferenceIsSuperView:(BOOL)isReferenceSuperView;
 
+- (UIViewController *)getParentviewController;
+
 // Init
 - (id)initWithSize:(CGSize)size;
 

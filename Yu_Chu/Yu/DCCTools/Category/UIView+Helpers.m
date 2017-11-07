@@ -475,7 +475,20 @@ static NSString * const UIVIEW_HELPERS_FRAME_KVO_KEY = @"frame";
         }
     }
 }
-
+//获得视图的父控制器
+- (UIViewController *)getParentviewController{
+    for (UIView *next = [self superview];next;next = next.superview) {
+        
+        UIResponder *nextResponder = [next nextResponder];
+        
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            
+            return (UIViewController *)nextResponder;
+            
+        }
+    }
+    return nil;
+}
 #pragma mark - Corners and Masks
 
 - (void)roundCornersTopLeft:(CGFloat)topLeft topRight:(CGFloat)topRight bottomLeft:(CGFloat)bottomLeft bottomRight:(CGFloat)bottomRight

@@ -30,6 +30,11 @@
 		047631E31FB07539003CE6DB /* DCCShoppingCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631E21FB07539003CE6DB /* DCCShoppingCarTableViewCell.m */; };
 		047631E61FB07541003CE6DB /* DCCConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631E51FB07541003CE6DB /* DCCConfirmOrderViewController.m */; };
 		047631E91FB07565003CE6DB /* DCCLoginpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631E71FB07564003CE6DB /* DCCLoginpageViewController.m */; };
+		047631FA1FB149AF003CE6DB /* ChooseLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631F51FB149AF003CE6DB /* ChooseLocationVC.m */; };
+		047631FB1FB149AF003CE6DB /* MapPoiTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631F71FB149AF003CE6DB /* MapPoiTableView.m */; };
+		047631FC1FB149AF003CE6DB /* SearchResultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631F91FB149AF003CE6DB /* SearchResultTable.m */; };
+		047632001FB18C3F003CE6DB /* DCCLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 047631FF1FB18C3F003CE6DB /* DCCLocationModel.m */; };
+		047632031FB1D7AB003CE6DB /* DCCUserInfomationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 047632021FB1D7AB003CE6DB /* DCCUserInfomationModel.m */; };
 		04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */; };
 		04B547301FA9B1040075D2E1 /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471C1FA9B1040075D2E1 /* NSDictionary+ValueCheck.m */; };
 		04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5471E1FA9B1040075D2E1 /* NSString+Extension.m */; };
@@ -229,6 +234,16 @@
 		047631E51FB07541003CE6DB /* DCCConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCConfirmOrderViewController.m; sourceTree = "<group>"; };
 		047631E71FB07564003CE6DB /* DCCLoginpageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCLoginpageViewController.m; sourceTree = "<group>"; };
 		047631E81FB07564003CE6DB /* DCCLoginpageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCLoginpageViewController.h; sourceTree = "<group>"; };
+		047631F41FB149AF003CE6DB /* ChooseLocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseLocationVC.h; sourceTree = "<group>"; };
+		047631F51FB149AF003CE6DB /* ChooseLocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseLocationVC.m; sourceTree = "<group>"; };
+		047631F61FB149AF003CE6DB /* MapPoiTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPoiTableView.h; sourceTree = "<group>"; };
+		047631F71FB149AF003CE6DB /* MapPoiTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPoiTableView.m; sourceTree = "<group>"; };
+		047631F81FB149AF003CE6DB /* SearchResultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultTable.h; sourceTree = "<group>"; };
+		047631F91FB149AF003CE6DB /* SearchResultTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTable.m; sourceTree = "<group>"; };
+		047631FE1FB18C3F003CE6DB /* DCCLocationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCLocationModel.h; sourceTree = "<group>"; };
+		047631FF1FB18C3F003CE6DB /* DCCLocationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCLocationModel.m; sourceTree = "<group>"; };
+		047632011FB1D7AB003CE6DB /* DCCUserInfomationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCUserInfomationModel.h; sourceTree = "<group>"; };
+		047632021FB1D7AB003CE6DB /* DCCUserInfomationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCUserInfomationModel.m; sourceTree = "<group>"; };
 		04B547191FA9B1040075D2E1 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CL.h"; sourceTree = "<group>"; };
 		04B5471A1FA9B1040075D2E1 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CL.m"; sourceTree = "<group>"; };
 		04B5471B1FA9B1040075D2E1 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
@@ -513,6 +528,30 @@
 				047631E21FB07539003CE6DB /* DCCShoppingCarTableViewCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		047631F31FB149AF003CE6DB /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				047631F41FB149AF003CE6DB /* ChooseLocationVC.h */,
+				047631F51FB149AF003CE6DB /* ChooseLocationVC.m */,
+				047631F61FB149AF003CE6DB /* MapPoiTableView.h */,
+				047631F71FB149AF003CE6DB /* MapPoiTableView.m */,
+				047631F81FB149AF003CE6DB /* SearchResultTable.h */,
+				047631F91FB149AF003CE6DB /* SearchResultTable.m */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		047631FD1FB18C30003CE6DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				047631FE1FB18C3F003CE6DB /* DCCLocationModel.h */,
+				047631FF1FB18C3F003CE6DB /* DCCLocationModel.m */,
+				047632011FB1D7AB003CE6DB /* DCCUserInfomationModel.h */,
+				047632021FB1D7AB003CE6DB /* DCCUserInfomationModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		04B547171FA9B1040075D2E1 /* DCCTools */ = {
@@ -869,6 +908,8 @@
 		990AED2F1FA80BA700F5D3E7 /* PersonCenter */ = {
 			isa = PBXGroup;
 			children = (
+				047631FD1FB18C30003CE6DB /* Model */,
+				047631F31FB149AF003CE6DB /* Location */,
 				047631851FAB46B1003CE6DB /* Views */,
 				990AED301FA80BA700F5D3E7 /* Controllers */,
 			);
@@ -878,14 +919,20 @@
 		990AED301FA80BA700F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
+				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
 				047631E81FB07564003CE6DB /* DCCLoginpageViewController.h */,
 				047631E71FB07564003CE6DB /* DCCLoginpageViewController.m */,
-				047631CC1FAC91D5003CE6DB /* DCCAddLocationViewController.h */,
-				047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */,
-				047631CE1FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.h */,
-				047631C71FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.m */,
 				047631CF1FAC91D5003CE6DB /* DCCLocationViewController.h */,
 				047631CD1FAC91D5003CE6DB /* DCCLocationViewController.m */,
+				047631CC1FAC91D5003CE6DB /* DCCAddLocationViewController.h */,
+				047631CB1FAC91D5003CE6DB /* DCCAddLocationViewController.m */,
+				047631981FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.h */,
+				047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */,
+				047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */,
+				047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */,
+				047631CE1FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.h */,
+				047631C71FAC91D5003CE6DB /* DCCIdeaFeedbackViewController.m */,
 				047631C41FAC91D4003CE6DB /* DCCMessageViewController.h */,
 				047631C91FAC91D5003CE6DB /* DCCMessageViewController.m */,
 				047631C51FAC91D4003CE6DB /* DCCMyEvaluateViewController.h */,
@@ -897,16 +944,10 @@
 				0476318F1FAB46C8003CE6DB /* DCCAboutUsViewController.m */,
 				047631901FAB46C8003CE6DB /* DCCBaseViewController.h */,
 				047631931FAB46C9003CE6DB /* DCCBaseViewController.m */,
-				047631971FAB46C9003CE6DB /* DCCExchangeRedViewController.h */,
-				047631961FAB46C9003CE6DB /* DCCExchangeRedViewController.m */,
 				047631911FAB46C9003CE6DB /* DCCMoreViewController.h */,
 				0476318E1FAB46C8003CE6DB /* DCCMoreViewController.m */,
-				047631981FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.h */,
-				047631941FAB46C9003CE6DB /* DCCMyRedEnvelopeViewController.m */,
 				047631921FAB46C9003CE6DB /* DCCUseRulesViewController.h */,
 				0476318D1FAB46C8003CE6DB /* DCCUseRulesViewController.m */,
-				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
-				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -967,10 +1008,10 @@
 		990AED4E1FA80C6E00F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				047631E41FB07541003CE6DB /* DCCConfirmOrderViewController.h */,
-				047631E51FB07541003CE6DB /* DCCConfirmOrderViewController.m */,
 				990AED541FA80C7E00F5D3E7 /* MSUShopCarController.h */,
 				990AED551FA80C7E00F5D3E7 /* MSUShopCarController.m */,
+				047631E41FB07541003CE6DB /* DCCConfirmOrderViewController.h */,
+				047631E51FB07541003CE6DB /* DCCConfirmOrderViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1286,6 +1327,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Yu/Pods-Yu-resources.sh",
+				"${PODS_ROOT}/AMap2DMap-NO-IDFA/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1348,6 +1391,7 @@
 				990AECF11FA8048E00F5D3E7 /* AppDelegate.m in Sources */,
 				990AED4C1FA80C4300F5D3E7 /* MSUOrderController.m in Sources */,
 				99026D571FAC3C5D00A011F1 /* MSUSellerView.m in Sources */,
+				047632001FB18C3F003CE6DB /* DCCLocationModel.m in Sources */,
 				99026D5A1FAC3CF200A011F1 /* MSUSellerTableCell.m in Sources */,
 				047631831FAB469F003CE6DB /* FSTextView.m in Sources */,
 				9904512F1FB0465400257C94 /* MSUOrderStatusController.m in Sources */,
@@ -1362,6 +1406,7 @@
 				0476319A1FAB46C9003CE6DB /* DCCUseRulesViewController.m in Sources */,
 				04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */,
 				99026D6E1FAC469A00A011F1 /* MSUShopCarView.m in Sources */,
+				047631FB1FB149AF003CE6DB /* MapPoiTableView.m in Sources */,
 				0476318B1FAB46B1003CE6DB /* DCCRedTableViewCell.m in Sources */,
 				04B547311FA9B1040075D2E1 /* NSString+Extension.m in Sources */,
 				9900EB811FAAF1ED0072F03C /* MSURightTableCell.m in Sources */,
@@ -1376,6 +1421,7 @@
 				9900EB7E1FAAEED20072F03C /* MSULeftTableCell.m in Sources */,
 				990AED6B1FA80E2200F5D3E7 /* MSUHUD.m in Sources */,
 				990AED591FA80CAC00F5D3E7 /* MSUNaviBaseController.m in Sources */,
+				047631FC1FB149AF003CE6DB /* SearchResultTable.m in Sources */,
 				990FF7A21FB00405007DFD29 /* MSUAllOrderView.m in Sources */,
 				04B547371FA9B1040075D2E1 /* XLTool.m in Sources */,
 				04B547381FA9B1040075D2E1 /* RequestManager.m in Sources */,
@@ -1392,6 +1438,7 @@
 				9900EB881FAB13CB0072F03C /* MSUDetailBottomView.m in Sources */,
 				047631E31FB07539003CE6DB /* DCCShoppingCarTableViewCell.m in Sources */,
 				990FF79A1FAFF4CE007DFD29 /* MSUOrderBottomView.m in Sources */,
+				047631FA1FB149AF003CE6DB /* ChooseLocationVC.m in Sources */,
 				04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */,
 				0476319D1FAB46C9003CE6DB /* DCCBaseViewController.m in Sources */,
 				04B5475A1FA9DDDD0075D2E1 /* MSUSeleAddressController.m in Sources */,
@@ -1415,6 +1462,7 @@
 				047631D31FAC91D6003CE6DB /* DCCMyIntegralViewController.m in Sources */,
 				04B547591FA9DDDD0075D2E1 /* MSUHomePageController.m in Sources */,
 				990AED6F1FA80E2200F5D3E7 /* SVProgressHUD.m in Sources */,
+				047632031FB1D7AB003CE6DB /* DCCUserInfomationModel.m in Sources */,
 				990FF7931FAFEDB4007DFD29 /* MSUOrderDetailController.m in Sources */,
 				990AED6C1FA80E2200F5D3E7 /* SVIndefiniteAnimatedView.m in Sources */,
 				990AED561FA80C7E00F5D3E7 /* MSUShopCarController.m in Sources */,

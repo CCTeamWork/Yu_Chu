@@ -3,10 +3,11 @@
 #import "RequestManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import <objc/runtime.h>
+#import "NSDictionary+ValueCheck.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
-//#define baseUrl  @"http://118.190.84.191/"
-//#define BaseUrl   @"http://192.168.10.69:8199/"
+#define DCCBaseUrl  @"http://192.168.10.123:8201/"
+#define DCCCYQBaseUrl   @"http://192.168.10.67:8201/"
 
 @interface RequestManager ()
 
@@ -18,7 +19,14 @@ static NSString *const JinQiangXinxiErrorDomain = @"JinQiangXinxiErrorDomain";
 
 @implementation RequestManager
 static id instance;
-
++ (instancetype)sharedInstance {
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
 #pragma mark - 配置请求底层参数
 
 - (AFHTTPSessionManager *)sessionManager {
@@ -67,13 +75,9 @@ static id instance;
     }
     else {
         NSLog(@"===Request faild:E%ld===", error.code);
-        if (error.code == 10001) {
-            //[SVProgressHUD dismiss];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenChange" object:nil];
-            return;
-        }
+
     }
-    
+    valueData = [NSDictionary changeType:valueData];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (nil != completion) {
             completion(nil == error, valueData, error);
@@ -106,15 +110,15 @@ static id instance;
         return nil;
     }
     
-//    NSInteger rcCode = [[responseDic valueWithNilForKey:@"code"] integerValue];
-//    valueData = responseDic;
-//    if (200 != rcCode) {
-////        *error = [self JinQiangXinxiErrorFromRC:rcCode];
-//        *error = [NSError errorWithDomain:JinQiangXinxiErrorDomain code:rcCode userInfo:@{NSLocalizedDescriptionKey:[responseDic valueWithNilForKey:@"message"]}];
-//        objc_setAssociatedObject(*error, NSLocalizedDescriptionKey, valueData, OBJC_ASSOCIATION_COPY_NONATOMIC);
-//        
-//        valueData = nil;
-//    }
+    NSInteger rcCode = [[responseDic valueWithNilForKey:@"code"] integerValue];
+    valueData = responseDic;
+    if (200 != rcCode) {
+        *error = [self JinQiangXinxiErrorFromRC:rcCode];
+        *error = [NSError errorWithDomain:JinQiangXinxiErrorDomain code:rcCode userInfo:@{NSLocalizedDescriptionKey:[responseDic valueWithNilForKey:@"message"]}];
+        objc_setAssociatedObject(*error, NSLocalizedDescriptionKey, valueData, OBJC_ASSOCIATION_COPY_NONATOMIC);
+        
+        valueData = nil;
+    }
     if ([valueData isKindOfClass:[NSNull class]]) {
         valueData = nil;
     }
@@ -248,4 +252,32 @@ static id instance;
     }];
 }
 
+- (void)uploadLocationAddressToSVR:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/addAddress",DCCBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+
+//获取收货列表
+- (void)getConfirmLocationListWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/getMyAddress",DCCBaseUrl];
+    [self getRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+//获取验证码
+- (void)getVerificationWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/getLoginValidateCode",DCCCYQBaseUrl];
+    [self getRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+//登陆 获取token
+- (void)loginAndGetToken:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/smsLogin",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+//获取用户信息
+- (void)getUserInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/getMyUserInfo",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
 @end

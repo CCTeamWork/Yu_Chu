@@ -10,4 +10,9 @@
 
 @interface DCCLocationViewController : DCCBaseViewController
 
+
+@property (nonatomic, assign)BOOL isSelected;
+
+@property (nonatomic, copy)void(^callBackReturnLocationModel)();
+
 @end

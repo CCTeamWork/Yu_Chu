@@ -13,6 +13,8 @@
 #import "MSUPathTools.h"
 #import "IQKeyboardManager.h"
 #import <BaiduMapAPI/BMapKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 
 @interface AppDelegate ()<UIScrollViewDelegate,BMKGeneralDelegate>
@@ -37,7 +39,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.token = @"";
+    [[NSUserDefaults standardUserDefaults]objectForKey:@""];
+    [self loginToken];
+    [AMapServices sharedServices].apiKey = @"3a4e6ecafef66c22884cff96f992a799";
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = WHITECOLOR;
@@ -89,6 +93,7 @@
 /* 设置根控制器 */
 - (void)createRootWithDictionary:(NSDictionary *)launchOptions application:(UIApplication *)application{
     MSUTabbarController *tab = [[MSUTabbarController alloc] init];
+    self.mainTabBar = tab;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tab];
     nav.navigationBar.hidden = YES;
     self.window.rootViewController = nav;
@@ -98,7 +103,14 @@
     // 百度地图
     [self setupBaiduMap];
 }
-
+/**  设置token*/
+- (void)loginToken{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"]) {
+        self.token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    }else{
+        self.token = @"";
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

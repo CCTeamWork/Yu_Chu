@@ -18,6 +18,7 @@
 #import "DCCLocationViewController.h"
 #import "DCCLoginpageViewController.h"
 #import "UITextField+Extension.h"
+#import "DCCUserInfomationModel.h"
 
 @interface MSUPersonCenterController (){
     BOOL _isLoadView;//标识是否加载过控件
@@ -34,6 +35,8 @@
     UIButton *_noLoginBtn;
     
     BOOL _isLogin;
+    
+    DCCUserInfomationModel *_currentModel;
 }
 
 
@@ -59,16 +62,29 @@
     [[NotificationCenter rac_addObserverForName:@"outLogin" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         [self initAllData];
     }];
+    [[NotificationCenter rac_addObserverForName:@"loginSuccess" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        [self initAllData];
+    }];
 }
 - (void)initAllData{
     //请求数据
     _isLogin = ![kAppDelegate.token isEqualToString:@""];
     if (_isLogin) {
-        if (_isLoadView) {
-            [self setRequestDataToSubviews];
-            return;
-        }
-        [self loadHaveDataBackView];
+        [SVProgressHUD show];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [[RequestManager sharedInstance]getUserInfomation:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+            [SVProgressHUD dismiss];
+            if (succeed) {
+            _currentModel = [DCCUserInfomationModel mj_objectWithKeyValues:[responseData valueWithNilForKey:@"data"]];
+                if (_isLoadView) {
+                    [self setRequestDataToSubviews];
+                    return;
+                }
+                [self loadHaveDataBackView];
+            }else{
+                [SVProgressHUD showErrorWithStatus:[responseData valueWithNilForKey:@"message"]];
+            }
+        }];
     }else{
         if (_isLoadView) {
             _personalIntegralBtn.hidden = YES;
@@ -170,8 +186,8 @@
     _mainSV.contentSize = CGSizeMake(kScreenWidth, currentHeight);
 }
 - (void)loadHaveDataBackView{
-    NSString *userNameString = @"我叫天王大哥";
-    NSString *integralString = @"菜鸟";
+    NSString *userNameString = _currentModel.name;
+    NSString *integralString = _currentModel.bonusPointsBalance;
     _isLoadView = YES;
     CGFloat headIMGWidth = 53.0;
     _headIMGV = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth/2.0-headIMGWidth/2.0, 45+(IS_IPHONE_X?24:0), headIMGWidth, headIMGWidth)];
@@ -182,7 +198,7 @@
     
     CGFloat nameWidth = [NSString calculateRowWidth:userNameString andFont:14 andHeight:15];
     CGFloat totalWidth = nameWidth+8+16;
-    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake((_topBackView.frameSizeWidth-totalWidth)/2.0, _headIMGV.frameMaxY+13, totalWidth, 16)];
+    _userNameLab = [[UILabel alloc] initWithFrame:CGRectMake((_topBackView.frameSizeWidth-totalWidth)/2.0, _headIMGV.frameMaxY+13, nameWidth, 16)];
     _userNameLab.text = userNameString;
     _userNameLab.textColor = JQXXXLZHFFFFFFCLOLR;
     _userNameLab.font = [UIFont systemFontOfSize:14];
@@ -213,8 +229,8 @@
     _editNameBtn.hidden = NO;
     _userNameLab.hidden = NO;
     _headIMGV.hidden = NO;
-    NSString *userNameString = @"我叫天王大哥";
-    NSString *integralString = @"菜鸟";
+    NSString *userNameString = _currentModel.name;
+    NSString *integralString = _currentModel.bonusPointsBalance;
     _userNameLab.text = userNameString;
     [_personalIntegralBtn setTitle:integralString forState:UIControlStateNormal];
 }
@@ -358,7 +374,12 @@
             [SVProgressHUD showErrorWithStatus:@"昵称不能为空"];
             return;
         }
+        CGFloat nameWidth = [NSString calculateRowWidth:_editNameTF.text andFont:14 andHeight:15];
+        CGFloat totalWidth = nameWidth+8+16;
+        _userNameLab.frameOriginX = (_topBackView.frameSizeWidth-totalWidth)/2.0;
+        _userNameLab.frameSizeWidth = nameWidth;
         _userNameLab.text = _editNameTF.text;
+        _editNameBtn.frameOriginX = _userNameLab.frameMaxX+8;
     }
     [self cancelEditUserName:nil];
 }

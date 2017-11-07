@@ -9,6 +9,7 @@
 #import "DCCLoginpageViewController.h"
 #import "XLZHHeader.h"
 #import "YYText.h"
+#import "UITextField+Extension.h"
 
 @interface DCCLoginpageViewController (){
     
@@ -19,6 +20,7 @@
 
 @implementation DCCLoginpageViewController{
     UITextField *_phoneTF;
+    UITextField *_verificationTF;
     UIButton *_getNumBtn;
     
     NSInteger totalTime;
@@ -35,6 +37,11 @@
 - (void)initAllData{
     
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_timer invalidate];
+
+}
 
 - (void)initAllSubviews{
     self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
@@ -50,12 +57,15 @@
     [self.view addSubview:navV];
     
     UIImageView *phoneIMGV = [[UIImageView alloc] initWithFrame:CGRectMake(14, navV.frameMaxY+37, 17, 17)];
-    phoneIMGV.image = [UIImage imageNamed:@""];
+    phoneIMGV.image = [UIImage imageNamed:@"login_icon_Phone"];
     [self.view addSubview:phoneIMGV];
     
     _phoneTF = [[UITextField alloc] initWithFrame:CGRectMake(phoneIMGV.frameMaxX+20, navV.frameMaxY+34, kScreenWidth-150-14, 19)];
+    _phoneTF.keyboardType = UIKeyboardTypeNumberPad;
     _phoneTF.placeholder = @"请输入电话号码";
     _phoneTF.textColor = JQXXXLZH272727CLOLR;
+    [_phoneTF addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    _phoneTF.tag = 1001;
     _phoneTF.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:_phoneTF];
     
@@ -66,8 +76,33 @@
     [[_getNumBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(__kindof UIControl * _Nullable x) {
          //获取验证码
-         totalTime = 60;
-         [_timer setFireDate:[NSDate distantPast]];
+         if (_phoneTF.text.length != 11) {
+             [SVProgressHUD showErrorWithStatus:@"手机号码格式错误"];
+             return ;
+         }
+         BOOL ret = [NSString validateMobile:_phoneTF.text];
+         if (ret) {
+             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+             [dic setObject:_phoneTF.text forKey:@"mobile"];
+             [[RequestManager sharedInstance]getVerificationWith:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+                 if (succeed) {
+                     totalTime = 60;
+                     [_timer setFireDate:[NSDate distantPast]];
+                     NSString *messageS = [responseData valueWithNilForKey:@"message"];
+                     if (messageS.length > 4) {
+                         messageS = [messageS substringToIndex:4];
+                     }
+                     _verificationTF.text = messageS;
+                     [SVProgressHUD showSuccessWithStatus:@"发送成功"];
+                     
+                 }else{
+                     [SVProgressHUD showErrorWithStatus:@"发送失败请重试"];
+                 }
+             }];
+         }else{
+             [SVProgressHUD showErrorWithStatus:@"手机号码格式错误"];
+         }
+        
      }];
     [self.view addSubview:_getNumBtn];
     
@@ -80,16 +115,19 @@
     [self.view addSubview:underLV];
     
     UIImageView *verificationCodeIMGV = [[UIImageView alloc] initWithFrame:CGRectMake(14, underLV.frameMaxY+25, 17, 17)];
-    verificationCodeIMGV.image = [UIImage imageNamed:@""];
+    verificationCodeIMGV.image = [UIImage imageNamed:@"login_icon_key"];
     [self.view addSubview:verificationCodeIMGV];
     
-    _phoneTF = [[UITextField alloc] initWithFrame:CGRectMake(phoneIMGV.frameMaxX+20, underLV.frameMaxY+22, kScreenWidth-150-14, 19)];
-    _phoneTF.placeholder = @"请输入验证码";
-    _phoneTF.textColor = JQXXXLZH272727CLOLR;
-    _phoneTF.font = [UIFont systemFontOfSize:15];
-    [self.view addSubview:_phoneTF];
+    _verificationTF = [[UITextField alloc] initWithFrame:CGRectMake(phoneIMGV.frameMaxX+20, underLV.frameMaxY+22, kScreenWidth-150-14, 19)];
+    _verificationTF.placeholder = @"请输入验证码";
+    _verificationTF.textColor = JQXXXLZH272727CLOLR;
+    _verificationTF.font = [UIFont systemFontOfSize:15];
+    _verificationTF.tag = 1002;
+    _verificationTF.keyboardType = UIKeyboardTypeNumberPad;
+    [_verificationTF addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.view addSubview:_verificationTF];
     
-    UIView *underLV2 = [[UIView alloc] initWithFrame:CGRectMake(14, _phoneTF.frameMaxY+9, kScreenWidth-28, 1.0)];
+    UIView *underLV2 = [[UIView alloc] initWithFrame:CGRectMake(14, _verificationTF.frameMaxY+9, kScreenWidth-28, 1.0)];
     underLV2.backgroundColor = JQXXXLZHFAFAFACLOLR;
     [self.view addSubview:underLV2];
     
@@ -121,13 +159,26 @@
     [[loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(id x) {
          //判定信息是否 正确，然后跳转并刷新
-         BOOL isOK = YES;
+         
+         BOOL isOK = [self judgeIsOK];
          if (isOK) {
-             kAppDelegate.token = @"newToken";
-             if (self.callBackReturnLoginStatus) {
-                 self.callBackReturnLoginStatus(isOK);
-             }
-             [self dismissViewControllerAnimated:YES completion:nil];
+             [SVProgressHUD show];
+             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+             [dic setObject:_phoneTF.text forKey:@"mobile"];
+             [dic setObject:_verificationTF.text forKey:@"validateCode"];
+             [[RequestManager sharedInstance]loginAndGetToken:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+                 [SVProgressHUD dismiss];
+                 if (succeed) {
+                     kAppDelegate.token = [[responseData valueWithNilForKey:@"data"] valueWithNilForKey:@"token"];
+                     [[NSUserDefaults standardUserDefaults] setObject:kAppDelegate.token forKey:@"dccLoginToken"];
+                     if (self.callBackReturnLoginStatus) {
+                         self.callBackReturnLoginStatus(isOK);
+                     }
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                 }else{
+                     [SVProgressHUD showErrorWithStatus:[responseData valueWithNilForKey:@"message"]];
+                 }
+             }];
          }else{
              [SVProgressHUD showErrorWithStatus:@"信息填写错误"];
          }
@@ -149,7 +200,27 @@
     [_timer setFireDate:[NSDate distantFuture]];
     
 }
+- (BOOL)judgeIsOK{
+    if (_phoneTF.text.length != 11) {
+        [SVProgressHUD showErrorWithStatus:@"手机号码格式错误"];
+        return NO;
+    }
+    if (!(_verificationTF.text.length == 6 || _verificationTF.text.length == 4)) {
+        [SVProgressHUD showErrorWithStatus:@"验证码格式错误"];
+        return NO;
+    }
+    
+    return [NSString validateMobile:_phoneTF.text];;
+}
+- (void)textFieldChanged:(UITextField *)TF{
 
+    if (TF.tag == 1001) {
+        [TF LimitCharacterWithInteger:11];
+    }
+    if (TF.tag == 1002) {
+        [TF LimitCharacterWithInteger:6];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

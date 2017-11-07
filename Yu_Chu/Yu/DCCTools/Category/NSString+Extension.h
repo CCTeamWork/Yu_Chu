@@ -12,6 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface NSString (Extension)
 
++ (BOOL) validateMobile:(NSString *)mobile;
+
 + (CGFloat)calculateRowWidth:(NSString *)string andFont:(CGFloat)fontSize andHeight:(CGFloat)fontHeight;
 
 ///** 时间戳转NSDate  */

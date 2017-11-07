@@ -9,4 +9,8 @@
 #import "DCCBaseViewController.h"
 @interface DCCMyRedEnvelopeViewController : DCCBaseViewController
 
+@property (nonatomic, assign)BOOL isSelected;
+
+@property (nonatomic, copy)void(^callBackReturnRedModel)();
+
 @end

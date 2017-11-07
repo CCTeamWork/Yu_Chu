@@ -7,6 +7,7 @@
 //
 
 #import "DCCBaseViewController.h"
+#import "SVProgressHUD.h"
 
 @interface DCCBaseViewController ()
 
@@ -32,6 +33,14 @@
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     self.hidesBottomBarWhenPushed = YES;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [SVProgressHUD dismiss];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

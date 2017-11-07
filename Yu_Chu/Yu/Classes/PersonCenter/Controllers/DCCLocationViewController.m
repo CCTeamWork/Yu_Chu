@@ -12,9 +12,11 @@
 #import "Masonry.h"
 #import "DCCLocationTableViewCell.h"
 #import "DCCAddLocationViewController.h"
+#import "DCCLocationModel.h"
 
 @interface DCCLocationViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UITableView *_mainTableview;
+    NSMutableArray <DCCLocationModel*>*_dataSourceArr;
 }
 
 @end
@@ -30,7 +32,17 @@
 }
 
 - (void)initAllData{
-    
+    [SVProgressHUD show];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [[RequestManager sharedInstance]getConfirmLocationListWith:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (succeed) {
+            _dataSourceArr = [DCCLocationModel mj_objectArrayWithKeyValuesArray:[responseData valueWithNilForKey:@"data"]];
+            [_mainTableview reloadData];
+        }else{
+            [SVProgressHUD showErrorWithStatus:[responseData valueWithNilForKey:@"message"]];
+        }
+    }];
 }
 
 - (void)initAllSubviews{
@@ -108,7 +120,7 @@
 }
 #pragma mark UITableviewDelegate UITbaleviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataSourceArr.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 85;
@@ -124,8 +136,36 @@
      subscribeNext:^(__kindof UIControl * _Nullable x) {
          [self climpEditLocationPageWithIndexPath:indexPath];
      }];
+    DCCLocationModel *model = _dataSourceArr[indexPath.row];
+    [cell initAllDataWith:model];
     return cell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_isSelected) {
+        if (self.callBackReturnLocationModel) {
+            self.callBackReturnLocationModel();
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+/**
+ *  修改Delete按钮文字为“删除”
+ */
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [_dataSourceArr removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationAutomatic];
+        //删除补充删除接口
+    }
+}
+
 - (void)climpEditLocationPageWithIndexPath:(NSIndexPath *)indexPath{
     DCCAddLocationViewController *vc = [[DCCAddLocationViewController alloc] init];
     if (indexPath) {
@@ -133,6 +173,10 @@
     }else{
         vc.isEdit = NO;
     }
+    vc.callBackAndRefreshPage = ^{
+        //刷新页面
+        [self initAllData];
+    };
     [self secondPushToViewcontroller:vc];
 }
 - (void)didReceiveMemoryWarning {

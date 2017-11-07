@@ -11,6 +11,7 @@
 #import "DCCShoppingCarTableViewCell.h"
 #import "Masonry.h"
 #import "DCCConfirmOrderViewController.h"
+#import "DCCLoginpageViewController.h"
 
 @interface MSUShopCarController ()<UITableViewDelegate,UITableViewDataSource>{
     UITableView *_mainTableview;
@@ -27,12 +28,33 @@
     [self initAllData];
     
     [self initAllSubviews];
+    
+    [[NotificationCenter rac_addObserverForName:@"outLogin" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        [self initAllData];
+    }];
+    [[NotificationCenter rac_addObserverForName:@"loginSuccess" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        [self initAllData];
+    }];
 }
 
 - (void)initAllData{
-    
+    BOOL isLogin = [kAppDelegate.token isEqualToString:@""];
+    if (!isLogin) {
+        [self climpLoginPage];
+    }
 }
-
+- (void)climpLoginPage{
+    
+    DCCLoginpageViewController *vc = [[DCCLoginpageViewController alloc] init];
+    vc.callBackReturnLoginStatus = ^(BOOL _isLogin) {
+        if (_isLogin) {
+            [self initAllData];
+        }else{
+            kAppDelegate.mainTabBar.selectedIndex = 0;
+        }
+    };
+    [self presentViewController:vc animated:YES completion:nil];
+}
 - (void)initAllSubviews{
     self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
     DCCBaseNavgationView *navV = [[DCCBaseNavgationView alloc] init];
@@ -94,18 +116,18 @@
         cell = [[DCCShoppingCarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"shopCell"];
     }
     cell.selectionStyle = UITableViewCellSeparatorStyleNone;
-    [[cell.removeBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
-     subscribeNext:^(__kindof UIControl * _Nullable x) {
-         //点击了删除按钮
-     }];
-    
-    [[cell.commitBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
-     subscribeNext:^(__kindof UIControl * _Nullable x) {
-         //点击了结算按钮
-         DCCConfirmOrderViewController *vc = [[DCCConfirmOrderViewController alloc] init];
-         [self pushToViewcontroller:vc];
-         
-     }];
+    [cell.removeBtn addTarget:self action:@selector(clickRemoveButton:) forControlEvents:UIControlEventTouchUpInside];
+    cell.removeBtn.tag = indexPath.row;
+    [cell.commitBtn addTarget:self action:@selector(clickConfirmButton) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+- (void)clickConfirmButton{
+    //结算按钮
+    DCCConfirmOrderViewController *vc = [[DCCConfirmOrderViewController alloc] init];
+    [self pushToViewcontroller:vc];
+}
+- (void)clickRemoveButton:(UIButton *)sender{
+    //删除按钮
+    
 }
 @end

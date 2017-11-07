@@ -22,6 +22,7 @@
 #import "UIView+Helpers.h"
 #import "UIButton+vertical.h"
 #import "DCCBaseNavgationView.h"
+#import "RequestManager.h"
 
 //定义颜色 XLZH
 #define JQXXXLZHF4F4F4COLOR [UIColor colorWithHexString:@"#f4f4f4"]

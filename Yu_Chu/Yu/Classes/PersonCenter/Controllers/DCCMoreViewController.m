@@ -107,8 +107,8 @@
      subscribeNext:^(id x) {
          //退出登录
          kAppDelegate.token = @"";
-         [UserDefaults setObject:@"" forKey:@"token"];
          [NotificationCenter postNotificationName:@"outLogin" object:nil];
+         [[NSUserDefaults standardUserDefaults] setObject:kAppDelegate.token forKey:@"dccLoginToken"];
          [self.navigationController popViewControllerAnimated:YES];
      }];
     [self.view addSubview:outLogoIn];
