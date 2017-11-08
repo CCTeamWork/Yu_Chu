@@ -36,4 +36,6 @@
 
 @property (nonatomic, copy) NSString *hnumber;
 
+@property (nonatomic, copy) NSString *tid;
+
 @end

@@ -171,6 +171,7 @@
                  if (succeed) {
                      kAppDelegate.token = [[responseData valueWithNilForKey:@"data"] valueWithNilForKey:@"token"];
                      [[NSUserDefaults standardUserDefaults] setObject:kAppDelegate.token forKey:@"dccLoginToken"];
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
                      if (self.callBackReturnLoginStatus) {
                          self.callBackReturnLoginStatus(isOK);
                      }

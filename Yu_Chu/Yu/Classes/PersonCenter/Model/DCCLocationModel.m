@@ -10,4 +10,10 @@
 
 @implementation DCCLocationModel
 
++ (NSDictionary *)replacedKeyFromPropertyName {
+    
+     return @{@"tid":@"id"};
+    
+ }
+
 @end

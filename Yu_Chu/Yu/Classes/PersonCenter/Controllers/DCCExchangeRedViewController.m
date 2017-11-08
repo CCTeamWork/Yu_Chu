@@ -48,11 +48,6 @@
     _exchangeRedTF.placeholder = @"请出入兑换码";
     _exchangeRedTF.keyboardType = UIKeyboardTypeEmailAddress;
     _exchangeRedTF.font = [UIFont systemFontOfSize:15];
-    [_exchangeRedTF.rac_textSignal subscribeNext:^(id x){
-        NSString *text = x;
-        //在这里可以限制字符数量
-        
-    }];
     [backV addSubview:_exchangeRedTF];
     
     UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(14, backV.frameMaxY+26, kScreenWidth-28, 36)];
@@ -72,7 +67,18 @@
 - (void)startExchangeRed{
     if (_exchangeRedTF.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"兑换码不能为空"];
+        return;
     }
+    [SVProgressHUD show];
+    double delayInSeconds = 2.0;
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, mainQueue, ^{
+        NSLog(@"延时执行的2秒");
+//        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:@"兑换码错误"];
+        
+    });
 }
 #pragma mark 页面的出现和消失
 - (void)viewWillAppear:(BOOL)animated {

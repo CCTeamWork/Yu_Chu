@@ -37,6 +37,8 @@
     BOOL _isLogin;
     
     DCCUserInfomationModel *_currentModel;
+    
+    NSInteger _refreshCount;
 }
 
 
@@ -57,19 +59,15 @@
     
     [self initAllSubviews];
     
-    [self initAllData];
-
-    [[NotificationCenter rac_addObserverForName:@"outLogin" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-        [self initAllData];
-    }];
-    [[NotificationCenter rac_addObserverForName:@"loginSuccess" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-        [self initAllData];
-    }];
 }
+
 - (void)initAllData{
     //请求数据
     _isLogin = ![kAppDelegate.token isEqualToString:@""];
     if (_isLogin) {
+        if (_noLoginBtn) {
+            _noLoginBtn.hidden = YES;
+        }
         [SVProgressHUD show];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [[RequestManager sharedInstance]getUserInfomation:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
@@ -106,6 +104,7 @@
         _noLoginBtn.layer.borderColor = JQXXXLZHFFFFFFCLOLR.CGColor;
         _noLoginBtn.layer.borderWidth = 1.5;
         _noLoginBtn.clipsToBounds = YES;
+        _noLoginBtn.hidden = NO;
         [[_noLoginBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
          subscribeNext:^(__kindof UIControl * _Nullable x) {
              [self climpLoginPage];
@@ -140,6 +139,7 @@
     [[messageBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x ){
         //点击按钮进入消息页面
         DCCMessageViewController *vc = [[DCCMessageViewController alloc] init];
+        vc.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
         [self pushToViewcontroller:vc];
     }];
     [_topBackView addSubview:messageBtn];
@@ -187,7 +187,7 @@
 }
 - (void)loadHaveDataBackView{
     NSString *userNameString = _currentModel.name;
-    NSString *integralString = _currentModel.bonusPointsBalance;
+    NSString *integralString = @"平民";
     _isLoadView = YES;
     CGFloat headIMGWidth = 53.0;
     _headIMGV = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth/2.0-headIMGWidth/2.0, 45+(IS_IPHONE_X?24:0), headIMGWidth, headIMGWidth)];
@@ -230,7 +230,7 @@
     _userNameLab.hidden = NO;
     _headIMGV.hidden = NO;
     NSString *userNameString = _currentModel.name;
-    NSString *integralString = _currentModel.bonusPointsBalance;
+    NSString *integralString = @"平民";
     _userNameLab.text = userNameString;
     [_personalIntegralBtn setTitle:integralString forState:UIControlStateNormal];
 }
@@ -252,12 +252,15 @@
         case 1002:{
             //跳转到我的评价
             DCCMyEvaluateViewController *vc = [[DCCMyEvaluateViewController alloc] init];
+            vc.userName = _currentModel.name;
             [self pushToViewcontroller:vc];
             break;
         }
         case 1003:{
             //跳转到我的积分
             DCCMyIntegralViewController *vc = [[DCCMyIntegralViewController alloc] init];
+            vc.userName = _currentModel.name;
+            vc.integral = _currentModel.bonusPointsBalance;
             [self pushToViewcontroller:vc];
             break;
         }
@@ -291,7 +294,7 @@
     vc.callBackReturnLoginStatus = ^(BOOL _isLogin) {
         if (_isLogin) {
             _noLoginBtn.hidden = YES;
-            [self initAllData];
+//            [self initAllData];
         }
     };
     [self presentViewController:vc animated:YES completion:nil];
@@ -397,6 +400,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self initAllData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

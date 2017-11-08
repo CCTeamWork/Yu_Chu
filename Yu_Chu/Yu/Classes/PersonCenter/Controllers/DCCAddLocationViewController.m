@@ -191,14 +191,14 @@
              [dic setObjectSafe:@"0" forKey:@"district"];
              [SVProgressHUD show];
              [[RequestManager sharedInstance]uploadLocationAddressToSVR:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
-              [SVProgressHUD dismiss];
-                 [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+//                 [SVProgressHUD dismiss];
                  if (succeed) {
                      if (self.callBackAndRefreshPage) {
                          self.callBackAndRefreshPage();
                      }
-                     
                      [self.navigationController popViewControllerAnimated:YES];
+                     [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+
                  }else{
                       [SVProgressHUD showErrorWithStatus:[responseData valueWithNilForKey:@"message"]];
                  }

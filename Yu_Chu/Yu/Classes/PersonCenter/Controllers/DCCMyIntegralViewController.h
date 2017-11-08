@@ -10,4 +10,8 @@
 
 @interface DCCMyIntegralViewController : DCCBaseViewController
 
+@property (nonatomic, copy) NSString *integral;
+
+@property (nonatomic, copy) NSString *userName;
+
 @end

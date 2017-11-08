@@ -29,8 +29,8 @@
 }
 
 - (void)initAllSubviews{
-    NSString *userNameString = @"御厨666888";
-    NSString *myIntegralString = @"666888";
+    NSString *userNameString = self.userName;
+    NSString *myIntegralString = self.integral;
     
     self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
     DCCBaseNavgationView *navV = [[DCCBaseNavgationView alloc] init];

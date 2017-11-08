@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "DCCLocationViewController.h"
 #import "DCCMyRedEnvelopeViewController.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 @interface DCCConfirmOrderViewController (){
     UIScrollView *_mainScrollerView;
@@ -32,10 +33,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self initAllData];
     
-    [self initAllSubviews];
+    if (self.shopId) {
+        if (![self.shopId isEqualToString:@""]) {
+            [self initAllData];
+            [self initAllSubviews];
+            return;
+        }
+    }
+    [NSException raise:@"你没有传shopid" format:@"跳转确认订单页面必须传shopid"];
+    
 }
 
 - (void)initAllData{
@@ -108,8 +115,37 @@
     [[okBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
          subscribeNext:^(__kindof UIControl * _Nullable x) {
          //点击提交订单
+             [self gotoAliPay];
      }];
     [self.view addSubview:okBtn];
+}
+- (void)gotoAliPay{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+//    [dic setObject:self.order forKey:@"orders"];
+//    [[RequestManager sharedInstance]getAliPayOrderString:dic andCallBack:^(BOOL succeed, id responseData, NSError *error) {
+//        if (succeed) {
+//            self.orderString = [responseData valueWithNilForKey:@"form"];
+//            NSString *appScheme = @"CHinaJianCai";
+//                       NSString *newsign = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)_orderString, NULL, (CFStringRef)@"!*'();:@&=+ $,./?%#[]", kCFStringEncodingUTF8));
+//            [[AlipaySDK defaultService] payOrder:_orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+//                NSString  *resultString = resultDic[@"resultStatus"] ;
+//                if ([resultString isEqualToString:@"9000"]) {
+//                    //支付成功,这里放你们想要的操作
+//                    NSLog(@"成功了");
+//                    [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+//                    [self.navigationController popViewControllerAnimated:NO];
+//                }
+//                else{
+//                    NSLog(@"失败了");
+//                    [SVProgressHUD showErrorWithStatus:@"支付失败"];
+//                }
+//            }];
+//        }else{
+//            [SVProgressHUD showErrorWithStatus:@"出现未知错误，请重试"];
+//            self.orderString = nil;
+//        }
+//    }];
 }
 - (void)addRedPocket{
     UIView *redV = [[UIView alloc] initWithFrame:CGRectMake(0, _currentHeight, kScreenWidth, 45)];

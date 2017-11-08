@@ -10,4 +10,7 @@
 
 @interface DCCMyEvaluateViewController : DCCBaseViewController
 
+@property (nonatomic, copy) NSString *userName;
+
+
 @end

@@ -160,9 +160,21 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [_dataSourceArr removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationAutomatic];
+        DCCLocationModel *model = _dataSourceArr[indexPath.row];
+        [SVProgressHUD show];
         //删除补充删除接口
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:model.tid forKey:@"id"];
+        [[RequestManager sharedInstance]removeLocationAddressToSVR:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+            [SVProgressHUD dismiss];
+            if (succeed) {
+                [_dataSourceArr removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationAutomatic];
+                [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"删除失败"];
+            }
+        }];
     }
 }
 

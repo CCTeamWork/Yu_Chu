@@ -25,21 +25,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self initAllData];
-    
     [self initAllSubviews];
     
-    [[NotificationCenter rac_addObserverForName:@"outLogin" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-        [self initAllData];
-    }];
-    [[NotificationCenter rac_addObserverForName:@"loginSuccess" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-        [self initAllData];
-    }];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self initAllData];
+}
 - (void)initAllData{
     BOOL isLogin = [kAppDelegate.token isEqualToString:@""];
-    if (!isLogin) {
+    if (isLogin) {
         [self climpLoginPage];
     }
 }

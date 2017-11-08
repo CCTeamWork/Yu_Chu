@@ -22,23 +22,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
     
     [self initAllData];
-    
-    [self initAllSubviews];
 }
-
-- (void)initAllData{
-    
-}
-
-- (void)initAllSubviews{
-    self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     DCCBaseNavgationView *navV = [[DCCBaseNavgationView alloc] init];
     [navV redBackGroundSetTitle:@"消息中心" andBackGroundColor:JQXXXLZHFF2D4BCLOLR andTarget:self];
     [self.view addSubview:navV];
     
-    BOOL isHaveData = YES;
+    [SVProgressHUD show];
+    double delayInSeconds = 2.0;
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, mainQueue, ^{
+        NSLog(@"延时执行的2秒");
+        [self initAllSubviews:navV.frameMaxY];
+                [SVProgressHUD dismiss];
+        
+    });
+    
+}
+- (void)initAllData{
+    
+}
+
+- (void)initAllSubviews:(CGFloat)height{
+    
+    BOOL isHaveData = NO;
     if (!isHaveData) {
         //没有评价加载空白页面
         
@@ -55,7 +67,7 @@
         [self.view addSubview:emptyLab];
         
         [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(navV.mas_bottom).with.offset(87);
+            make.top.mas_equalTo(height+87);
             make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
             make.width.mas_equalTo(112);
             make.height.mas_equalTo(112);
@@ -69,7 +81,7 @@
         
     }else{
         //加载消息列表
-        _mainTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, navV.frameMaxY, kScreenWidth, kScreenHeight-navV.frameMaxY) style:UITableViewStylePlain];
+        _mainTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, height, kScreenWidth, kScreenHeight-height) style:UITableViewStylePlain];
         _mainTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTableview.delegate = self;
         _mainTableview.dataSource = self;

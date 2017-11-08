@@ -41,7 +41,7 @@
     UIImageView *backIMGV = [[UIImageView alloc] init];
     backIMGV.image = [UIImage imageNamed:@"bg_icon_redbag"];
     backIMGV.userInteractionEnabled = YES;
-    backIMGV.contentMode = UIViewContentModeScaleAspectFit;
+    backIMGV.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:backIMGV];
     [backIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(14);

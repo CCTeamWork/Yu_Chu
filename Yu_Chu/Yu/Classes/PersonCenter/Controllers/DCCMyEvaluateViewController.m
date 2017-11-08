@@ -34,8 +34,8 @@
 
 - (void)initAllSubviews{
     self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
-    NSString *userNameString = @"我叫天王大哥";
-    NSString *evaluateString = @"100";
+    NSString *userNameString = self.userName;
+    NSString *evaluateString = @"0";
     UIView *topBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 181+(IS_IPHONE_X?24:0))];
     topBackView.userInteractionEnabled = YES;
     topBackView.backgroundColor = JQXXXLZHFF2D4BCLOLR;

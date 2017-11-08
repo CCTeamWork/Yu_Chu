@@ -25,6 +25,9 @@ typedef void (^JinQiangXinxiRequestCompletionn)(BOOL succeed, id responseData, N
 //添加收货地址
 - (void)uploadLocationAddressToSVR:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion;
 
+//删除收货地址
+- (void)removeLocationAddressToSVR:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion;
+
 //获取收货列表
 - (void)getConfirmLocationListWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion;
 
@@ -36,5 +39,8 @@ typedef void (^JinQiangXinxiRequestCompletionn)(BOOL succeed, id responseData, N
 
 //获取用户信息
 - (void)getUserInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion;
+
+//获取购物车信息
+- (void)getSHopCarInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion;
 
 @end

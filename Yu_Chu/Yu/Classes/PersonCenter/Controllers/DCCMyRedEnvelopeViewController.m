@@ -11,6 +11,7 @@
 #import "DCCUseRulesViewController.h"
 #import "DCCRedTableViewCell.h"
 #import "DCCExchangeRedViewController.h"
+#import "Masonry.h"
 
 
 
@@ -68,20 +69,52 @@
      }];
     [self.view addSubview:climpRulesBtn];
     
-    CGFloat currentY = climpRulesBtn.frameMaxY;
-    CGFloat height = kScreenHeight - currentY;
-    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, currentY, kScreenWidth, kScreenHeight-currentY) style:UITableViewStylePlain];
-    _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_mainTableView];
-    _mainTableView.delegate = self;
-    _mainTableView.dataSource = self;
+    BOOL isHaveData = NO;
+    if (!isHaveData) {
+        //没有评价加载空白页面
+        
+        UIImageView *emptyIMGV = [[UIImageView alloc] init];
+        emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
+        emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
+        [self.view addSubview:emptyIMGV];
+        
+        UILabel *emptyLab = [[UILabel alloc] init];
+        emptyLab.text = @"暂无红包";
+        emptyLab.textColor = JQXXXLZH272727CLOLR;
+        emptyLab.font = [UIFont systemFontOfSize:14];
+        emptyLab.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:emptyLab];
+        
+        [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(navV.mas_bottom).with.offset(87);
+            make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+            make.width.mas_equalTo(112);
+            make.height.mas_equalTo(112);
+        }];
+        
+        [emptyLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(emptyIMGV.mas_bottom).with.offset(20);
+            make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+        }];
+        
+        
+    }else{
+        CGFloat currentY = climpRulesBtn.frameMaxY;
+        CGFloat height = kScreenHeight - currentY;
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, currentY, kScreenWidth, kScreenHeight-currentY) style:UITableViewStylePlain];
+        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:_mainTableView];
+        _mainTableView.delegate = self;
+        _mainTableView.dataSource = self;
+    }
+    
 }
 #pragma mark UITableviewDelegate UITbaleviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 110;
+    return (kScreenWidth/375.0*100.0+10);
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     DCCRedTableViewCell *cell = nil;

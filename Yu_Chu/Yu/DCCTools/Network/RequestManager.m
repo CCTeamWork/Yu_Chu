@@ -257,6 +257,12 @@ static id instance;
     NSString *urlS = [NSString stringWithFormat:@"%@member/user/addAddress",DCCBaseUrl];
     [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
 }
+//删除收货地址
+- (void)removeLocationAddressToSVR:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/deleteAddressById",DCCBaseUrl];
+    [self getRequestWithUrl:urlS params:params WhenComplete:completion];
+}
 
 //获取收货列表
 - (void)getConfirmLocationListWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
@@ -280,4 +286,11 @@ static id instance;
     NSString *urlS = [NSString stringWithFormat:@"%@member/user/getMyUserInfo",DCCCYQBaseUrl];
     [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
 }
+//获取购物车信息
+- (void)getSHopCarInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/member/shop/getShopCar",DCCCYQBaseUrl];
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    [self getRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+
 @end
