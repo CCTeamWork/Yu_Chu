@@ -59,7 +59,7 @@
     NSArray *titArr  = @[@"全部订单",@"待评价"];
     for (NSInteger i = 0; i < 2; i++) {
         UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        menuBtn.frame = CGRectMake(WIDTH*0.5-24-70+(48+70)*i, 0, 70, 44);
+        menuBtn.frame = CGRectMake(WIDTH*0.5-24-62+(48+62)*i, 0, 62, 44);
         [menuBtn setTitle:titArr[i] forState:UIControlStateNormal];
         [menuBtn setTitleColor:HEXCOLOR(0xffffff) forState:UIControlStateNormal];
         [menuBtn setTitleColor:REDCOLOR forState:UIControlStateSelected];
@@ -70,7 +70,7 @@
     }
     
     self.lineView = [[UIView alloc] init];
-    _lineView.frame = CGRectMake(WIDTH*0.5-24-60, 37, 60, 3);
+    _lineView.frame = CGRectMake(WIDTH*0.5-24-60, 37, 50, 3);
     _lineView.backgroundColor = HEXCOLOR(0xffffff);
     [bgView addSubview:_lineView];
     
@@ -92,7 +92,7 @@
     
     [UIView animateWithDuration:0.25 animations:^{
         NSInteger a = sender.tag - 1542;
-        _lineView.frame = CGRectMake(WIDTH*0.5-24-60 + a*(48+60), 37, 60, 3);
+        _lineView.frame = CGRectMake(WIDTH*0.5-24-60 + a*(48+60+5), 37, 50, 3);
     }];
     
     if (sender.tag == 1542) {

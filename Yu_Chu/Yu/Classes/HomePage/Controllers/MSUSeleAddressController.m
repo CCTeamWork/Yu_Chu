@@ -52,6 +52,8 @@
 
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArr;
+@property (nonatomic , strong) NSMutableArray *latiArr;
+@property (nonatomic , strong) NSMutableArray *longArr;
 
 @property (nonatomic , strong) MSUSeleLocaView *locaView;
 
@@ -94,6 +96,9 @@
     
     //初始化tableview列表
     self.dataArr = [NSMutableArray array];
+    self.latiArr = [NSMutableArray array];
+    self.longArr = [NSMutableArray array];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -253,12 +258,12 @@
 //            NSLog(@"geo检索发送失败");
 //        }
         if (self.selectSuccessBlock) {
-            self.selectSuccessBlock(self.dataArr[indexPath.row]);
+            self.selectSuccessBlock(self.dataArr[indexPath.row],self.latiArr[indexPath.row],self.longArr[indexPath.row]);
         }
         
     } else{
         if (self.selectSuccessBlock) {
-            self.selectSuccessBlock(self.dataArr[indexPath.row]);
+            self.selectSuccessBlock(self.dataArr[indexPath.row],self.latiArr[indexPath.row],self.longArr[indexPath.row]);
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -364,7 +369,10 @@
     {
         [self.dataArr removeAllObjects];
         [self.dataArr addObjectsFromArray:result.poiList];
-        
+        [self.latiArr removeAllObjects];
+        [self.latiArr addObject:[NSNumber numberWithDouble:result.location.latitude]];
+        [self.longArr removeAllObjects];
+        [self.longArr addObject:[NSNumber numberWithDouble:result.location.longitude]];
         
         NSLog(@"--   %@",result.address);
 //        NSString *cityStr = [result.address substringToIndex:6];

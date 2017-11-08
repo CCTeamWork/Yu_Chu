@@ -58,7 +58,8 @@
 
 #pragma - 点击事件
 - (void)backArrowBtnClick:(UIButton *)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)pushBtnClick:(UIButton *)sender{
