@@ -17,7 +17,7 @@
 #define MAS_SHORTHAND_GLOBALS
 #import "Masonry.h"
 
-
+#import "MSUPathTools.h"
 #import "MSUScrollHeaderView.h"
 
 @implementation MSUScrollHeaderView
@@ -50,10 +50,11 @@
     }];
     
 
-    for (NSInteger i = 0; i < 4; i++) {
+    NSArray *imaArr = @[@"index_pic",@"index_pic"];
+    for (NSInteger i = 0; i < imaArr.count; i++) {
         self.imaView = [[UIImageView alloc] init];
         //        _imaView.backgroundColor = [UIColor];
-        //        [_imaView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://source.showbuy100.com%@",arr[i]]]];
+        _imaView.image = [MSUPathTools showImageWithContentOfFileByName:imaArr[i]];
         _imaView.backgroundColor = [UIColor brownColor];
         _imaView.contentMode = UIViewContentModeScaleToFill;
         [_scrollView addSubview:_imaView];
@@ -70,7 +71,7 @@
     self.pageControl = [[UIPageControl alloc] init];
     _pageControl.currentPageIndicatorTintColor = HEXCOLOR(0xff4e1e);
     _pageControl.pageIndicatorTintColor = HEXCOLOR(0xffffff);
-    _pageControl.numberOfPages = 4;
+    _pageControl.numberOfPages = imaArr.count;
     [_scrollView addSubview:_pageControl];
     [_pageControl makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.bottom).offset(-18);

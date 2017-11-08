@@ -10,7 +10,7 @@
 
 @interface MSUSeleAddressController : UIViewController
 
-@property (nonatomic , copy) void (^selectSuccessBlock)(NSString *addressStr);
+@property (nonatomic , copy) void (^selectSuccessBlock)(NSString *addressStr,NSNumber *latiNum,NSNumber *longNum);
 
 
 @end

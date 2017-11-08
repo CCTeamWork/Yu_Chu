@@ -14,6 +14,7 @@
 
 #import "MSUPrefixHeader.pch"
 #import "MSUHomeNavView.h"
+#import "MSUAFNRequest.h"
 
 /* 地图框架 */
 #import <CoreLocation/CoreLocation.h>
@@ -29,6 +30,8 @@
 @property (nonatomic , strong) CLLocationManager *locationManager;
 /// 得到当前位置的经纬度
 @property (nonatomic , assign) CLLocationCoordinate2D curCoordinate2D;
+@property (nonatomic , strong) NSNumber *latiNum;
+@property (nonatomic , strong) NSNumber *longNum;
 
 @end
 
@@ -39,6 +42,25 @@
     [super viewWillAppear:animated];
     /// 状态栏字体颜色
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    
+    NSLog(@" %@,%@",self.latiNum,self.longNum);
+//    NSDictionary *dic = @{@"token":token,@"latitude":self.latiNum,@"longitude":self.longNum};
+//    NSLog(@"--- dic %@",dic);
+//    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.123:8201/member/shop/nearbyShop" parameters:dic withBlock:^(id obj, NSError *error) {
+//        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+//        if (!error) {
+//            NSLog(@"访问成功%@",jsonDict);
+//            
+//        }else{
+//            NSLog(@"访问报错%@",error);
+//        }
+//    }];
+
 }
 
 
@@ -72,7 +94,6 @@
     }
     [_nav.LocationBtn setTitle:city forState:UIControlStateNormal];
 
-    
 }
 
 - (void)ApplicationDidBecomeActive:(NSNotification *)noti{
@@ -122,9 +143,14 @@
 - (void)locationBtnClick:(UIButton *)sender{
     self.hidesBottomBarWhenPushed = YES;
     MSUSeleAddressController *sele = [[MSUSeleAddressController alloc] init];
-    sele.selectSuccessBlock = ^(NSString *addressStr) {
+    __weak typeof(self) weakSelf = self;
+    sele.selectSuccessBlock = ^(NSString *addressStr,NSNumber *latiNum,NSNumber *longnum) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+
         if (addressStr.length > 0) {
-            [_nav.LocationBtn setTitle:addressStr forState:UIControlStateNormal];
+            [strongSelf.nav.LocationBtn setTitle:addressStr forState:UIControlStateNormal];
+            strongSelf.latiNum = [NSNumber numberWithDouble:_curCoordinate2D.latitude];
+            strongSelf.longNum = [NSNumber numberWithDouble:_curCoordinate2D.longitude];
             [[NSUserDefaults standardUserDefaults] setObject:addressStr forKey:@"city"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
@@ -167,6 +193,8 @@
     __block NSString *addressStr;
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:_curCoordinate2D.latitude longitude:_curCoordinate2D.longitude];
+    self.latiNum = [NSNumber numberWithDouble:_curCoordinate2D.latitude];
+    self.longNum = [NSNumber numberWithDouble:_curCoordinate2D.longitude];
     //    NSLog(@"转换后得到的坐标===%f  %f",_curCoordinate2D.latitude,_curCoordinate2D.longitude);
     
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
