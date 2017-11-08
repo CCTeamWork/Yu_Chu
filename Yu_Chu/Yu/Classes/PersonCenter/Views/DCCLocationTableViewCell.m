@@ -23,13 +23,12 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self initAllSubviews];
-        [self initAllData];
     }
     return self;
 }
-- (void)initAllData{
-    _nameAndMobilelab.text = [NSString stringWithFormat:@"%@  %@",@"钱宝宝",@"16666666666"];
-    _locationLab.text = @"杭州市民中心 游泳馆";
+- (void)initAllDataWith:(DCCLocationModel *)model{
+    _nameAndMobilelab.text = [NSString stringWithFormat:@"%@  %@",model.consignee,model.mobile];
+    _locationLab.text = [NSString stringWithFormat:@"%@  %@",model.address,model.hnumber];
 }
 
 - (void)initAllSubviews{
@@ -72,6 +71,7 @@
         make.height.mas_equalTo(52);
     }];
 }
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

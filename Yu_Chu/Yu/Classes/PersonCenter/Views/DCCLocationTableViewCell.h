@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCCLocationModel.h"
 
 @interface DCCLocationTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UIButton *editBtn;;
+
+- (void)initAllDataWith:(DCCLocationModel *)model;
 
 @end

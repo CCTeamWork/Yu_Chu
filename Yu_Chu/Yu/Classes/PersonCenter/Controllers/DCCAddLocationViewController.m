@@ -9,6 +9,9 @@
 #import "DCCAddLocationViewController.h"
 #import "XLZHHeader.h"
 #import "UITextField+Extension.h"
+#import <AMapSearchKit/AMapSearchKit.h>
+#import "ChooseLocationVC.h"
+#import "RequestManager.h"
 
 @interface DCCAddLocationViewController (){
     UITextField *_relationName;
@@ -18,6 +21,8 @@
     UITextField *_doorNum;
     
     UIButton *_currentBtn;
+    AMapPOI *_mapPoint;
+    CLPlacemark *_placeMark;
 }
 
 @end
@@ -31,6 +36,8 @@
     [self initAllData];
     
     [self initAllSubviews];
+    
+    [NotificationCenter addObserver:self selector:@selector(selectLocation:) name:@"slectPoint" object:nil];
 }
 
 - (void)initAllData{
@@ -59,14 +66,14 @@
     NSArray *titleArr = @[@"联系人",@"联系电话",@"收货地址",@"门牌号码"];
     CGFloat currentHeight = 0;
     for (NSInteger i = 0; i < titleArr.count; i++) {
-        UILabel *leftLab = [[UILabel alloc] initWithFrame:CGRectMake(14, currentHeight+26, 60, 14)];
+        UILabel *leftLab = [[UILabel alloc] initWithFrame:CGRectMake(14, currentHeight+18, 60, 14)];
         leftLab.text = titleArr[i];
         leftLab.textColor = JQXXXLZH272727CLOLR;
         leftLab.font = [UIFont systemFontOfSize:14];
         [backV addSubview:leftLab];
         
         if (i == 0) {
-            _relationName = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+22, kScreenWidth-100, 22)];
+            _relationName = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-100, 22)];
             _relationName.placeholder = @"请填写收餐人姓名";
             _relationName.textColor = JQXXXLZH272727CLOLR;
             _relationName.font = [UIFont systemFontOfSize:14];
@@ -96,7 +103,8 @@
             [womanBtn setTitleColor:JQXXXLZH272727CLOLR forState:UIControlStateSelected];
             womanBtn.titleLabel.font = [UIFont systemFontOfSize:14];
             womanBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 13, 0, 0);
-            [womanBtn addTarget:self action:@selector(changeSex:) forControlEvents:UIControlEventTouchUpInside];            womanBtn.tag = 1000;
+            [womanBtn addTarget:self action:@selector(changeSex:) forControlEvents:UIControlEventTouchUpInside];
+            womanBtn.tag = 1000;
             [backV addSubview:womanBtn];
             
             if (_isMan) {
@@ -111,7 +119,7 @@
             currentHeight+=100;
         }else{
             if (i == 1) {
-                _phoneNum = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+22, kScreenWidth-100, 22)];
+                _phoneNum = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-100, 22)];
                 _phoneNum.placeholder = @"请填写收餐人的手机号码";
                 _phoneNum.textColor = JQXXXLZH272727CLOLR;
                 _phoneNum.font = [UIFont systemFontOfSize:14];
@@ -121,12 +129,12 @@
                 [backV addSubview:_phoneNum];
             }
             if (i == 2) {
-                _location = [[UILabel alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+22, kScreenWidth-128, 22)];
+                _location = [[UILabel alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-128, 22)];
                 _location.textColor = JQXXXLZH272727CLOLR;
                 _location.font = [UIFont systemFontOfSize:14];
                 [backV addSubview:_location];
                 
-                UIImageView *rightIMGV = [[UIImageView alloc] initWithFrame:CGRectMake(backV.frameSizeWidth-14-14,currentHeight+10, 14, 14)];
+                UIImageView *rightIMGV = [[UIImageView alloc] initWithFrame:CGRectMake(backV.frameSizeWidth-14-14,currentHeight+18, 14, 14)];
                 rightIMGV.image = [UIImage imageNamed:@"icon_forward"];
                 [backV addSubview:rightIMGV];
                 
@@ -135,12 +143,11 @@
                 [backV addSubview:selectLocationBtn];
             }
             if (i == 3) {
-                _doorNum = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+22, kScreenWidth-100, 22)];
+                _doorNum = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-100, 22)];
                 _doorNum.placeholder = @"请填写收餐具体的门牌号及楼层";
                 _doorNum.textColor = JQXXXLZH272727CLOLR;
                 _doorNum.font = [UIFont systemFontOfSize:14];
                 _doorNum.tag = 2002;
-                _doorNum.keyboardType = UIKeyboardTypeNumberPad;
                 [_doorNum addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
                 [backV addSubview:_doorNum];
             }
@@ -162,18 +169,65 @@
     [[okBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(id x) {
          //判定信息是否 正确，然后跳转并刷新
-         BOOL isOK = YES;
+         BOOL isOK = [self judgeIsOkToUpdateData];
 
          if (isOK) {
-             if (self.callBackAndRefreshPage) {
-                 self.callBackAndRefreshPage();
-             }
-             [self.navigationController popViewControllerAnimated:YES];
+             NSDictionary *infoDic = _placeMark.addressDictionary;
+             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+             [dic setObjectSafe:_relationName.text forKey:@"consignee"];
+             [dic setObjectSafe:[NSString stringWithFormat:@"%d",(_currentBtn.tag == 1001)?1:2] forKey:@"gender"];
+             [dic setObjectSafe:_location.text forKey:@"address"];
+             [dic setObjectSafe:_doorNum.text forKey:@"hnumber"];
+             [dic setObjectSafe:_phoneNum.text forKey:@"mobile"];
+             [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.longitude] forKey:@"longitude"];
+             [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.latitude] forKey:@"latitude"];
+             
+             [dic setObjectSafe:[infoDic valueWithNilForKey:@"City"] forKey:@"cityName"];
+             [dic setObjectSafe:[infoDic valueWithNilForKey:@"State"] forKey:@"provinceName"];
+             [dic setObjectSafe:[infoDic valueWithNilForKey:@"Sublocality"] forKey:@"districtName"];
+             [dic setObjectSafe:@"86" forKey:@"country"];
+             [dic setObjectSafe:@"0" forKey:@"province"];
+             [dic setObjectSafe:@"0" forKey:@"city"];
+             [dic setObjectSafe:@"0" forKey:@"district"];
+             [SVProgressHUD show];
+             [[RequestManager sharedInstance]uploadLocationAddressToSVR:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+              [SVProgressHUD dismiss];
+                 [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                 if (succeed) {
+                     if (self.callBackAndRefreshPage) {
+                         self.callBackAndRefreshPage();
+                     }
+                     
+                     [self.navigationController popViewControllerAnimated:YES];
+                 }else{
+                      [SVProgressHUD showErrorWithStatus:[responseData valueWithNilForKey:@"message"]];
+                 }
+             }];
+             
          }else{
              [SVProgressHUD showErrorWithStatus:@"信息填写不正确"];
          }
      }];
     [self.view addSubview:okBtn];
+}
+- (BOOL)judgeIsOkToUpdateData{
+    if (_relationName.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"收件人不能为空"];
+        return NO;
+    }
+    if (_phoneNum.text.length != 11 || ![NSString validateMobile:_phoneNum.text]) {
+        [SVProgressHUD showErrorWithStatus:@"联系电话格式不正确"];
+        return NO;
+    }
+    if (_location.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"收货地址不能为空"];
+        return NO;
+    }
+    if (_doorNum.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"门牌号码不能为空"];
+        return NO;
+    }
+    return YES;
 }
 - (void)changeSex:(UIButton *)sender{
     if (_currentBtn == sender) {
@@ -202,6 +256,21 @@
 }
 - (void)climpLocationPage{
     //跳转选择位置页面
+    ChooseLocationVC *vc = [[ChooseLocationVC alloc] init];
+    [self secondPushToViewcontroller:vc];
+}
+- (void)selectLocation:(NSNotification *)noti{
+    _mapPoint = noti.object;
+    _location.text = _mapPoint.name;
+    CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_mapPoint.location.latitude longitude:_mapPoint.location.longitude]; // 最后一个值为最新位置
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    // 根据经纬度反向得出位置城市信息
+    [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (placemarks.count > 0) {
+            _placeMark = placemarks[0];
+        }
+        
+     }];
 }
 #pragma mark 页面的出现和消失
 - (void)viewWillAppear:(BOOL)animated {

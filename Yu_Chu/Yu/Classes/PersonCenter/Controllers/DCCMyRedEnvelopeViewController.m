@@ -92,6 +92,14 @@
     cell.selectionStyle = UITableViewCellSeparatorStyleNone;
     return cell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_isSelected) {
+        if (self.callBackReturnRedModel) {
+            self.callBackReturnRedModel();
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 #pragma mark 页面的出现和消失
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

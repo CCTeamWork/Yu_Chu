@@ -19,4 +19,5 @@
 
 - (void)redBackGroundSetTitle:(NSString *)title andBackGroundColor:(UIColor *)color andTarget:(UIViewController *)target;
 
+- (void)loginSetTitle:(NSString *)title andBackGroundColor:(UIColor *)color andTarget:(UIViewController *)target;
 @end
