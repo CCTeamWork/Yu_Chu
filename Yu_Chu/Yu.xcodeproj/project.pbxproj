@@ -66,6 +66,11 @@
 		04B547591FA9DDDD0075D2E1 /* MSUHomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B547491FA9DDDD0075D2E1 /* MSUHomePageController.m */; };
 		04B5475A1FA9DDDD0075D2E1 /* MSUSeleAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5474B1FA9DDDD0075D2E1 /* MSUSeleAddressController.m */; };
 		04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5474E1FA9DDDD0075D2E1 /* MSUSeleLocaView.m */; };
+		04CE9EA91FB31533004C5A6F /* DCCShopCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */; };
+		04CE9EAC1FB3192B004C5A6F /* DCCGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAB1FB3192B004C5A6F /* DCCGoodsModel.m */; };
+		04CE9EAF1FB3E745004C5A6F /* DCCConfirmOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAE1FB3E745004C5A6F /* DCCConfirmOrderModel.m */; };
+		04CE9EB21FB3F718004C5A6F /* DCCMyEvaluateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EB11FB3F718004C5A6F /* DCCMyEvaluateModel.m */; };
+		04CE9EB61FB3FA97004C5A6F /* NSArray+DCCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EB51FB3FA97004C5A6F /* NSArray+DCCExtension.m */; };
 		9900EB561FAAAF940072F03C /* MSUHomeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9900EB551FAAAF940072F03C /* MSUHomeScrollView.m */; };
 		9900EB591FAAB2E30072F03C /* MSUHomeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9900EB581FAAB2E30072F03C /* MSUHomeTableCell.m */; };
 		9900EB5B1FAABEEE0072F03C /* tabbar_icon_shopping_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9900EB5A1FAABEEE0072F03C /* tabbar_icon_shopping_selected@2x.png */; };
@@ -299,6 +304,16 @@
 		04B5474B1FA9DDDD0075D2E1 /* MSUSeleAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUSeleAddressController.m; sourceTree = "<group>"; };
 		04B5474D1FA9DDDD0075D2E1 /* MSUSeleLocaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUSeleLocaView.h; sourceTree = "<group>"; };
 		04B5474E1FA9DDDD0075D2E1 /* MSUSeleLocaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUSeleLocaView.m; sourceTree = "<group>"; };
+		04CE9EA71FB31533004C5A6F /* DCCShopCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCShopCarModel.h; sourceTree = "<group>"; };
+		04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCShopCarModel.m; sourceTree = "<group>"; };
+		04CE9EAA1FB3192B004C5A6F /* DCCGoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCGoodsModel.h; sourceTree = "<group>"; };
+		04CE9EAB1FB3192B004C5A6F /* DCCGoodsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCGoodsModel.m; sourceTree = "<group>"; };
+		04CE9EAD1FB3E745004C5A6F /* DCCConfirmOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCConfirmOrderModel.h; sourceTree = "<group>"; };
+		04CE9EAE1FB3E745004C5A6F /* DCCConfirmOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCConfirmOrderModel.m; sourceTree = "<group>"; };
+		04CE9EB01FB3F718004C5A6F /* DCCMyEvaluateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCMyEvaluateModel.h; sourceTree = "<group>"; };
+		04CE9EB11FB3F718004C5A6F /* DCCMyEvaluateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCMyEvaluateModel.m; sourceTree = "<group>"; };
+		04CE9EB41FB3FA97004C5A6F /* NSArray+DCCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+DCCExtension.h"; sourceTree = "<group>"; };
+		04CE9EB51FB3FA97004C5A6F /* NSArray+DCCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DCCExtension.m"; sourceTree = "<group>"; };
 		6D7E88C8E44E308C234712D9 /* Pods-Yu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yu/Pods-Yu.release.xcconfig"; sourceTree = "<group>"; };
 		9900EB541FAAAF940072F03C /* MSUHomeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUHomeScrollView.h; sourceTree = "<group>"; };
 		9900EB551FAAAF940072F03C /* MSUHomeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUHomeScrollView.m; sourceTree = "<group>"; };
@@ -580,6 +595,8 @@
 				047631FF1FB18C3F003CE6DB /* DCCLocationModel.m */,
 				047632011FB1D7AB003CE6DB /* DCCUserInfomationModel.h */,
 				047632021FB1D7AB003CE6DB /* DCCUserInfomationModel.m */,
+				04CE9EB01FB3F718004C5A6F /* DCCMyEvaluateModel.h */,
+				04CE9EB11FB3F718004C5A6F /* DCCMyEvaluateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -623,6 +640,8 @@
 				04B547241FA9B1040075D2E1 /* UIImage+Extension.m */,
 				04B547251FA9B1040075D2E1 /* UITextField+Extension.h */,
 				04B547261FA9B1040075D2E1 /* UITextField+Extension.m */,
+				04CE9EB41FB3FA97004C5A6F /* NSArray+DCCExtension.h */,
+				04CE9EB51FB3FA97004C5A6F /* NSArray+DCCExtension.m */,
 				04B547291FA9B1040075D2E1 /* XLTool.h */,
 				04B5472A1FA9B1040075D2E1 /* XLTool.m */,
 				04B5472B1FA9B1040075D2E1 /* XLZHHeader.h */,
@@ -736,6 +755,19 @@
 				9900EB5F1FAAC4E00072F03C /* MSUScrollHeaderView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		04CE9EA61FB31526004C5A6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04CE9EA71FB31533004C5A6F /* DCCShopCarModel.h */,
+				04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */,
+				04CE9EAA1FB3192B004C5A6F /* DCCGoodsModel.h */,
+				04CE9EAB1FB3192B004C5A6F /* DCCGoodsModel.m */,
+				04CE9EAD1FB3E745004C5A6F /* DCCConfirmOrderModel.h */,
+				04CE9EAE1FB3E745004C5A6F /* DCCConfirmOrderModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		688CB35104F88165EF798EF8 /* Frameworks */ = {
@@ -1048,6 +1080,7 @@
 		990AED4D1FA80C6E00F5D3E7 /* ShopCar */ = {
 			isa = PBXGroup;
 			children = (
+				04CE9EA61FB31526004C5A6F /* Model */,
 				047631E01FB07539003CE6DB /* Views */,
 				990AED4E1FA80C6E00F5D3E7 /* Controllers */,
 			);
@@ -1479,18 +1512,22 @@
 				04B547381FA9B1040075D2E1 /* RequestManager.m in Sources */,
 				9900EB7A1FAAEEBA0072F03C /* MSUDetailTopView.m in Sources */,
 				990AED761FA80E7C00F5D3E7 /* MSUStringTools.m in Sources */,
+				04CE9EB61FB3FA97004C5A6F /* NSArray+DCCExtension.m in Sources */,
 				9900EB631FAACB040072F03C /* MSUShopDetailController.m in Sources */,
 				990AED871FA8189D00F5D3E7 /* MSUShadowView.m in Sources */,
 				9900EB7B1FAAEEBA0072F03C /* MSUSeleTableView.m in Sources */,
 				990AED701FA80E2200F5D3E7 /* SVRadialGradientLayer.m in Sources */,
 				9900EB591FAAB2E30072F03C /* MSUHomeTableCell.m in Sources */,
+				04CE9EAF1FB3E745004C5A6F /* DCCConfirmOrderModel.m in Sources */,
 				047631C11FAC91BC003CE6DB /* DCCMessageTableViewCell.m in Sources */,
 				047631C21FAC91BC003CE6DB /* DCCLocationTableViewCell.m in Sources */,
 				0476319B1FAB46C9003CE6DB /* DCCMoreViewController.m in Sources */,
+				04CE9EB21FB3F718004C5A6F /* DCCMyEvaluateModel.m in Sources */,
 				9900EB881FAB13CB0072F03C /* MSUDetailBottomView.m in Sources */,
 				047631E31FB07539003CE6DB /* DCCShoppingCarTableViewCell.m in Sources */,
 				990FF79A1FAFF4CE007DFD29 /* MSUOrderBottomView.m in Sources */,
 				047631FA1FB149AF003CE6DB /* ChooseLocationVC.m in Sources */,
+				04CE9EAC1FB3192B004C5A6F /* DCCGoodsModel.m in Sources */,
 				04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */,
 				0476319D1FAB46C9003CE6DB /* DCCBaseViewController.m in Sources */,
 				04B5475A1FA9DDDD0075D2E1 /* MSUSeleAddressController.m in Sources */,
@@ -1519,6 +1556,7 @@
 				990AED6C1FA80E2200F5D3E7 /* SVIndefiniteAnimatedView.m in Sources */,
 				990AED561FA80C7E00F5D3E7 /* MSUShopCarController.m in Sources */,
 				99026D711FAC49F500A011F1 /* MSUCarTableCell.m in Sources */,
+				04CE9EA91FB31533004C5A6F /* DCCShopCarModel.m in Sources */,
 				99026D4C1FAC130200A011F1 /* MSUDetaiCommentTableCell.m in Sources */,
 				0476318A1FAB46B1003CE6DB /* DCCBaseNavgationView.m in Sources */,
 				990AED791FA80F5500F5D3E7 /* MSUHomeNavView.m in Sources */,

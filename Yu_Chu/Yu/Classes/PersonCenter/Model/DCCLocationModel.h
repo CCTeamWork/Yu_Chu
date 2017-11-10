@@ -38,4 +38,12 @@
 
 @property (nonatomic, copy) NSString *tid;
 
+@property (nonatomic, copy) NSString *genger;
+
+@property (nonatomic, copy) NSString *latitude;
+
+@property (nonatomic, copy) NSString *longitude;
+
+
+
 @end

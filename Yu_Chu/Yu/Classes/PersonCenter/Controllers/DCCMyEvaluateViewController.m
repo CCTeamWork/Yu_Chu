@@ -10,10 +10,14 @@
 #import "XLZHHeader.h"
 #import "Masonry.h"
 #import "DCCEvaluateTableViewCell.h"
+#import "DCCMyEvaluateModel.h"
 
 @interface DCCMyEvaluateViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
     UITableView *_mainTableview;
+    NSMutableArray <DCCMyEvaluateModel *>*_dataSourceArr;
+    UIView *topBackView;
+    UILabel *evaluateLab;
 }
 
 @end
@@ -23,20 +27,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
+
     [self initAllData];
-    
     [self initAllSubviews];
+
 }
 
 - (void)initAllData{
-    
+    //请求我的评价
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [[RequestManager sharedInstance]getMyEvaluateWith:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+        if (succeed) {
+            _dataSourceArr = [DCCMyEvaluateModel mj_objectArrayWithKeyValuesArray:[[responseData valueWithNilForKey:@"data"]valueWithNilForKey:@"dataList"]];
+            [self initTopView];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"请求失败"];
+        }
+    }];
 }
 
 - (void)initAllSubviews{
-    self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
     NSString *userNameString = self.userName;
-    NSString *evaluateString = @"0";
-    UIView *topBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 181+(IS_IPHONE_X?24:0))];
+    topBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 181+(IS_IPHONE_X?24:0))];
     topBackView.userInteractionEnabled = YES;
     topBackView.backgroundColor = JQXXXLZHFF2D4BCLOLR;
     [self.view addSubview:topBackView];
@@ -55,8 +68,7 @@
     userNameLab.textAlignment = NSTextAlignmentCenter;
     [topBackView addSubview:userNameLab];
     
-    UILabel *evaluateLab = [[UILabel alloc] initWithFrame:CGRectMake(14, userNameLab.frameMaxY+13, kScreenWidth-28, 14)];
-    evaluateLab.text = [NSString stringWithFormat:@"已贡献%@条评价",evaluateString];
+    evaluateLab = [[UILabel alloc] initWithFrame:CGRectMake(14, userNameLab.frameMaxY+13, kScreenWidth-28, 14)];
     evaluateLab.textColor = JQXXXLZHFFFFFFCLOLR;
     evaluateLab.font = [UIFont systemFontOfSize:14];
     evaluateLab.textAlignment = NSTextAlignmentCenter;
@@ -70,6 +82,12 @@
     }];
     [topBackView addSubview:backBtn];
     
+    
+}
+- (void)initTopView{
+    NSString *evaluateString = [NSString stringWithFormat:@"%ld",_dataSourceArr.count];
+    evaluateLab.text = [NSString stringWithFormat:@"已贡献%@条评价",evaluateString];
+
     if (evaluateString.integerValue == 0) {
         //没有评价加载空白页面
         
@@ -108,11 +126,12 @@
 }
 #pragma mark UITableviewDelegate UITbaleviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataSourceArr.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *contentStr = @"两岸御厨，于 2017 年正式上线，是知名浙江两岸咖啡集团协力开发之网上订餐平台．秉持”美味匠心，食在安心”的品牌精神，不惜耗资千万元在杭州设立中央厨房，聘请数十位专业厨师致力于研发最美味之饭菜，确保生产质量并严格遵守食品安全规范．严选新鲜食材、当日烹煮配送，是两岸御厨永远的坚持。让大家吃的放心、吃的开心，则是两岸御厨永远的心愿。";
-    return [self getSpaceLabelHeight:contentStr withFont:[UIFont systemFontOfSize:14] withWidth:kScreenWidth-40]+65;
+    DCCMyEvaluateModel *model = _dataSourceArr[indexPath.row];
+    NSString *contentStr = model.content;
+    return [self getSpaceLabelHeight:contentStr withFont:[UIFont systemFontOfSize:14] withWidth:(kScreenWidth-28-56)]+65;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     DCCEvaluateTableViewCell *cell = nil;

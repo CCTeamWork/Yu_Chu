@@ -26,7 +26,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self initAllSubviews];
-        [self initAllData];
     }
     return self;
 }
@@ -169,21 +168,22 @@
     }];
     
 }
-- (void)initAllData{
-    _shopNameLab.text = @"两岸咖啡（绍兴店）";
+- (void)initAllData:(DCCShopCarModel *)model{
+    _shopNameLab.text = model.shopName;
     
-    NSString *contentS = [NSString stringWithFormat:@"已享受满减，优惠%@元",@"19"];
+    NSString *contentS = [NSString stringWithFormat:@"已享受满减，优惠%@元",@"0"];
     NSMutableAttributedString *text  = [[NSMutableAttributedString alloc] initWithString: contentS];
     text.yy_font = [UIFont systemFontOfSize:12];
     text.yy_color = JQXXXLZHD2D2D2CLOLR;
-    [text yy_setColor:JQXXXLZHFF2D4BCLOLR range:[contentS rangeOfString:@"19"]];
+    [text yy_setColor:JQXXXLZHFF2D4BCLOLR range:[contentS rangeOfString:@"0"]];
     _discountLab.attributedText = text;
 
-    _totalLab.text = @"合计 ¥19元";
+    _totalLab.text = [NSString stringWithFormat:@"合计 ¥%@元",model.totalAmount];
     
-    NSArray *imgArr = @[@"img_1",@"img_2"];
     UIView *currentV = _shopOwerV;
-    for (NSInteger i=0; i<2; i++) {
+    for (NSInteger i=0; i< model.shopCars.count; i++) {
+        NSArray <DCCGoodsModel *>*modelARR = model.shopCars;
+        DCCGoodsModel *goodModel = modelARR[i];
         UIView *contentV = [[UIView alloc] init];
         contentV.backgroundColor = JQXXXLZHFFFFFFCLOLR;
         contentV.userInteractionEnabled = YES;
@@ -202,26 +202,26 @@
         }];
         
         UIImageView *leftIMGV = [[UIImageView alloc] init];
-        leftIMGV.image = [UIImage imageNamed:imgArr[i]];
+        [leftIMGV sd_setImageWithURL:[NSURL URLWithString:goodModel.dishImg]];
         leftIMGV.layer.cornerRadius = 2.5;
         [contentV addSubview:leftIMGV];
         
         UILabel *titleLab = [[UILabel alloc] init];
         titleLab.textColor = JQXXXLZH272727CLOLR;
-        titleLab.text = @"双椒牛蛙套餐";
+        titleLab.text = goodModel.dishName;
         titleLab.font = [UIFont systemFontOfSize:12];
         [contentV addSubview:titleLab];
         
         UILabel *countLab = [[UILabel alloc] init];
         countLab.textColor = JQXXXLZH272727CLOLR;
-        countLab.text = @"x1";
+        countLab.text = [NSString stringWithFormat:@"x%@",goodModel.count];
         countLab.font = [UIFont systemFontOfSize:12];
         [contentV addSubview:countLab];
         
         UILabel *priceLab = [[UILabel alloc] init];
         priceLab.textColor = JQXXXLZHFF2D4BCLOLR;
         priceLab.font = [UIFont systemFontOfSize:14];
-        priceLab.text = @"¥28.99";
+        priceLab.text = [NSString stringWithFormat:@"¥%@",goodModel.dishPrice];
         [contentV addSubview:priceLab];
         
         [leftIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -246,7 +246,7 @@
             make.centerY.equalTo(contentV.mas_centerY).with.offset(0);
         }];
         currentV = contentV;
-        if (i == 1) {
+        if (i == (model.shopCars.count-1)) {
             UIView *topLineV = [[UIView alloc] init];
             topLineV.backgroundColor = JQXXXLZHFAFAFACLOLR;
             [contentV addSubview:topLineV];

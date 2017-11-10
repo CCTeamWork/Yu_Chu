@@ -17,6 +17,8 @@
 
 @interface DCCMyRedEnvelopeViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UITableView *_mainTableView;
+    
+    DCCBaseNavgationView *navV;
 }
 
 @end
@@ -37,7 +39,7 @@
 
 - (void)initAllSubviews{
     self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
-    DCCBaseNavgationView *navV = [[DCCBaseNavgationView alloc] init];
+    navV = [[DCCBaseNavgationView alloc] init];
     [navV setTitle:@"我的红包" andBackGroundColor:JQXXXLZHF4F4F4COLOR andTarget:self];
     [self.view addSubview:navV];
     
@@ -71,8 +73,55 @@
     
     BOOL isHaveData = NO;
     if (!isHaveData) {
-        //没有评价加载空白页面
+        if (kAppDelegate.netStatus) {
+            //没有评价加载空白页面
+            self.NONetBtn.hidden = YES;
+            UIImageView *emptyIMGV = [[UIImageView alloc] init];
+            emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
+            emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
+            [self.view addSubview:emptyIMGV];
+            
+            UILabel *emptyLab = [[UILabel alloc] init];
+            emptyLab.text = @"暂无红包";
+            emptyLab.textColor = JQXXXLZH272727CLOLR;
+            emptyLab.font = [UIFont systemFontOfSize:14];
+            emptyLab.textAlignment = NSTextAlignmentCenter;
+            [self.view addSubview:emptyLab];
+            
+            [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(navV.mas_bottom).with.offset(87);
+                make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+                make.width.mas_equalTo(112);
+                make.height.mas_equalTo(112);
+            }];
+            
+            [emptyLab mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(emptyIMGV.mas_bottom).with.offset(20);
+                make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+            }];
+
+        }else{
+            [self.view addSubview:self.NONetBtn];
+            self.NONetBtn.hidden = NO;
+            [self.NONetBtn addTarget:self action:@selector(reRequestData) forControlEvents:UIControlEventTouchUpInside];
+            
+        }
         
+    }else{
+        CGFloat currentY = climpRulesBtn.frameMaxY;
+        CGFloat height = kScreenHeight - currentY;
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, currentY, kScreenWidth, kScreenHeight-currentY) style:UITableViewStylePlain];
+        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:_mainTableView];
+        _mainTableView.delegate = self;
+        _mainTableView.dataSource = self;
+    }
+    
+}
+- (void)reRequestData{
+    if (kAppDelegate.netStatus) {
+        //没有评价加载空白页面
+        self.NONetBtn.hidden = YES;
         UIImageView *emptyIMGV = [[UIImageView alloc] init];
         emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
         emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
@@ -97,17 +146,7 @@
             make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
         }];
         
-        
-    }else{
-        CGFloat currentY = climpRulesBtn.frameMaxY;
-        CGFloat height = kScreenHeight - currentY;
-        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, currentY, kScreenWidth, kScreenHeight-currentY) style:UITableViewStylePlain];
-        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self.view addSubview:_mainTableView];
-        _mainTableView.delegate = self;
-        _mainTableView.dataSource = self;
     }
-    
 }
 #pragma mark UITableviewDelegate UITbaleviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

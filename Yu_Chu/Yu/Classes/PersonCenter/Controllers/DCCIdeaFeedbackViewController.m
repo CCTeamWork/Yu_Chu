@@ -69,7 +69,12 @@
         return;
     }
     [SVProgressHUD showSuccessWithStatus:@"感谢您的宝贝意见"];
-    [self.navigationController popViewControllerAnimated:YES];
+    double delayInSeconds = 0.8;
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, mainQueue, ^{
+        [self.navigationController popViewControllerAnimated:YES];
+    });
 }
 #pragma mark 页面的出现和消失
 - (void)viewWillAppear:(BOOL)animated {

@@ -70,7 +70,7 @@
         return;
     }
     [SVProgressHUD show];
-    double delayInSeconds = 2.0;
+    double delayInSeconds = 0.8;
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, mainQueue, ^{

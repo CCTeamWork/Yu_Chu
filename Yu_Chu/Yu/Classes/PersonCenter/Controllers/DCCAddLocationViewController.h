@@ -7,11 +7,14 @@
 //
 
 #import "DCCBaseViewController.h"
+#import "DCCLocationModel.h"
 
 @interface DCCAddLocationViewController : DCCBaseViewController
 
 @property (nonatomic, assign) BOOL isEdit;//默认是NO
 
 @property (nonatomic, copy) void(^callBackAndRefreshPage)();
+
+@property (nonatomic, strong)DCCLocationModel *currentModel;
 
 @end

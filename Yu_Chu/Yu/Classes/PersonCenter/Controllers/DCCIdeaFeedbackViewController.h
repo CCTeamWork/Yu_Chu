@@ -6,8 +6,7 @@
 //  Copyright © 2017年 何龙飞. All rights reserved.
 //
 
-#import "DCCBaseViewController.h"
-
-@interface DCCIdeaFeedbackViewController : DCCBaseViewController
+#import <UIKit/UIKit.h>
+@interface DCCIdeaFeedbackViewController : UIViewController
 
 @end

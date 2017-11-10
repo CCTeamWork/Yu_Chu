@@ -7,12 +7,13 @@
 //
 
 #import "DCCBaseViewController.h"
+#import "DCCLocationModel.h"
 
 @interface DCCLocationViewController : DCCBaseViewController
 
 
 @property (nonatomic, assign)BOOL isSelected;
 
-@property (nonatomic, copy)void(^callBackReturnLocationModel)();
+@property (nonatomic, copy)void(^callBackReturnLocationModel)(DCCLocationModel *model);
 
 @end
