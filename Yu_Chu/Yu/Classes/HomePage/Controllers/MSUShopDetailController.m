@@ -20,6 +20,8 @@
 #import "MSUSellerView.h"
 #import "MSUShopCarView.h"
 
+#import "MSUDetailModel.h"
+
 @interface MSUShopDetailController ()<MSUSeleTableViewDelegate>
 
 @property (nonatomic , strong) MSUHomeNavView *navView;
@@ -58,6 +60,8 @@
     
     self.view.backgroundColor = REDCOLOR;
     
+    [self loadRequest];
+    
     self.navView  = [[MSUHomeNavView alloc] initWithFrame:NavRect showNavWithNumber:4];
     [self.view addSubview:self.navView];
     _navView.backgroundColor = [UIColor clearColor];
@@ -76,6 +80,36 @@
     UIButton *btn = self.btnArr[0];
     btn.selected = YES;
 }
+
+- (void)loadRequest
+{
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    
+    NSDictionary *dic = @{@"token":token,@"shopId":self.shopID};
+    NSLog(@"--- dic %@",dic);
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.123:8201/member/shop/getDishClass" parameters:dic withBlock:^(id obj, NSError *error) {
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+        if (!error) {
+            NSLog(@"访问成功%@",jsonDict);
+            if([jsonDict[@"code"] isEqualToString:@"200"]){
+                
+                MSUDetailModel *detailModel = [MSUDetailModel mj_objectWithKeyValues:jsonDict];
+                self.orderView.detailModel = detailModel;
+                
+            } else{
+              
+            }
+            
+        }else{
+            NSLog(@"访问报错%@",error);
+        }
+    }];
+    
+}
+
 
 - (void)createTableView{
     NSArray *arr = @[@"点菜",@"评价",@"商家"];

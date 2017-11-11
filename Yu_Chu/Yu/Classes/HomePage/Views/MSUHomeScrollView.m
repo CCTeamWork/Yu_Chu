@@ -22,6 +22,8 @@
 
 #import "MSUScrollHeaderView.h"
 
+#import "UIImageView+WebCache.h"
+
 @interface MSUHomeScrollView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 @property (nonatomic , strong) MSUScrollHeaderView *headerView;
@@ -38,6 +40,12 @@
         
     }
     return self;
+}
+
+- (void)setHomeModel:(MSUHomeModel *)homeModel{
+    _homeModel = homeModel;
+    
+    [self.tableView reloadData];
 }
 
 
@@ -73,19 +81,31 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return self.homeModel.data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MSUHomeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homeCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    MSUHomeDataModel *dataModel = self.homeModel.data[indexPath.row];
+    
+    cell.titLabel.text = dataModel.dishClassName;
+    cell.subLabel.text = dataModel.intro_msg;
+    [cell.imaView sd_setImageWithURL:[NSURL URLWithString:dataModel.coverImage]];
+    cell.nameLabel.text = dataModel.dishName;
+    cell.priceLabel.text = [NSString stringWithFormat:@"¥%@",dataModel.dishPrice];
+
+
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(tableViewDidSelect)]) {
-        [self.delegate tableViewDidSelect];
+    MSUHomeDataModel *dataModel = self.homeModel.data[indexPath.row];
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tableViewDidSelectWithShopID:)]) {
+        [self.delegate tableViewDidSelectWithShopID:dataModel.shopId];
     }
 }
 

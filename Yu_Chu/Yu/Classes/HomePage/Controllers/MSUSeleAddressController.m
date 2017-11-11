@@ -28,6 +28,7 @@
     BOOL isFirstLocation;
 }
 
+@property (nonatomic , assign) CGFloat trans;
 
 @property (nonatomic , strong) UIScrollView *scrollView;
 
@@ -98,7 +99,18 @@
     self.dataArr = [NSMutableArray array];
     self.latiArr = [NSMutableArray array];
     self.longArr = [NSMutableArray array];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
+}
+
+
+- (void)KeyboardWillChangeFrame:(NSNotification *)note{
+    NSLog(@"%@",note.userInfo);
+    
+    CGRect keyboard = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.trans = keyboard.origin.y - HEIGHT;
+//    self.view.transform = CGAffineTransformMakeTranslation(0, trans);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -135,6 +147,8 @@
     {
         _localService = nil;
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 
@@ -257,13 +271,15 @@
 //        {
 //            NSLog(@"geo检索发送失败");
 //        }
+        BMKPoiInfo *model=[self.dataArr objectAtIndex:indexPath.row];
+
         if (self.selectSuccessBlock) {
-            self.selectSuccessBlock(self.dataArr[indexPath.row],self.latiArr[indexPath.row],self.longArr[indexPath.row]);
+            self.selectSuccessBlock(model.name,[NSNumber numberWithInteger:model.pt.latitude],[NSNumber numberWithInteger:model.pt.longitude]);
         }
         
     } else{
         if (self.selectSuccessBlock) {
-            self.selectSuccessBlock(self.dataArr[indexPath.row],self.latiArr[indexPath.row],self.longArr[indexPath.row]);
+            self.selectSuccessBlock(self.dataList[indexPath.row],[NSNumber numberWithInteger:5],[NSNumber numberWithInteger:5]);
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -496,10 +512,13 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 300, WIDTH, HEIGHT-300) style:UITableViewStylePlain];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 300, WIDTH, HEIGHT-300-64) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        self.tableView.panGestureRecognizer.delaysTouchesBegan = self.tableView.delaysContentTouches;
+        _tableView.scrollEnabled = YES;
+
         [_scrollView addSubview:_tableView];
     }
     return _tableView;
@@ -507,7 +526,7 @@
 
 - (UITableView *)sugeTableView{
     if (!_sugeTableView) {
-        self.sugeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, WIDTH, HEIGHT-60) style:UITableViewStylePlain];
+        self.sugeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, WIDTH, HEIGHT-60+self.trans) style:UITableViewStylePlain];
         _sugeTableView.backgroundColor = HEXCOLOR(0xffffff);
         _sugeTableView.dataSource = self;
         _sugeTableView.delegate = self;

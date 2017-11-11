@@ -10,4 +10,6 @@
 
 @interface MSUShopDetailController : UIViewController
 
+@property (nonatomic , strong) NSString *shopID;
+
 @end

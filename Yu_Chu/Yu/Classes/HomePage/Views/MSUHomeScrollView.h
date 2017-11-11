@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MSUHomeModel.h"
+
 @protocol MSUHomeScrollViewDelegate <NSObject>
 
-- (void)tableViewDidSelect;
+- (void)tableViewDidSelectWithShopID:(NSString *)shopID;
 
 @end
 
@@ -22,5 +24,6 @@
 
 @property (nonatomic , strong) UITableView *tableView;
 
+@property (nonatomic , strong) MSUHomeModel *homeModel;
 
 @end

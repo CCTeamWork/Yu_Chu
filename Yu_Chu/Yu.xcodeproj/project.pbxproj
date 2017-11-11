@@ -186,6 +186,11 @@
 		990FF7E41FB0424E007DFD29 /* img_clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990FF7E31FB0424E007DFD29 /* img_clock@2x.png */; };
 		9A6E22E01FB5565A009D433E /* nav_icon_pull_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E22DF1FB5565A009D433E /* nav_icon_pull_default@2x.png */; };
 		9A6E22E21FB5565F009D433E /* nav_icon_pull_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E22E11FB5565F009D433E /* nav_icon_pull_default@3x.png */; };
+		9AA630B51FB6D31300644949 /* MSUNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630B41FB6D31300644949 /* MSUNoDataView.m */; };
+		9AA630B71FB6D4D800644949 /* comment_image_none@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA630B61FB6D4D800644949 /* comment_image_none@2x.png */; };
+		9AA630B91FB6D4DB00644949 /* comment_image_none@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA630B81FB6D4DB00644949 /* comment_image_none@3x.png */; };
+		9AA630BD1FB6D8C200644949 /* MSUHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630BC1FB6D8C200644949 /* MSUHomeModel.m */; };
+		9AA630C01FB6F68200644949 /* MSUDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630BF1FB6F68200644949 /* MSUDetailModel.m */; };
 		E38277068921C63AE4768A8A /* libPods-Yu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF593E1F6F6872A9B321AD79 /* libPods-Yu.a */; };
 /* End PBXBuildFile section */
 
@@ -495,6 +500,14 @@
 		990FF7E31FB0424E007DFD29 /* img_clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_clock@2x.png"; sourceTree = "<group>"; };
 		9A6E22DF1FB5565A009D433E /* nav_icon_pull_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_pull_default@2x.png"; sourceTree = "<group>"; };
 		9A6E22E11FB5565F009D433E /* nav_icon_pull_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_pull_default@3x.png"; sourceTree = "<group>"; };
+		9AA630B31FB6D31300644949 /* MSUNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUNoDataView.h; sourceTree = "<group>"; };
+		9AA630B41FB6D31300644949 /* MSUNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUNoDataView.m; sourceTree = "<group>"; };
+		9AA630B61FB6D4D800644949 /* comment_image_none@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_image_none@2x.png"; sourceTree = "<group>"; };
+		9AA630B81FB6D4DB00644949 /* comment_image_none@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_image_none@3x.png"; sourceTree = "<group>"; };
+		9AA630BB1FB6D8C200644949 /* MSUHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUHomeModel.h; sourceTree = "<group>"; };
+		9AA630BC1FB6D8C200644949 /* MSUHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUHomeModel.m; sourceTree = "<group>"; };
+		9AA630BE1FB6F68200644949 /* MSUDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUDetailModel.h; sourceTree = "<group>"; };
+		9AA630BF1FB6F68200644949 /* MSUDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUDetailModel.m; sourceTree = "<group>"; };
 		AF593E1F6F6872A9B321AD79 /* libPods-Yu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yu/Pods-Yu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -674,6 +687,7 @@
 		04B5473B1FA9DDDC0075D2E1 /* @2X */ = {
 			isa = PBXGroup;
 			children = (
+				9AA630B61FB6D4D800644949 /* comment_image_none@2x.png */,
 				9A6E22DF1FB5565A009D433E /* nav_icon_pull_default@2x.png */,
 				9902AA4C1FB2D11A00492E3A /* index_pic@2x.png */,
 				990451391FB05A0E00257C94 /* nav_close@2x.png */,
@@ -703,6 +717,7 @@
 		04B547411FA9DDDD0075D2E1 /* @3X */ = {
 			isa = PBXGroup;
 			children = (
+				9AA630B81FB6D4DB00644949 /* comment_image_none@3x.png */,
 				9A6E22E11FB5565F009D433E /* nav_icon_pull_default@3x.png */,
 				9902AA4E1FB2D12200492E3A /* index_pic@3x.png */,
 				9904513B1FB05A1500257C94 /* nav_close@3x.png */,
@@ -759,6 +774,8 @@
 				9900EB581FAAB2E30072F03C /* MSUHomeTableCell.m */,
 				9900EB5E1FAAC4E00072F03C /* MSUScrollHeaderView.h */,
 				9900EB5F1FAAC4E00072F03C /* MSUScrollHeaderView.m */,
+				9AA630B31FB6D31300644949 /* MSUNoDataView.h */,
+				9AA630B41FB6D31300644949 /* MSUNoDataView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1076,6 +1093,7 @@
 		990AED3D1FA80BDE00F5D3E7 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				9AA630BA1FB6D8A700644949 /* Model */,
 				04B547471FA9DDDD0075D2E1 /* Controllers */,
 				04B5473A1FA9DDDC0075D2E1 /* Resource */,
 				04B5474C1FA9DDDD0075D2E1 /* Views */,
@@ -1225,6 +1243,17 @@
 			path = Order;
 			sourceTree = "<group>";
 		};
+		9AA630BA1FB6D8A700644949 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9AA630BB1FB6D8C200644949 /* MSUHomeModel.h */,
+				9AA630BC1FB6D8C200644949 /* MSUHomeModel.m */,
+				9AA630BE1FB6F68200644949 /* MSUDetailModel.h */,
+				9AA630BF1FB6F68200644949 /* MSUDetailModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1347,6 +1376,7 @@
 				99026D601FAC3E7200A011F1 /* shop_icon_phone@2x.png in Resources */,
 				99026D791FAC4D5600A011F1 /* shop_icon_subtract@3x.png in Resources */,
 				990FF7CC1FB033C2007DFD29 /* img_tick@2x.png in Resources */,
+				9AA630B71FB6D4D800644949 /* comment_image_none@2x.png in Resources */,
 				9900EB5D1FAABEF20072F03C /* tabbar_icon_shopping_selected@3x.png in Resources */,
 				99026D3E1FABFA9900A011F1 /* address_frame@3x.png in Resources */,
 				99026D3C1FABFA9600A011F1 /* address_frame@2x.png in Resources */,
@@ -1365,6 +1395,7 @@
 				990FF7E21FB041FC007DFD29 /* img_clock@3x.png in Resources */,
 				04B547521FA9DDDD0075D2E1 /* back@2x.png in Resources */,
 				9902AA4F1FB2D12200492E3A /* index_pic@3x.png in Resources */,
+				9AA630B91FB6D4DB00644949 /* comment_image_none@3x.png in Resources */,
 				04B5474F1FA9DDDD0075D2E1 /* address_icon_edit@2x.png in Resources */,
 				99026D451FAC0BEC00A011F1 /* comment_icon_greystar@3x.png in Resources */,
 				990AECF91FA8048E00F5D3E7 /* Assets.xcassets in Resources */,
@@ -1527,6 +1558,7 @@
 				990AED701FA80E2200F5D3E7 /* SVRadialGradientLayer.m in Sources */,
 				9900EB591FAAB2E30072F03C /* MSUHomeTableCell.m in Sources */,
 				04CE9EAF1FB3E745004C5A6F /* DCCConfirmOrderModel.m in Sources */,
+				9AA630BD1FB6D8C200644949 /* MSUHomeModel.m in Sources */,
 				047631C11FAC91BC003CE6DB /* DCCMessageTableViewCell.m in Sources */,
 				047631C21FAC91BC003CE6DB /* DCCLocationTableViewCell.m in Sources */,
 				0476319B1FAB46C9003CE6DB /* DCCMoreViewController.m in Sources */,
@@ -1536,6 +1568,7 @@
 				990FF79A1FAFF4CE007DFD29 /* MSUOrderBottomView.m in Sources */,
 				047631FA1FB149AF003CE6DB /* ChooseLocationVC.m in Sources */,
 				04CE9EAC1FB3192B004C5A6F /* DCCGoodsModel.m in Sources */,
+				9AA630B51FB6D31300644949 /* MSUNoDataView.m in Sources */,
 				04B5472F1FA9B1040075D2E1 /* NSDate+CL.m in Sources */,
 				0476319D1FAB46C9003CE6DB /* DCCBaseViewController.m in Sources */,
 				04B5475A1FA9DDDD0075D2E1 /* MSUSeleAddressController.m in Sources */,
@@ -1562,6 +1595,7 @@
 				047632031FB1D7AB003CE6DB /* DCCUserInfomationModel.m in Sources */,
 				990FF7931FAFEDB4007DFD29 /* MSUOrderDetailController.m in Sources */,
 				990AED6C1FA80E2200F5D3E7 /* SVIndefiniteAnimatedView.m in Sources */,
+				9AA630C01FB6F68200644949 /* MSUDetailModel.m in Sources */,
 				990AED561FA80C7E00F5D3E7 /* MSUShopCarController.m in Sources */,
 				99026D711FAC49F500A011F1 /* MSUCarTableCell.m in Sources */,
 				04CE9EA91FB31533004C5A6F /* DCCShopCarModel.m in Sources */,

@@ -15,12 +15,14 @@
 #import "MSUPrefixHeader.pch"
 #import "MSUHomeNavView.h"
 #import "MSUAFNRequest.h"
+#import "MSUNoDataView.h"
 
 /* 地图框架 */
 #import <CoreLocation/CoreLocation.h>
 #import "TQLocationConverter.h"
 #import "ZCChinaLocation.h"
 
+#import "MSUHomeModel.h"
 
 @interface MSUHomePageController ()<MSUHomeScrollViewDelegate,CLLocationManagerDelegate>
 
@@ -34,6 +36,7 @@
 @property (nonatomic , strong) NSNumber *longNum;
 
 @property (nonatomic , strong) MSUHomeScrollView *scrolleView;
+@property (nonatomic , strong) MSUNoDataView *noDataView;
 
 @end
 
@@ -67,6 +70,21 @@
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
         if (!error) {
             NSLog(@"访问成功%@",jsonDict);
+            if([jsonDict[@"code"] isEqualToString:@"200"]){
+                MSUHomeModel *homeModel = [MSUHomeModel mj_objectWithKeyValues:jsonDict];
+                if (homeModel.data.count > 0) {
+                    self.scrolleView.hidden = NO;
+                    self.noDataView.hidden = YES;
+                    self.scrolleView.homeModel = homeModel;
+                } else{
+                    self.noDataView.hidden = NO;
+                    self.scrolleView.hidden = YES;
+                }
+                
+            } else{
+                self.noDataView.hidden = NO;
+                self.scrolleView.hidden = YES;
+            }
             
         }else{
             NSLog(@"访问报错%@",error);
@@ -85,6 +103,9 @@
     [self.view addSubview:_nav];
     [_nav.LocationBtn addTarget:self action:@selector(locationBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49)];
+    bgView.backgroundColor = HEXCOLOR(0xf0f0f0);
+    [self.view addSubview:bgView];
  
     
     // 定位初始化
@@ -160,8 +181,8 @@
 //            [strongSelf.nav.LocationBtn setTitle:addressStr forState:UIControlStateNormal];
             strongSelf.nav.LocationLab.text = addressStr;
 
-            strongSelf.latiNum = [NSNumber numberWithDouble:_curCoordinate2D.latitude];
-            strongSelf.longNum = [NSNumber numberWithDouble:_curCoordinate2D.longitude];
+            strongSelf.latiNum = latiNum;
+            strongSelf.longNum = longnum;
             [[NSUserDefaults standardUserDefaults] setObject:addressStr forKey:@"city"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
@@ -172,9 +193,10 @@
 
 
 #pragma mark - 代理
-- (void)tableViewDidSelect{
+- (void)tableViewDidSelectWithShopID:(NSString *)shopID{
     self.hidesBottomBarWhenPushed = YES;
     MSUShopDetailController *detail = [[MSUShopDetailController alloc] init];
+    detail.shopID = shopID;
     [self.navigationController pushViewController:detail animated:YES];
     self.hidesBottomBarWhenPushed = NO;;
 }
@@ -242,6 +264,13 @@
     return _scrolleView;
 }
 
-
+- (MSUNoDataView *)noDataView{
+    if(!_noDataView){
+        _noDataView = [[MSUNoDataView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49)];
+        [self.view addSubview:_noDataView];
+        _noDataView.backgroundColor = HEXCOLOR(0xf0f0f0);
+    }
+    return _noDataView;
+}
 
 @end

@@ -30,7 +30,6 @@
 
 - (void)createContentView{
     self.titLabel = [[UILabel alloc] init];
-    _titLabel.text = @"今日推荐";
     _titLabel.font = [UIFont systemFontOfSize:20];
     _titLabel.textColor = HEXCOLOR(0x272727);
     [self addSubview:_titLabel];
@@ -42,7 +41,6 @@
     }];
     
     self.subLabel = [[UILabel alloc] init];
-    _subLabel.text = @"两岸御厨~吃遍大江南北，美味精挑细选";
     _subLabel.font = [UIFont systemFontOfSize:12];
     _subLabel.textColor = HEXCOLOR(0xb7b7b7);
     [self addSubview:_subLabel];
@@ -55,7 +53,7 @@
     
     self.imaView = [[UIImageView alloc] init];
 //    _imaView .image = [MSUPathTools showImageWithContentOfFileByName:@""];
-    _imaView.backgroundColor = [UIColor brownColor];
+    _imaView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_imaView];
     [_imaView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_subLabel.bottom).offset(20);
@@ -65,7 +63,6 @@
     }];
     
     self.nameLabel = [[UILabel alloc] init];
-    _nameLabel.text = @"海鲜面";
     _nameLabel.font = [UIFont systemFontOfSize:14];
     _nameLabel.textColor = HEXCOLOR(0x272727);
     [self addSubview:_nameLabel];
@@ -77,7 +74,6 @@
     }];
     
     self.priceLabel = [[UILabel alloc] init];
-    _priceLabel.text = [NSString stringWithFormat:@"¥%@",@"26"];
     _priceLabel.font = [UIFont systemFontOfSize:15];
     _priceLabel.textColor = HEXCOLOR(0xff2d4b);
     [self addSubview:_priceLabel];

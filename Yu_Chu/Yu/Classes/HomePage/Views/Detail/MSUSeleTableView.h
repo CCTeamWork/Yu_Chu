@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MSUDetailModel.h"
+
 @protocol MSUSeleTableViewDelegate <NSObject>
 
 - (void)seleDelegateToCaculateWithGoodsPrice:(NSString *)price goodsNum:(NSInteger)num;
@@ -26,5 +28,7 @@
 @property (nonatomic , strong) UITableView *rightTableView;
 
 @property (nonatomic , strong) NSArray *sectionArr;
+
+@property (nonatomic , strong) MSUDetailModel *detailModel;
 
 @end

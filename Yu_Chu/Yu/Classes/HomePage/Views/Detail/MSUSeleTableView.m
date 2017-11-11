@@ -44,6 +44,13 @@
     return self;
 }
 
+- (void)setDetailModel:(MSUDetailModel *)detailModel{
+    _detailModel = detailModel;
+    
+    [self.leftTableView reloadData];
+    [self.rightTableView reloadData];
+}
+
 //     bgView.frame = CGRectMake(0, CGRectGetMaxY(_topView.frame), WIDTH, HEIGHT-CGRectGetMaxY(_topView.frame)-49);
 
 - (void)createView{
@@ -122,7 +129,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (_leftTableView == tableView) {
-        return 4;
+        return _detailModel.data.count;
     } else{
         return 3;
     }
@@ -134,7 +141,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = HEXCOLOR(0xf4f4f4);
         
-        NSMutableString *text = [[NSMutableString alloc] initWithString:self.sectionArr[indexPath.row]];
+        MSUShopDetailModel *shopModel = _detailModel.data[indexPath.row];
+        NSMutableString *text = [[NSMutableString alloc] initWithString:shopModel.dishClassName];
         [text insertString:@"\n" atIndex:2];
 
 //        cell.top
