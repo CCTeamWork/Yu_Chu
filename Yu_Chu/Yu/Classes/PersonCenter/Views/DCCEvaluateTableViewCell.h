@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCCMyEvaluateModel.h"
 
 @interface DCCEvaluateTableViewCell : UITableViewCell
 
-
+- (void)initAllData:(DCCMyEvaluateModel *)model;
 @end

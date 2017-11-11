@@ -377,16 +377,29 @@
             [SVProgressHUD showErrorWithStatus:@"昵称不能为空"];
             return;
         }
-        CGFloat nameWidth = [NSString calculateRowWidth:_editNameTF.text andFont:14 andHeight:15];
-        CGFloat totalWidth = nameWidth+8+16;
-        _userNameLab.frameOriginX = (_topBackView.frameSizeWidth-totalWidth)/2.0;
-        _userNameLab.frameSizeWidth = nameWidth;
-        _userNameLab.text = _editNameTF.text;
-        _editNameBtn.frameOriginX = _userNameLab.frameMaxX+8;
+        NSMutableDictionary *dic= [[NSMutableDictionary alloc] init];
+        [dic setObject:_editNameTF.text forKey:@"name"];
+        [SVProgressHUD show];
+        [[RequestManager sharedInstance]modifyUserInfomation:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+            if (succeed) {
+                [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                CGFloat nameWidth = [NSString calculateRowWidth:_editNameTF.text andFont:14 andHeight:15];
+                CGFloat totalWidth = nameWidth+8+16;
+                _userNameLab.frameOriginX = (_topBackView.frameSizeWidth-totalWidth)/2.0;
+                _userNameLab.frameSizeWidth = nameWidth;
+                _userNameLab.text = _editNameTF.text;
+                _editNameBtn.frameOriginX = _userNameLab.frameMaxX+8;
+                _currentModel.name = _editNameTF.text;
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"修改失败"];
+            }
+        }];
+        
     }
     [self cancelEditUserName:nil];
 }
 - (void)textFieldChanged:(UITextField *)TF{
+    TF.text = [self disable_emoji:TF.text];
     [TF LimitCharacterWithInteger:10];
 }
 - (void)cancelEditUserName:(UIGestureRecognizer *)ges{
@@ -395,6 +408,15 @@
     } completion:^(BOOL finished) {
         [_editNameTF resignFirstResponder];
     }];
+}
+- (NSString *)disable_emoji:(NSString *)text
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^\\u0020-\\u007E\\u00A0-\\u00BE\\u2E80-\\uA4CF\\uF900-\\uFAFF\\uFE30-\\uFE4F\\uFF00-\\uFFEF\\u0080-\\u009F\\u2000-\\u201f\r\n]" options:NSRegularExpressionCaseInsensitive error:nil];
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:text
+                                                               options:0
+                                                                 range:NSMakeRange(0, [text length])
+                                                          withTemplate:@""];
+    return modifiedString;
 }
 #pragma mark 页面的出现和消失
 - (void)viewWillAppear:(BOOL)animated {
@@ -407,6 +429,7 @@
     [super viewWillDisappear:animated];
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

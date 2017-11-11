@@ -15,7 +15,7 @@
 #import <BaiduMapAPI/BMapKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
-
+#import "AFNetworking.h"
 
 @interface AppDelegate ()<UIScrollViewDelegate,BMKGeneralDelegate>
 {
@@ -40,6 +40,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self loginToken];
+    [self judgeNetIsChange];
     [AMapServices sharedServices].apiKey = @"3a4e6ecafef66c22884cff96f992a799";
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -110,7 +111,35 @@
         self.token = @"";
     }
 }
-
+- (void)judgeNetIsChange{
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkReachabilityManager sharedManager ] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        //区分Wi-Fi网络还是蜂窝
+        switch (status) {
+            case -1:
+//                NSLog(@"未知网络");
+                break;
+            case 0:
+//                NSLog(@"网络不可达");
+                break;
+            case 1:
+//                NSLog(@"GPRS网络");
+                break;
+            case 2:
+//                NSLog(@"wifi网络");
+                break;
+            default:
+                break;
+        }
+        if(status ==AFNetworkReachabilityStatusReachableViaWWAN || status == AFNetworkReachabilityStatusReachableViaWiFi)
+        {
+            self.netStatus = YES;
+        }else
+        {
+            self.netStatus = NO;
+        }
+    }];
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -149,7 +178,18 @@
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSString  *resultString = resultDic[@"resultStatus"] ;
+            if ([resultString isEqualToString:@"9000"]) {
+                //支付成功,这里放你们想要的操作
+                NSLog(@"成功了");
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"payResult" object:@"1"];
+                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+            }
+            else{
+                NSLog(@"失败了");
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"payResult" object:@"0"];
+                [SVProgressHUD showErrorWithStatus:@"支付失败"];
+            }
         }];
     }
     return YES;
@@ -161,7 +201,18 @@
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSString  *resultString = resultDic[@"resultStatus"] ;
+            if ([resultString isEqualToString:@"9000"]) {
+                //支付成功,这里放你们想要的操作
+                NSLog(@"成功了");
+                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"payResult" object:@"1"];
+            }
+            else{
+                NSLog(@"失败了");
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"payResult" object:@"0"];
+                [SVProgressHUD showErrorWithStatus:@"支付失败"];
+            }
         }];
     }
     return YES;

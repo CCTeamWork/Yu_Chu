@@ -42,7 +42,7 @@
 
 - (void)initAllData{
     if (_isEdit) {
-        _isMan = NO;
+        _isMan = [_currentModel.genger isEqualToString:@"1"];
     }else{
         _isMan = YES;
     }
@@ -75,6 +75,9 @@
         if (i == 0) {
             _relationName = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-100, 22)];
             _relationName.placeholder = @"请填写收餐人姓名";
+            if (_isEdit) {
+                _relationName.text = _currentModel.consignee;
+            }
             _relationName.textColor = JQXXXLZH272727CLOLR;
             _relationName.font = [UIFont systemFontOfSize:14];
             _relationName.tag = 2000;
@@ -121,6 +124,9 @@
             if (i == 1) {
                 _phoneNum = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-100, 22)];
                 _phoneNum.placeholder = @"请填写收餐人的手机号码";
+                if (_isEdit) {
+                    _phoneNum.text = _currentModel.mobile;
+                }
                 _phoneNum.textColor = JQXXXLZH272727CLOLR;
                 _phoneNum.font = [UIFont systemFontOfSize:14];
                 _phoneNum.tag = 2001;
@@ -132,6 +138,9 @@
                 _location = [[UILabel alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-128, 22)];
                 _location.textColor = JQXXXLZH272727CLOLR;
                 _location.font = [UIFont systemFontOfSize:14];
+                if (_isEdit) {
+                    _location.text = _currentModel.address;
+                }
                 [backV addSubview:_location];
                 
                 UIImageView *rightIMGV = [[UIImageView alloc] initWithFrame:CGRectMake(backV.frameSizeWidth-14-14,currentHeight+18, 14, 14)];
@@ -145,6 +154,9 @@
             if (i == 3) {
                 _doorNum = [[UITextField alloc] initWithFrame:CGRectMake(leftLab.frameMaxX+13, currentHeight+14, kScreenWidth-100, 22)];
                 _doorNum.placeholder = @"请填写收餐具体的门牌号及楼层";
+                if (_isEdit) {
+                    _doorNum.text = _currentModel.hnumber;
+                }
                 _doorNum.textColor = JQXXXLZH272727CLOLR;
                 _doorNum.font = [UIFont systemFontOfSize:14];
                 _doorNum.tag = 2002;
@@ -172,26 +184,37 @@
          BOOL isOK = [self judgeIsOkToUpdateData];
 
          if (isOK) {
-             NSDictionary *infoDic = _placeMark.addressDictionary;
              NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
              [dic setObjectSafe:_relationName.text forKey:@"consignee"];
-             [dic setObjectSafe:[NSString stringWithFormat:@"%d",(_currentBtn.tag == 1001)?1:2] forKey:@"gender"];
+             [dic setObjectSafe:[NSString stringWithFormat:@"%d",(_currentBtn.tag == 1001)?1:2] forKey:@"genger"];
              [dic setObjectSafe:_location.text forKey:@"address"];
              [dic setObjectSafe:_doorNum.text forKey:@"hnumber"];
              [dic setObjectSafe:_phoneNum.text forKey:@"mobile"];
-             [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.longitude] forKey:@"longitude"];
-             [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.latitude] forKey:@"latitude"];
              
-             [dic setObjectSafe:[infoDic valueWithNilForKey:@"City"] forKey:@"cityName"];
-             [dic setObjectSafe:[infoDic valueWithNilForKey:@"State"] forKey:@"provinceName"];
-             [dic setObjectSafe:[infoDic valueWithNilForKey:@"Sublocality"] forKey:@"districtName"];
-             [dic setObjectSafe:@"86" forKey:@"country"];
-             [dic setObjectSafe:@"0" forKey:@"province"];
-             [dic setObjectSafe:@"0" forKey:@"city"];
-             [dic setObjectSafe:@"0" forKey:@"district"];
+             if (_isEdit) {
+                 if (!_mapPoint) {
+                     [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.longitude] forKey:@"longitude"];
+                     [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.latitude] forKey:@"latitude"];
+                     [dic setObjectSafe:_currentModel.cityName forKey:@"cityName"];
+                     [dic setObjectSafe:_currentModel.provinceName forKey:@"provinceName"];
+                     [dic setObjectSafe:_currentModel.districtName forKey:@"districtName"];
+                     [dic setObjectSafe:@"86" forKey:@"country"];
+                     [dic setObjectSafe:@"0" forKey:@"province"];
+                     [dic setObjectSafe:@"0" forKey:@"city"];
+                     [dic setObjectSafe:@"0" forKey:@"district"];
+                 }else{
+                     [self setValueTodic:dic];
+                 }
+             }else{
+                  [self setValueTodic:dic];
+             }
+             
+             if (self.isEdit) {
+                 [dic setObjectSafe:_currentModel.tid forKey:@"id"];
+             }
              [SVProgressHUD show];
              [[RequestManager sharedInstance]uploadLocationAddressToSVR:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
-//                 [SVProgressHUD dismiss];
+                 [SVProgressHUD dismiss];
                  if (succeed) {
                      if (self.callBackAndRefreshPage) {
                          self.callBackAndRefreshPage();
@@ -209,6 +232,19 @@
          }
      }];
     [self.view addSubview:okBtn];
+}
+- (void)setValueTodic:(NSMutableDictionary *)dic{
+    NSDictionary *infoDic = _placeMark.addressDictionary;
+    [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.longitude] forKey:@"longitude"];
+    [dic setObjectSafe:[NSString stringWithFormat:@"%f",_mapPoint.location.latitude] forKey:@"latitude"];
+    
+    [dic setObjectSafe:[infoDic valueWithNilForKey:@"City"] forKey:@"cityName"];
+    [dic setObjectSafe:[infoDic valueWithNilForKey:@"State"] forKey:@"provinceName"];
+    [dic setObjectSafe:[infoDic valueWithNilForKey:@"Sublocality"] forKey:@"districtName"];
+    [dic setObjectSafe:@"86" forKey:@"country"];
+    [dic setObjectSafe:@"0" forKey:@"province"];
+    [dic setObjectSafe:@"0" forKey:@"city"];
+    [dic setObjectSafe:@"0" forKey:@"district"];
 }
 - (BOOL)judgeIsOkToUpdateData{
     if (_relationName.text.length == 0) {
@@ -272,6 +308,7 @@
         
      }];
 }
+
 #pragma mark 页面的出现和消失
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

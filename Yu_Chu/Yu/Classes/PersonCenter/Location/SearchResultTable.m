@@ -56,7 +56,7 @@
         //self.tableView.mj_footer.state = MJRefreshStateIdle;
         // 添加数据并刷新TableView
         [response.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop) {
-            [_searchResultArray addObject:obj];
+            [_searchResultArray addSafeObject:obj];
         }];
     }
     if ([self.mDelegate respondsToSelector:@selector(shouldShowTable:)]) {

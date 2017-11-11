@@ -29,10 +29,10 @@
 - (void)initAllDataWith:(DCCLocationModel *)model{
     _nameAndMobilelab.text = [NSString stringWithFormat:@"%@  %@",model.consignee,model.mobile];
     _locationLab.text = [NSString stringWithFormat:@"%@  %@",model.address,model.hnumber];
-    CGFloat contentHeight = [self getSpaceLabelHeight:_locationLab.text withFont:[UIFont systemFontOfSize:14] withWidth:kScreenWidth-40];
+    CGFloat contentHeight = [self getSpaceLabelHeight:_locationLab.text withFont:[UIFont systemFontOfSize:14] withWidth:(kScreenWidth-28-56)];
     _locationLab.numberOfLines = 0;
     [_locationLab mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(contentHeight);
+        make.height.mas_equalTo(contentHeight+4);
     }];
 }
 -(CGFloat)getSpaceLabelHeight:(NSString*)str withFont:(UIFont*)font withWidth:(CGFloat)width {
@@ -53,10 +53,16 @@
 }
 - (void)initAllSubviews{
     self.backgroundColor = JQXXXLZHFAFAFACLOLR;
-    UIView *backV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 79)];
+    UIView *backV = [[UIView alloc] init];
     backV.backgroundColor = JQXXXLZHFFFFFFCLOLR;
     backV.userInteractionEnabled = YES;
     [self addSubview:backV];
+    [backV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.top.equalTo(self.mas_top);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-6);
+    }];
     
     _nameAndMobilelab = [[UILabel alloc] init];
     _nameAndMobilelab.textColor = JQXXXLZH787878CLOLR;
@@ -89,7 +95,7 @@
     [_locationLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(14);
         make.top.equalTo(_nameAndMobilelab.mas_bottom).with.offset(15);
-        make.right.equalTo(_editBtn.mas_left).with.offset(14);
+        make.right.equalTo(_editBtn.mas_left).with.offset(-14);
     }];
 }
 

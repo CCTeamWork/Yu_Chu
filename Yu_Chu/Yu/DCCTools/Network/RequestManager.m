@@ -41,18 +41,18 @@ static id instance;
     
         _sessionManager.responseSerializer.acceptableContentTypes = [_sessionManager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
         // 如果要检测网络状态的变化,必须用检测管理器的单例的startMonitoring
-        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-        
-        // 检测网络连接的单例,网络变化时的回调方法
-        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            if(status  == AFNetworkReachabilityStatusNotReachable){
-                
-                //[SVProgressHUD showErrorWithStatus:@"请检查网络链接"];
-                
-                [self cancelALLRequest];
-                [self cancelAllOperations];
-            }
-        }];
+//        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+//        
+//        // 检测网络连接的单例,网络变化时的回调方法
+//        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//            if(status  == AFNetworkReachabilityStatusNotReachable){
+//                
+//                //[SVProgressHUD showErrorWithStatus:@"请检查网络链接"];
+//                
+//                [self cancelALLRequest];
+//                [self cancelAllOperations];
+//            }
+//        }];
     }
     return _sessionManager;
 }
@@ -215,7 +215,9 @@ static id instance;
      */
     NSString *errorInfo = @"";
     switch (rcCode) {
-        case 1:
+        case 10001:
+            kAppDelegate.token = @"";
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"dccLoginToken"];
             errorInfo = @"请求失败，请重新请求";
             break;
         default:
@@ -254,7 +256,12 @@ static id instance;
 
 - (void)uploadLocationAddressToSVR:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
     [params setObject:kAppDelegate.token forKey:@"token"];
-    NSString *urlS = [NSString stringWithFormat:@"%@member/user/addAddress",DCCBaseUrl];
+    NSString *urlS = nil;
+    if ([params objectForKey:@"id"]) {
+        urlS = [NSString stringWithFormat:@"%@member/user/updateAddress",DCCBaseUrl];
+    }else{
+         urlS = [NSString stringWithFormat:@"%@member/user/addAddress",DCCBaseUrl];
+    }
     [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
 }
 //删除收货地址
@@ -286,11 +293,50 @@ static id instance;
     NSString *urlS = [NSString stringWithFormat:@"%@member/user/getMyUserInfo",DCCCYQBaseUrl];
     [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
 }
+//修改用户昵称
+- (void)modifyUserInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/updateUserInfo",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+
 //获取购物车信息
 - (void)getSHopCarInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
-    NSString *urlS = [NSString stringWithFormat:@"%@member/user/member/shop/getShopCar",DCCCYQBaseUrl];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/shop/getShopCarGroupShop",DCCCYQBaseUrl];
     [params setObject:kAppDelegate.token forKey:@"token"];
     [self getRequestWithUrl:urlS params:params WhenComplete:completion];
 }
+//删除购物车结算
+- (void)removeShopCarInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/shop/clearShopCar",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+//购物车结算
+- (void)PayMoneySHopCarInfomation:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/shop/settlement",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
 
+//提交订单
+- (void)commitOrderWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/shop/createOrder",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+
+//获取支付宝支付的参数
+- (void)getPayOrderWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/shop/getOrderPayParams",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+
+//获取我的评价
+- (void)getMyEvaluateWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    NSString *urlS = [NSString stringWithFormat:@"%@member/user/getMyComments",DCCBaseUrl];
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    [self getRequestWithUrl:urlS params:params WhenComplete:completion];
+}
 @end

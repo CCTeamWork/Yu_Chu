@@ -33,7 +33,7 @@
         // 初始化时保证_searchPoiArray长度为1
         _searchPoiArray = [NSMutableArray array];
         AMapPOI *point = [[AMapPOI alloc] init];
-        [_searchPoiArray addObject:point];
+        [_searchPoiArray addSafeObject:point];
     }
     return self;
 }
@@ -161,7 +161,7 @@
         
     // 添加数据并刷新TableView
     [response.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop) {
-        [_searchPoiArray addObject:obj];
+        [_searchPoiArray addSafeObject:obj];
     }];
     [_tableView reloadData];
 }

@@ -33,14 +33,13 @@
     [self.view addSubview:navV];
     
     [SVProgressHUD show];
-    double delayInSeconds = 2.0;
+    double delayInSeconds = 0.8;
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, mainQueue, ^{
         NSLog(@"延时执行的2秒");
         [self initAllSubviews:navV.frameMaxY];
-                [SVProgressHUD dismiss];
-        
+            [SVProgressHUD dismiss];
     });
     
 }
@@ -52,31 +51,38 @@
     
     BOOL isHaveData = NO;
     if (!isHaveData) {
-        //没有评价加载空白页面
-        
-        UIImageView *emptyIMGV = [[UIImageView alloc] init];
-        emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
-        emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
-        [self.view addSubview:emptyIMGV];
-        
-        UILabel *emptyLab = [[UILabel alloc] init];
-        emptyLab.text = @"暂无消息";
-        emptyLab.textColor = JQXXXLZH272727CLOLR;
-        emptyLab.font = [UIFont systemFontOfSize:14];
-        emptyLab.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:emptyLab];
-        
-        [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(height+87);
-            make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
-            make.width.mas_equalTo(112);
-            make.height.mas_equalTo(112);
-        }];
-        
-        [emptyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(emptyIMGV.mas_bottom).with.offset(20);
-            make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
-        }];
+        if (kAppDelegate.netStatus) {
+            self.NONetBtn.hidden = YES;
+            //没有评价加载空白页面
+            UIImageView *emptyIMGV = [[UIImageView alloc] init];
+            emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
+            emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
+            [self.view addSubview:emptyIMGV];
+            
+            UILabel *emptyLab = [[UILabel alloc] init];
+            emptyLab.text = @"暂无消息";
+            emptyLab.textColor = JQXXXLZH272727CLOLR;
+            emptyLab.font = [UIFont systemFontOfSize:14];
+            emptyLab.textAlignment = NSTextAlignmentCenter;
+            [self.view addSubview:emptyLab];
+            
+            [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(height+87);
+                make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+                make.width.mas_equalTo(112);
+                make.height.mas_equalTo(112);
+            }];
+            
+            [emptyLab mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(emptyIMGV.mas_bottom).with.offset(20);
+                make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+            }];
+            
+        }else{
+            [self.view addSubview:self.NONetBtn];
+            self.NONetBtn.hidden = NO;
+            [self.NONetBtn addTarget:self action:@selector(reRequestData) forControlEvents:UIControlEventTouchUpInside];
+        }
         
         
     }else{
@@ -89,6 +95,16 @@
         [self.view addSubview:_mainTableview];
     }
     
+}
+- (void)reRequestData{
+    double delayInSeconds = 0.8;
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, mainQueue, ^{
+        NSLog(@"延时执行的2秒");
+        [self initAllSubviews:STATUS_AND_NAVIGATION_HEIGHT];
+        [SVProgressHUD dismiss];
+    });
 }
 #pragma mark UITableviewDelegate UITbaleviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

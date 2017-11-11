@@ -12,6 +12,8 @@
 #import "DCCLocationViewController.h"
 #import "DCCMyRedEnvelopeViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "DCCLocationModel.h"
+#import "DCCConfirmOrderModel.h"
 
 @interface DCCConfirmOrderViewController (){
     UIScrollView *_mainScrollerView;
@@ -25,6 +27,15 @@
     
     UILabel *_arriveTimeLab;
     UILabel *_redCountLab;
+    UIButton *_clickBtn;
+    
+    DCCConfirmOrderModel *_currentModel;
+    UIImageView *_leftIMGV;
+    UIImageView *_rightIMGV;
+    UILabel *_arriveLcationLab;
+    
+    NSString *_locationID;
+    
 }
 
 @end
@@ -33,24 +44,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
+
     if (self.shopId) {
         if (![self.shopId isEqualToString:@""]) {
             [self initAllData];
-            [self initAllSubviews];
             return;
         }
     }
     [NSException raise:@"你没有传shopid" format:@"跳转确认订单页面必须传shopid"];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(payResult:) name:@"payResult" object:nil];
 }
 
 - (void)initAllData{
-    
+    [SVProgressHUD show];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"1" forKey:@"shopId"];
+    [[RequestManager sharedInstance]PayMoneySHopCarInfomation:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (succeed) {
+            _currentModel = [DCCConfirmOrderModel mj_objectWithKeyValues:[responseData valueWithNilForKey:@"data"]];
+            _locationID = _currentModel.addressId;
+            [self initAllSubviews];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"请求失败"];
+        }
+    }];
 }
 
 - (void)initAllSubviews{
-    self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
     DCCBaseNavgationView *navV = [[DCCBaseNavgationView alloc] init];
     [navV redBackGroundSetTitle:@"确认订单" andBackGroundColor:JQXXXLZHFF2D4BCLOLR andTarget:self];
     [self.view addSubview:navV];
@@ -65,7 +87,6 @@
     
     //加载收货地址view
     [self loadLocationView];
-    [self modifyOrSetValueToLocationView];
     
     [self creatView:@"付款信息" andFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:nil andLeftIMGWidth:0 andRightTitle:@"在线支付" andightFontSize:14 andColor:JQXXXLZHB7B7B7CLOLR andLeftIMG:@"icon_forward" andLeftIMGWidth:14 andNSInteger:0];
     _currentHeight+=6;
@@ -75,32 +96,31 @@
     [selectTimeV addGestureRecognizer:tapGes];
     _currentHeight+=6;
     
-    [self creatView:@"两岸咖啡（绍兴店）" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"img_big" andLeftIMGWidth:35 andRightTitle:@"" andightFontSize:14 andColor:JQXXXLZHB7B7B7CLOLR andLeftIMG:@"icon_forward" andLeftIMGWidth:14 andNSInteger:2];
+    [self creatView:self.shopName andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"img_big" andLeftIMGWidth:35 andRightTitle:@"" andightFontSize:14 andColor:JQXXXLZHB7B7B7CLOLR andLeftIMG:@"icon_forward" andLeftIMGWidth:14 andNSInteger:2];
     [self addUnderLV:_currentHeight];
     
     [self addGoodsList];
     
-    [self creatView:@"在线支付立减优惠" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"icon_onlinepayment" andLeftIMGWidth:18 andRightTitle:@"-¥16" andightFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:nil andLeftIMGWidth:0 andNSInteger:2];
+    [self creatView:@"在线支付立减优惠" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"icon_onlinepayment" andLeftIMGWidth:18 andRightTitle:@"0" andightFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:nil andLeftIMGWidth:0 andNSInteger:2];
     
-    [self creatView:@"会员减配送费" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"icon_member" andLeftIMGWidth:18 andRightTitle:@"-¥4" andightFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"nil" andLeftIMGWidth:0 andNSInteger:2];
-    [self addUnderLV:_currentHeight];
+//    [self creatView:@"会员减配送费" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"icon_member" andLeftIMGWidth:18 andRightTitle:@"0" andightFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"nil" andLeftIMGWidth:0 andNSInteger:2];
+//    [self addUnderLV:_currentHeight];
     
     [self addRedPocket];
     _mainScrollerView.contentSize = CGSizeMake(kScreenWidth, _currentHeight);
     
-    [self
-     addFooterView];
+    [self addFooterView];
 }
 - (void)addFooterView{
-    UILabel *arriveLcationLab = [[UILabel alloc] initWithFrame:CGRectMake(0,_mainScrollerView.frameMaxY ,kScreenWidth, 20 )];
-    arriveLcationLab.text = @"  送至：迪凯银座";
-    arriveLcationLab.backgroundColor = JQXXXLZH272727CLOLR;
-    arriveLcationLab.backgroundColor = JQXXXLZHFFFADACLOLR;
-    arriveLcationLab.font = [UIFont systemFontOfSize:12];
-    [self.view addSubview:arriveLcationLab];
+    _arriveLcationLab = [[UILabel alloc] initWithFrame:CGRectMake(0,_mainScrollerView.frameMaxY ,kScreenWidth, 20 )];
+    _arriveLcationLab.text = [NSString stringWithFormat:@"  送至：%@",_currentModel.address];
+    _arriveLcationLab.backgroundColor = JQXXXLZH272727CLOLR;
+    _arriveLcationLab.backgroundColor = JQXXXLZHFFFADACLOLR;
+    _arriveLcationLab.font = [UIFont systemFontOfSize:12];
+    [self.view addSubview:_arriveLcationLab];
     
-    UILabel *discountInfoLab = [[UILabel alloc] initWithFrame:CGRectMake(0,arriveLcationLab.frameMaxY ,kScreenWidth-106, 50 )];
-    discountInfoLab.text = @"  待支付 ¥24 | 优惠 ¥14";
+    UILabel *discountInfoLab = [[UILabel alloc] initWithFrame:CGRectMake(0,_arriveLcationLab.frameMaxY ,kScreenWidth-106, 50 )];
+    discountInfoLab.text = [NSString stringWithFormat:@"  待支付 ¥%@ | 优惠 ¥%@",_currentModel.totalAmount,_currentModel.couponAmount];
     discountInfoLab.backgroundColor = JQXXXLZH272727CLOLR;
     discountInfoLab.backgroundColor = JQXXXLZHF4F4F4COLOR;
     discountInfoLab.font = [UIFont systemFontOfSize:12];
@@ -115,37 +135,50 @@
     [[okBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
          subscribeNext:^(__kindof UIControl * _Nullable x) {
          //点击提交订单
-             [self gotoAliPay];
+             [SVProgressHUD show];
+             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+             [dic setObjectSafe:self.shopId forKey:@"shopId"];
+             [dic setObjectSafe:_locationID forKey:@"addressId"];
+             [[RequestManager sharedInstance]commitOrderWith:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+                 if (succeed) {
+                     NSMutableDictionary *paramic = [[NSMutableDictionary alloc] init];
+                     [paramic setObjectSafe:[[responseData valueWithNilForKey:@"data"]valueWithNilForKey:@"id"] forKey:@"orderId"];
+                     [[RequestManager sharedInstance]getPayOrderWith:paramic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+                         if (succeed) {
+                             [self gotoAliPay:[[responseData valueWithNilForKey:@"data"] valueWithNilForKey:@"alipay"]];
+                         }else{
+                              [SVProgressHUD showErrorWithStatus:@"提交失败"];
+                         }
+                     }];
+                 }else{
+                     [SVProgressHUD showErrorWithStatus:@"提交失败"];
+
+                 }
+             }];
      }];
     [self.view addSubview:okBtn];
 }
-- (void)gotoAliPay{
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-//    [dic setObject:self.order forKey:@"orders"];
-//    [[RequestManager sharedInstance]getAliPayOrderString:dic andCallBack:^(BOOL succeed, id responseData, NSError *error) {
-//        if (succeed) {
-//            self.orderString = [responseData valueWithNilForKey:@"form"];
-//            NSString *appScheme = @"CHinaJianCai";
-//                       NSString *newsign = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)_orderString, NULL, (CFStringRef)@"!*'();:@&=+ $,./?%#[]", kCFStringEncodingUTF8));
-//            [[AlipaySDK defaultService] payOrder:_orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-//                NSString  *resultString = resultDic[@"resultStatus"] ;
-//                if ([resultString isEqualToString:@"9000"]) {
-//                    //支付成功,这里放你们想要的操作
-//                    NSLog(@"成功了");
-//                    [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-//                    [self.navigationController popViewControllerAnimated:NO];
-//                }
-//                else{
-//                    NSLog(@"失败了");
-//                    [SVProgressHUD showErrorWithStatus:@"支付失败"];
-//                }
-//            }];
-//        }else{
-//            [SVProgressHUD showErrorWithStatus:@"出现未知错误，请重试"];
-//            self.orderString = nil;
-//        }
-//    }];
+- (void)gotoAliPay:(NSString *)payString{
+    NSString *appScheme = @"haixiayuchu";
+    [[AlipaySDK defaultService] payOrder:payString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        NSString  *resultString = resultDic[@"resultStatus"] ;
+        if ([resultString isEqualToString:@"9000"]) {
+            //支付成功,这里放你们想要的操作
+            NSLog(@"成功了");
+            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+        else{
+            NSLog(@"失败了");
+            [SVProgressHUD showErrorWithStatus:@"支付失败"];
+        }
+    }];
+}
+- (void)payResult:(NSNotification *)noti{
+    if ([noti.object isEqualToString:@"1"]) {
+        //支付成功
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)addRedPocket{
     UIView *redV = [[UIView alloc] initWithFrame:CGRectMake(0, _currentHeight, kScreenWidth, 45)];
@@ -164,10 +197,10 @@
     [redV addSubview:leftLab];
     
     _redCountLab = [[UILabel alloc] init];
-    _redCountLab.textColor = JQXXXLZHFFFFFFCLOLR;
+    _redCountLab.textColor = JQXXXLZHB7B7B7CLOLR;
     _redCountLab.font = [UIFont systemFontOfSize:12];
-    _redCountLab.backgroundColor = JQXXXLZHFF2D4BCLOLR;
-    _redCountLab.text = @"3个可用";
+//    _redCountLab.backgroundColor = JQXXXLZHFF2D4BCLOLR;
+    _redCountLab.text = @"暂无可用红包";
     [redV addSubview:_redCountLab];
     
     UIImageView *rightIMGV = [[UIImageView alloc] init];
@@ -198,7 +231,7 @@
     _currentHeight+=1;
 }
 - (void)loadLocationView{
-    UIView *locationV = [[UIView alloc] initWithFrame:CGRectMake(0, _currentHeight, kScreenWidth, 79)];
+    UIView *locationV = [[UIView alloc] initWithFrame:CGRectMake(0, _currentHeight, kScreenWidth, 85)];
     locationV.backgroundColor = JQXXXLZHFFFFFFCLOLR;
     locationV.userInteractionEnabled = YES;
     [_mainScrollerView addSubview:locationV];
@@ -207,10 +240,10 @@
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(climpLocationListPage)];
     [locationV addGestureRecognizer:tapGes];
     
-    UIImageView *leftIMGV = [[UIImageView alloc] init];
-    leftIMGV.image = [UIImage imageNamed:@"icon_address11"];
-    leftIMGV.contentMode = UIViewContentModeScaleAspectFit;
-    [locationV addSubview:leftIMGV];
+    _leftIMGV = [[UIImageView alloc] init];
+    _leftIMGV.image = [UIImage imageNamed:@"icon_address11"];
+    _leftIMGV.contentMode = UIViewContentModeScaleAspectFit;
+    [locationV addSubview:_leftIMGV];
     
     _userNameLab = [[UILabel alloc] init];
     _userNameLab.textColor = JQXXXLZH272727CLOLR;
@@ -227,12 +260,12 @@
     _detailLocationLab.font = [UIFont systemFontOfSize:14];
     [locationV addSubview:_detailLocationLab];
     
-    UIImageView *rightIMGV = [[UIImageView alloc] init];
-    rightIMGV.image = [UIImage imageNamed:@"icon_forward"];
-    [locationV addSubview:rightIMGV];
+    _rightIMGV = [[UIImageView alloc] init];
+    _rightIMGV.image = [UIImage imageNamed:@"icon_forward"];
+    [locationV addSubview:_rightIMGV];
     
     //布局
-    [leftIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_leftIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(locationV.mas_left).with.offset(14);
         make.top.equalTo(locationV.mas_top).with.offset(14);
         make.width.mas_equalTo(14);
@@ -240,32 +273,49 @@
     }];
     
     [_userNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(leftIMGV.mas_right).with.offset(16);
-        make.centerY.equalTo(leftIMGV.mas_centerY).with.offset(0);
+        make.left.equalTo(_leftIMGV.mas_right).with.offset(16);
+        make.centerY.equalTo(_leftIMGV.mas_centerY).with.offset(0);
     }];
     
     [_phoneLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_userNameLab.mas_right).with.offset(20);
-        make.centerY.equalTo(leftIMGV.mas_centerY).with.offset(0);
+        make.centerY.equalTo(_leftIMGV.mas_centerY).with.offset(0);
     }];
     
     [_detailLocationLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_userNameLab.mas_left);
-        make.top.equalTo(_userNameLab.mas_bottom).with.offset(18);
+        make.top.equalTo(_userNameLab.mas_bottom).with.offset(15);
+        make.right.equalTo(locationV.mas_right).with.offset(14);
     }];
     
-    [rightIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_rightIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(locationV.mas_right).with.offset(-14);
-        make.centerY.equalTo(leftIMGV.mas_centerY).with.offset(0);
+        make.centerY.equalTo(_leftIMGV.mas_centerY).with.offset(0);
         make.width.mas_equalTo(14);
         make.height.mas_equalTo(14);
     }];
     
+    BOOL isHaveAddress = ![_currentModel.consignee  isEqualToString:@""];
+    if (isHaveAddress) {
+        [self modifyOrSetValueToLocationView];
+    }else{
+        _leftIMGV.hidden = YES;
+        _rightIMGV.hidden = YES;
+        _clickBtn = [[UIButton alloc] initWithFrame:locationV.bounds];
+        [locationV addSubview:_clickBtn];
+        [_clickBtn setTitle:@"点击选择地址" forState:UIControlStateNormal];
+        [_clickBtn setTitleColor:JQXXXLZH272727CLOLR forState:UIControlStateNormal];
+        _clickBtn.contentHorizontalAlignment = 0;
+        _clickBtn.contentVerticalAlignment = 0;
+        _clickBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_clickBtn addTarget:self action:@selector(climpLocationListPage) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
 }
 - (void)modifyOrSetValueToLocationView{
-    _userNameLab.text = @"两岸咖啡";
-    _phoneLab.text = @"18888888888";
-    _detailLocationLab.text  = @"杭州市江干区迪凯银座1301";
+    _userNameLab.text = _currentModel.consignee;
+    _phoneLab.text = _currentModel.mobile;
+    _detailLocationLab.text  = [NSString stringWithFormat:@"%@  %@",_currentModel.address,_currentModel.hnumber];;
 }
 - (UIView *)creatView:(NSString *)lefrtTitle andFontSize:(CGFloat)leftFontSize andColor:(UIColor *)leftColor andLeftIMG:(NSString *)lefImgV andLeftIMGWidth:(CGFloat)leftWidth andRightTitle:(NSString *)rightTitle andightFontSize:(CGFloat)rightFontSize andColor:(UIColor *)rightColor andLeftIMG:(NSString *)rightImgV andLeftIMGWidth:(CGFloat)rightWidth andNSInteger:(NSInteger )lab{
     CGFloat viewHeight = 45;
@@ -340,9 +390,21 @@
 }
 - (void)addGoodsList{
     //跳转收货地址列表页面
-    NSArray *titleArr = @[@"维他柠檬茶",@"黄椒牛蛙套餐",@"餐盒",@"配送费"];
-    NSArray *countArr = @[@"1",@"1",@"",@""];
-    NSArray *priceArr = @[@"5",@"26",@"2",@"5"];
+    
+    NSMutableArray *titleArr = [[NSMutableArray alloc] init];;
+    NSMutableArray *countArr = [[NSMutableArray alloc] init];
+    NSMutableArray *priceArr = [[NSMutableArray alloc] init];
+    for (DCCGoodsModel *goodModel in _currentModel.goods) {
+        [titleArr addSafeObject:goodModel.dishName];
+        [countArr addSafeObject:goodModel.num];
+        [priceArr addSafeObject:goodModel.payPrice];
+    }
+    [titleArr addSafeObject:@"餐盒"];
+    [countArr addSafeObject:@"1"];
+    [priceArr addSafeObject:@"0"];
+    [titleArr addSafeObject:@"配送费"];
+    [countArr addSafeObject:@""];
+    [priceArr addSafeObject:@"0"];
     CGFloat totalHeight = 46+25*(titleArr.count-2)+15*(titleArr.count-1) +50;
     UIView *goodsV = [[UIView alloc] initWithFrame:CGRectMake(0, _currentHeight, kScreenWidth, totalHeight)];
     goodsV.backgroundColor = JQXXXLZHFFFFFFCLOLR;
@@ -406,9 +468,44 @@
 - (void)climpLocationListPage{
     DCCLocationViewController *vc = [[DCCLocationViewController alloc] init];
     vc.isSelected = YES;
+    __weak typeof(self) weakSelf = self;
+    vc.callBackReturnLocationModel = ^(DCCLocationModel *model) {
+        [weakSelf modifyLocationInfo:model];
+    };
     [self secondPushToViewcontroller:vc];
 }
+- (void)modifyLocationInfo:(DCCLocationModel *)model{
+    _clickBtn.hidden = YES;
+    _leftIMGV.hidden = NO;
+    _rightIMGV.hidden = NO;
+    _arriveLcationLab.text = [NSString stringWithFormat:@"  送至：%@",model.address];
+    _userNameLab.text = model.consignee;
+    _phoneLab.text = model.mobile;
+    _locationID = model.tid;
+    _detailLocationLab.text  =[NSString stringWithFormat:@"%@  %@",model.address,model.hnumber];
+    CGFloat contentHeight = [self getSpaceLabelHeight:_detailLocationLab.text withFont:[UIFont systemFontOfSize:14] withWidth:_detailLocationLab.frameSizeWidth];
+    _detailLocationLab.numberOfLines = 2;
+    [_detailLocationLab mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(contentHeight+4);
+    }];
 
+}
+-(CGFloat)getSpaceLabelHeight:(NSString*)str withFont:(UIFont*)font withWidth:(CGFloat)width {
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    paraStyle.alignment = NSTextAlignmentLeft;
+    paraStyle.lineSpacing = 0;
+    paraStyle.hyphenationFactor = 1.0;
+    paraStyle.firstLineHeadIndent = 0.0;
+    paraStyle.paragraphSpacingBefore = 0.0;
+    paraStyle.headIndent = 0;
+    paraStyle.tailIndent = 0;
+    NSDictionary *dic = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paraStyle, NSKernAttributeName:@1.5f
+                          };
+    
+    CGSize size = [str boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    return size.height;
+}
 - (void)selectTime{
     //选择配送时间
 }
@@ -416,6 +513,9 @@
     DCCMyRedEnvelopeViewController *vc = [[DCCMyRedEnvelopeViewController alloc] init];
     vc.isSelected = YES;
     [self secondPushToViewcontroller:vc];
+}
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

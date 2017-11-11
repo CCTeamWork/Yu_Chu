@@ -18,5 +18,7 @@
 
 @property (nonatomic, strong) MSUTabbarController *mainTabBar;
 
+@property (nonatomic, assign) BOOL netStatus;//为YES 代表有网，NO为无网络
+
 @end
 

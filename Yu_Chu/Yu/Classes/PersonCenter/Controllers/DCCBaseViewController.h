@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XLZHHeader.h"
 
 @interface DCCBaseViewController : UIViewController
 
@@ -16,5 +17,8 @@
 //二级页面push全部用这个方法
 - (void)secondPushToViewcontroller:(UIViewController *)vc;
 
+@property (nonatomic, strong) UIButton *NONetBtn;
+
+@property (nonatomic, strong) UIButton *errorBtn;
 
 @end

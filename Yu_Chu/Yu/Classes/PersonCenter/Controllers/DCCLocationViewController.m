@@ -123,7 +123,10 @@
     return _dataSourceArr.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 85;
+    DCCLocationModel *model = _dataSourceArr[indexPath.row];
+    NSString *String = [NSString stringWithFormat:@"%@  %@",model.address,model.hnumber];
+    CGFloat contentHeight = [self getSpaceLabelHeight:String withFont:[UIFont systemFontOfSize:14] withWidth:(kScreenWidth-28-56)];
+    return (85-14+contentHeight+2);
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     DCCLocationTableViewCell *cell = nil;
@@ -142,8 +145,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_isSelected) {
+        DCCLocationModel *model = _dataSourceArr[indexPath.row];
         if (self.callBackReturnLocationModel) {
-            self.callBackReturnLocationModel();
+            self.callBackReturnLocationModel(model);
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -181,7 +185,9 @@
 - (void)climpEditLocationPageWithIndexPath:(NSIndexPath *)indexPath{
     DCCAddLocationViewController *vc = [[DCCAddLocationViewController alloc] init];
     if (indexPath) {
+        DCCLocationModel *model = _dataSourceArr[indexPath.row];
         vc.isEdit = YES;
+        vc.currentModel = model;
     }else{
         vc.isEdit = NO;
     }
@@ -190,6 +196,22 @@
         [self initAllData];
     };
     [self secondPushToViewcontroller:vc];
+}
+-(CGFloat)getSpaceLabelHeight:(NSString*)str withFont:(UIFont*)font withWidth:(CGFloat)width {
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    paraStyle.alignment = NSTextAlignmentLeft;
+    paraStyle.lineSpacing = 0;
+    paraStyle.hyphenationFactor = 1.0;
+    paraStyle.firstLineHeadIndent = 0.0;
+    paraStyle.paragraphSpacingBefore = 0.0;
+    paraStyle.headIndent = 0;
+    paraStyle.tailIndent = 0;
+    NSDictionary *dic = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paraStyle, NSKernAttributeName:@1.5f
+                          };
+    
+    CGSize size = [str boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    return size.height;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -28,15 +28,14 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self initAllSubviews];
-        [self initAllData];
     }
     return self;
 }
 
-- (void)initAllData{
-    NSString *timeStr = @"17-01-15 12:18";
-    NSString *stars = @"4";
-    NSString *contentStr = @"两岸御厨，于 2017 年正式上线，是知名浙江两岸咖啡集团协力开发之网上订餐平台．秉持”美味匠心，食在安心”的品牌精神，不惜耗资千万元在杭州设立中央厨房，聘请数十位专业厨师致力于研发最美味之饭菜，确保生产质量并严格遵守食品安全规范．严选新鲜食材、当日烹煮配送，是两岸御厨永远的坚持。让大家吃的放心、吃的开心，则是两岸御厨永远的心愿。";
+- (void)initAllData:(DCCMyEvaluateModel *)model{
+    NSString *timeStr = model.replySime;
+    NSString *stars = model.score;
+    NSString *contentStr = model.content;
     _timeLab.text = timeStr;
     NSArray <UIImageView *>*imgArr = @[_starsOne,_starsTwo,_starsThree,_starsFour,_starsFive];
     NSInteger count = stars.integerValue;
@@ -50,7 +49,7 @@
     }
     _contetLab.text = contentStr;
     _contetLab.numberOfLines = 0;
-    CGFloat contentHeight = [self getSpaceLabelHeight:contentStr withFont:[UIFont systemFontOfSize:14] withWidth:kScreenWidth-40];
+    CGFloat contentHeight = [self getSpaceLabelHeight:contentStr withFont:[UIFont systemFontOfSize:14] withWidth:_contetLab.frameSizeWidth];
     [_contetLab mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(contentHeight);
     }];
