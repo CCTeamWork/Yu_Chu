@@ -106,6 +106,18 @@
 
 
 - (void)createHomePageNavView{
+
+    UIImageView *imaView = [[UIImageView alloc] init];
+    imaView.contentMode = UIViewContentModeScaleAspectFit;
+    imaView.image = [MSUPathTools showImageWithContentOfFileByName:@"nav_icon_pull_default"];
+    [self addSubview:imaView];
+    [imaView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.top).offset(15);
+        make.left.equalTo(self.left).offset(14);
+        make.width.equalTo(13);
+        make.height.equalTo(13);
+    }];
+    
     NSString *city;
     //取出存值，判断是否第一次进入 如果第一次进入 city默认为上海 ；如果不是第一次进入 city为上次定位位置
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"city"]) {
@@ -113,14 +125,28 @@
     }else{
         city = @"上海";
     }
+    
+    self.LocationLab = [[UILabel alloc] init];
+    _LocationLab.text = city;
+    _LocationLab.font = [UIFont systemFontOfSize:14];
+    _LocationLab.textColor = HEXCOLOR(0xffffff);
+    [self addSubview:_LocationLab];
+    [_LocationLab makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(imaView.centerY).offset(0);
+        make.left.equalTo(imaView.right).offset(8);
+        make.width.equalTo(80);
+        make.height.equalTo(14);
+    }];
+    
+
     self.LocationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _LocationBtn.backgroundColor = [UIColor redColor];
-    [_LocationBtn setTitle:city forState:UIControlStateNormal];
-    _LocationBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-    _LocationBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [_LocationBtn setTitleColor:HEXCOLOR(0xffffff) forState:UIControlStateNormal];
-    [_LocationBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"state-location"] forState:UIControlStateNormal];
-    _LocationBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+    _LocationBtn.backgroundColor = [UIColor clearColor];
+//    [_LocationBtn setTitle:city forState:UIControlStateNormal];
+//    _LocationBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+//    _LocationBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [_LocationBtn setTitleColor:HEXCOLOR(0xffffff) forState:UIControlStateNormal];
+//    [_LocationBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"state-location"] forState:UIControlStateNormal];
+//    _LocationBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
     [self addSubview:_LocationBtn];
 //    [_LocationBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_LocationBtn makeConstraints:^(MASConstraintMaker *make) {
@@ -137,7 +163,7 @@
     attentionLab.textColor = HEXCOLOR(0xffffff);
     [self addSubview:attentionLab];
     [attentionLab makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.top).offset(15);
+        make.centerY.equalTo(imaView.centerY).offset(0);
         make.left.equalTo(self.left).offset([UIScreen mainScreen].bounds.size.width * 0.5 - 100);
         make.width.equalTo(200);
         make.height.equalTo(20);

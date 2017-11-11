@@ -13,6 +13,8 @@
 
 /// 定位位置按钮
 @property (nonatomic , strong) UIButton *LocationBtn;
+@property (nonatomic , strong) UILabel *LocationLab;
+
 /// 返回箭头按钮
 @property (nonatomic , strong) UIButton *backArrowBtn;
 /// 中间内容

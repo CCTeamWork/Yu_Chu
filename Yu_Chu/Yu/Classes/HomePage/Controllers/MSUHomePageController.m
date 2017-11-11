@@ -33,6 +33,8 @@
 @property (nonatomic , strong) NSNumber *latiNum;
 @property (nonatomic , strong) NSNumber *longNum;
 
+@property (nonatomic , strong) MSUHomeScrollView *scrolleView;
+
 @end
 
 @implementation MSUHomePageController
@@ -43,26 +45,35 @@
     /// 状态栏字体颜色
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
+
+    NSLog(@" %@,%@",self.latiNum,self.longNum);
+    if (self.latiNum) {
+        [self loadRequest];
+    }
+
+
+}
+
+- (void)loadRequest
+{
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
     if (!token) {
         token = @"";
     }
     
-    NSLog(@" %@,%@",self.latiNum,self.longNum);
-//    NSDictionary *dic = @{@"token":token,@"latitude":self.latiNum,@"longitude":self.longNum};
-//    NSLog(@"--- dic %@",dic);
-//    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.123:8201/member/shop/nearbyShop" parameters:dic withBlock:^(id obj, NSError *error) {
-//        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
-//        if (!error) {
-//            NSLog(@"访问成功%@",jsonDict);
-//            
-//        }else{
-//            NSLog(@"访问报错%@",error);
-//        }
-//    }];
+    NSDictionary *dic = @{@"token":token,@"latitude":self.latiNum,@"longitude":self.longNum};
+    NSLog(@"--- dic %@",dic);
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.123:8201/member/shop/nearbyShop" parameters:dic withBlock:^(id obj, NSError *error) {
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+        if (!error) {
+            NSLog(@"访问成功%@",jsonDict);
+            
+        }else{
+            NSLog(@"访问报错%@",error);
+        }
+    }];
 
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,9 +85,7 @@
     [self.view addSubview:_nav];
     [_nav.LocationBtn addTarget:self action:@selector(locationBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    MSUHomeScrollView *scrolleView = [[MSUHomeScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49)];
-    [self.view addSubview:scrolleView];
-    scrolleView.delegate = self;
+ 
     
     // 定位初始化
     [self locationInit];
@@ -92,8 +101,8 @@
     }else{
         city = @"上海";
     }
-    [_nav.LocationBtn setTitle:city forState:UIControlStateNormal];
-
+//    [_nav.LocationBtn setTitle:city forState:UIControlStateNormal];
+    _nav.LocationLab.text = city;
 }
 
 - (void)ApplicationDidBecomeActive:(NSNotification *)noti{
@@ -148,7 +157,9 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
 
         if (addressStr.length > 0) {
-            [strongSelf.nav.LocationBtn setTitle:addressStr forState:UIControlStateNormal];
+//            [strongSelf.nav.LocationBtn setTitle:addressStr forState:UIControlStateNormal];
+            strongSelf.nav.LocationLab.text = addressStr;
+
             strongSelf.latiNum = [NSNumber numberWithDouble:_curCoordinate2D.latitude];
             strongSelf.longNum = [NSNumber numberWithDouble:_curCoordinate2D.longitude];
             [[NSUserDefaults standardUserDefaults] setObject:addressStr forKey:@"city"];
@@ -195,6 +206,9 @@
     CLLocation *location = [[CLLocation alloc] initWithLatitude:_curCoordinate2D.latitude longitude:_curCoordinate2D.longitude];
     self.latiNum = [NSNumber numberWithDouble:_curCoordinate2D.latitude];
     self.longNum = [NSNumber numberWithDouble:_curCoordinate2D.longitude];
+    if (self.latiNum) {
+        [self loadRequest];
+    }
     //    NSLog(@"转换后得到的坐标===%f  %f",_curCoordinate2D.latitude,_curCoordinate2D.longitude);
     
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
@@ -203,16 +217,29 @@
             NSLog(@"获取定理位置失败");
         }else{
             addressStr = [placemarks firstObject].locality;
+
             //            NSLog(@"------------ %@",addressStr);
-            NSString *locationCity = [addressStr substringWithRange:NSMakeRange(0, 2) ];
-            [_nav.LocationBtn setTitle:locationCity forState:UIControlStateNormal];
-            
+            NSString *locationCity = [NSString stringWithFormat:@"%@",[placemarks firstObject].thoroughfare];
+//            [_nav.LocationBtn setTitle:locationCity forState:UIControlStateNormal];
+            _nav.LocationLab.text = locationCity;
+
             //存储city  用以判断下次app进入city默认显示值
             [[NSUserDefaults standardUserDefaults] setObject:locationCity forKey:@"city"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }];
     return addressStr;
+}
+
+
+#pragma mark - 初始化
+- (MSUHomeScrollView *)scrolleView{
+    if (!_scrolleView) {
+       _scrolleView = [[MSUHomeScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49)];
+        [self.view addSubview:_scrolleView];
+        _scrolleView.delegate = self;
+    }
+    return _scrolleView;
 }
 
 

@@ -179,6 +179,8 @@
 		990FF7E01FB041B8007DFD29 /* MSUOrderCanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 990FF7DF1FB041B8007DFD29 /* MSUOrderCanelView.m */; };
 		990FF7E21FB041FC007DFD29 /* img_clock@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990FF7E11FB041FC007DFD29 /* img_clock@3x.png */; };
 		990FF7E41FB0424E007DFD29 /* img_clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990FF7E31FB0424E007DFD29 /* img_clock@2x.png */; };
+		9A6E22E01FB5565A009D433E /* nav_icon_pull_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E22DF1FB5565A009D433E /* nav_icon_pull_default@2x.png */; };
+		9A6E22E21FB5565F009D433E /* nav_icon_pull_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E22E11FB5565F009D433E /* nav_icon_pull_default@3x.png */; };
 		E38277068921C63AE4768A8A /* libPods-Yu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF593E1F6F6872A9B321AD79 /* libPods-Yu.a */; };
 /* End PBXBuildFile section */
 
@@ -476,6 +478,8 @@
 		990FF7DF1FB041B8007DFD29 /* MSUOrderCanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUOrderCanelView.m; sourceTree = "<group>"; };
 		990FF7E11FB041FC007DFD29 /* img_clock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_clock@3x.png"; sourceTree = "<group>"; };
 		990FF7E31FB0424E007DFD29 /* img_clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_clock@2x.png"; sourceTree = "<group>"; };
+		9A6E22DF1FB5565A009D433E /* nav_icon_pull_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_pull_default@2x.png"; sourceTree = "<group>"; };
+		9A6E22E11FB5565F009D433E /* nav_icon_pull_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_icon_pull_default@3x.png"; sourceTree = "<group>"; };
 		AF593E1F6F6872A9B321AD79 /* libPods-Yu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yu/Pods-Yu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -651,6 +655,7 @@
 		04B5473B1FA9DDDC0075D2E1 /* @2X */ = {
 			isa = PBXGroup;
 			children = (
+				9A6E22DF1FB5565A009D433E /* nav_icon_pull_default@2x.png */,
 				9902AA4C1FB2D11A00492E3A /* index_pic@2x.png */,
 				990451391FB05A0E00257C94 /* nav_close@2x.png */,
 				990FF79B1FAFFA0E007DFD29 /* nav_icon_back@2x.png */,
@@ -679,6 +684,7 @@
 		04B547411FA9DDDD0075D2E1 /* @3X */ = {
 			isa = PBXGroup;
 			children = (
+				9A6E22E11FB5565F009D433E /* nav_icon_pull_default@3x.png */,
 				9902AA4E1FB2D12200492E3A /* index_pic@3x.png */,
 				9904513B1FB05A1500257C94 /* nav_close@3x.png */,
 				990FF79D1FAFFA11007DFD29 /* nav_icon_back@3x.png */,
@@ -1256,7 +1262,7 @@
 				TargetAttributes = {
 					990AECE81FA8048E00F5D3E7 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = BQTRH34XZT;
+						DevelopmentTeam = VF4Q39SD8Y;
 						ProvisioningStyle = Automatic;
 					};
 					990AED011FA8048E00F5D3E7 = {
@@ -1303,6 +1309,7 @@
 				04B547541FA9DDDD0075D2E1 /* address_icon_edit@3x.png in Resources */,
 				990451311FB0470E00257C94 /* nav_phone@2x.png in Resources */,
 				99026D731FAC4CA600A011F1 /* tabbar_icon_shop_default@2x.png in Resources */,
+				9A6E22E21FB5565F009D433E /* nav_icon_pull_default@3x.png in Resources */,
 				99026D471FAC0BF000A011F1 /* comment_icon_redstar@2x.png in Resources */,
 				99026D601FAC3E7200A011F1 /* shop_icon_phone@2x.png in Resources */,
 				99026D791FAC4D5600A011F1 /* shop_icon_subtract@3x.png in Resources */,
@@ -1321,6 +1328,7 @@
 				99026D681FAC3FCB00A011F1 /* index_icon_forward@2x.png in Resources */,
 				99026D661FAC3E8300A011F1 /* shop_icon_place@3x.png in Resources */,
 				990451351FB0475B00257C94 /* nav_phone@3x.png in Resources */,
+				9A6E22E01FB5565A009D433E /* nav_icon_pull_default@2x.png in Resources */,
 				990FF7E21FB041FC007DFD29 /* img_clock@3x.png in Resources */,
 				04B547521FA9DDDD0075D2E1 /* back@2x.png in Resources */,
 				9902AA4F1FB2D12200492E3A /* index_pic@3x.png in Resources */,
@@ -1670,7 +1678,7 @@
 			baseConfigurationReference = C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BQTRH34XZT;
+				DEVELOPMENT_TEAM = VF4Q39SD8Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1691,7 +1699,7 @@
 			baseConfigurationReference = 6D7E88C8E44E308C234712D9 /* Pods-Yu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BQTRH34XZT;
+				DEVELOPMENT_TEAM = VF4Q39SD8Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
