@@ -61,6 +61,14 @@
 
 @property (nonatomic, copy) NSString *allowRefund;
 
+@property (nonatomic, copy) NSString *shopLogo;
+
+@property (nonatomic, copy) NSString *provinceName;
+
+@property (nonatomic, copy) NSString *districtName;
+
+@property (nonatomic, copy) NSString *cityName;
+
 @property (nonatomic, strong) NSArray <DCCGoodsModel *>*goods;
 
 @end

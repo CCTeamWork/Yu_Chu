@@ -66,6 +66,8 @@
 		04B547591FA9DDDD0075D2E1 /* MSUHomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B547491FA9DDDD0075D2E1 /* MSUHomePageController.m */; };
 		04B5475A1FA9DDDD0075D2E1 /* MSUSeleAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5474B1FA9DDDD0075D2E1 /* MSUSeleAddressController.m */; };
 		04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5474E1FA9DDDD0075D2E1 /* MSUSeleLocaView.m */; };
+		04C391901FB96F020059030B /* launchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3918F1FB96F020059030B /* launchImage.png */; };
+		04C391941FB988760059030B /* DCCOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C391931FB988760059030B /* DCCOrderModel.m */; };
 		04CE9EA91FB31533004C5A6F /* DCCShopCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */; };
 		04CE9EAC1FB3192B004C5A6F /* DCCGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAB1FB3192B004C5A6F /* DCCGoodsModel.m */; };
 		04CE9EAF1FB3E745004C5A6F /* DCCConfirmOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAE1FB3E745004C5A6F /* DCCConfirmOrderModel.m */; };
@@ -311,6 +313,9 @@
 		04B5474B1FA9DDDD0075D2E1 /* MSUSeleAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUSeleAddressController.m; sourceTree = "<group>"; };
 		04B5474D1FA9DDDD0075D2E1 /* MSUSeleLocaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUSeleLocaView.h; sourceTree = "<group>"; };
 		04B5474E1FA9DDDD0075D2E1 /* MSUSeleLocaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUSeleLocaView.m; sourceTree = "<group>"; };
+		04C3918F1FB96F020059030B /* launchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchImage.png; sourceTree = "<group>"; };
+		04C391921FB988760059030B /* DCCOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCOrderModel.h; sourceTree = "<group>"; };
+		04C391931FB988760059030B /* DCCOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCOrderModel.m; sourceTree = "<group>"; };
 		04CE9EA71FB31533004C5A6F /* DCCShopCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCShopCarModel.h; sourceTree = "<group>"; };
 		04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCShopCarModel.m; sourceTree = "<group>"; };
 		04CE9EAA1FB3192B004C5A6F /* DCCGoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCGoodsModel.h; sourceTree = "<group>"; };
@@ -780,6 +785,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		04C391911FB988680059030B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04C391921FB988760059030B /* DCCOrderModel.h */,
+				04C391931FB988760059030B /* DCCOrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		04CE9EA61FB31526004C5A6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1023,6 +1037,7 @@
 		990AED301FA80BA700F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				04C3918F1FB96F020059030B /* launchImage.png */,
 				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
 				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
 				047631E81FB07564003CE6DB /* DCCLoginpageViewController.h */,
@@ -1059,6 +1074,7 @@
 		990AED361FA80BA700F5D3E7 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				04C391911FB988680059030B /* Model */,
 				990FF7BD1FB02B49007DFD29 /* Resource */,
 				990FF79F1FB003ED007DFD29 /* Views */,
 				990AED371FA80BA700F5D3E7 /* Controllers */,
@@ -1396,6 +1412,7 @@
 				04B547521FA9DDDD0075D2E1 /* back@2x.png in Resources */,
 				9902AA4F1FB2D12200492E3A /* index_pic@3x.png in Resources */,
 				9AA630B91FB6D4DB00644949 /* comment_image_none@3x.png in Resources */,
+				04C391901FB96F020059030B /* launchImage.png in Resources */,
 				04B5474F1FA9DDDD0075D2E1 /* address_icon_edit@2x.png in Resources */,
 				99026D451FAC0BEC00A011F1 /* comment_icon_greystar@3x.png in Resources */,
 				990AECF91FA8048E00F5D3E7 /* Assets.xcassets in Resources */,
@@ -1545,6 +1562,7 @@
 				9900EB7E1FAAEED20072F03C /* MSULeftTableCell.m in Sources */,
 				990AED6B1FA80E2200F5D3E7 /* MSUHUD.m in Sources */,
 				990AED591FA80CAC00F5D3E7 /* MSUNaviBaseController.m in Sources */,
+				04C391941FB988760059030B /* DCCOrderModel.m in Sources */,
 				047631FC1FB149AF003CE6DB /* SearchResultTable.m in Sources */,
 				990FF7A21FB00405007DFD29 /* MSUAllOrderView.m in Sources */,
 				04B547371FA9B1040075D2E1 /* XLTool.m in Sources */,

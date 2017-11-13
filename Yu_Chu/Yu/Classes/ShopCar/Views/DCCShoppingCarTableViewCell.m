@@ -36,6 +36,9 @@
     NSLog(@"%ld",tag);
     if (tag == 500) {
         //跳转商家主页
+        if (self.callBackClimpSale) {
+            self.callBackClimpSale();
+        }
     }else{
         //跳转对应商品列表
         

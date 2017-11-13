@@ -15,6 +15,8 @@
 
 @property(nonatomic, strong) UIButton *commitBtn;
 
+@property (nonatomic, copy) void(^callBackClimpSale)();
+
 -(void)initAllData:(DCCShopCarModel *)model;
 
 @end
