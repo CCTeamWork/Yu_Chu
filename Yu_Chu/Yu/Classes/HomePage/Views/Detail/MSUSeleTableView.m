@@ -93,7 +93,7 @@
     if (_leftTableView == tableView) {
         return 1;
     } else{
-        return _sectionArr.count;
+        return _detailModel.data.count;
     }
 }
 
@@ -115,8 +115,9 @@
         lineView.backgroundColor = HEXCOLOR(0xfafafa);
         [bgView addSubview:lineView];
 
+        MSUShopDetailModel *detaiModel = _detailModel.data[section];
         UILabel *attentionLab = [[UILabel alloc] initWithFrame:CGRectMake(8, 1, SelfWidth-74, 39)];
-        attentionLab.text = _sectionArr[section];
+        attentionLab.text = detaiModel.dishClassName;
         attentionLab.font = [UIFont systemFontOfSize:12];
         attentionLab.textColor = HEXCOLOR(0xff2d4b);
         [bgView addSubview:attentionLab];
@@ -131,7 +132,9 @@
     if (_leftTableView == tableView) {
         return _detailModel.data.count;
     } else{
-        return 3;
+        MSUShopDetailModel *detaiModel = _detailModel.data[section];
+
+        return detaiModel.dishList.count;
     }
 }
 
