@@ -9,6 +9,8 @@
 #import "MSUShopDetailController.h"
 #import "MSUOrderDetailController.h"
 
+#import "DCCConfirmOrderViewController.h"
+
 #import "MSUHomeNavView.h"
 #import "MSUPrefixHeader.pch"
 #import "MSUShadowView.h"
@@ -194,6 +196,8 @@
         _bottomView.backgroundColor = HEXCOLOR(0xffffff);
         [self.view addSubview:_bottomView];
         [_bottomView.carBtn addTarget:self action:@selector(carBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView.buyBtn addTarget:self action:@selector(buyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+
     }
     return _orderView;
 }
@@ -296,32 +300,46 @@
 
 
 - (void)carBtnClick:(UIButton *)sender{
-    
+//    self.hidesBottomBarWhenPushed =YES;
+//    DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
+//    com.shopId = @"1";
+//    com.shopName = @"haha";
+//    [self.navigationController pushViewController:com animated:YES];
 }
+
+- (void)buyBtnClick:(UIButton *)sender{
+    self.hidesBottomBarWhenPushed =YES;
+    DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
+    com.shopId = @"1";
+    com.shopName = @"haha";
+    [self.navigationController pushViewController:com animated:YES];
+}
+
 
 
 #pragma mark - 代理
 - (void)seleDelegateToCaculateWithGoodsID:(NSString *)goodId goodsNum:(NSString *)num model:(MSUMenuModel *)model isAdd:(NSInteger)signNum{
+    NSArray * array = [NSArray arrayWithArray: self.idArr];
 
     if (signNum == 1) {
         if (self.idArr.count > 0) {
-            for (NSString *idStr in self.idArr) {
-                if ([idStr isEqualToString:goodId]) {
-                    NSInteger index = [self.idArr indexOfObject:idStr];
-                    [self.numArr replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%ld",[self.numArr[index] integerValue]+1]];
-                } else{
-                    [self.idArr addObject:goodId];
-                    [self.numArr addObject:num];
-                    [self.modelArr addObject:model];
-                }
+            if ([array containsObject:goodId]) {
+                NSInteger index = [self.idArr indexOfObject:goodId];
+                [self.numArr replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%ld",[self.numArr[index] integerValue]+1]];
+            } else{
+                [self.idArr addObject:goodId];
+                [self.numArr addObject:num];
+                [self.modelArr addObject:model];
+
             }
-        } else{
+    } else{
             [self.idArr addObject:goodId];
             [self.numArr addObject:num];
             [self.modelArr addObject:model];
         }
     } else{
-        for (NSString *idStr in self.idArr) {
+        
+        for (NSString *idStr in array) {
             if ([goodId isEqualToString:idStr]) {
                 NSInteger index = [self.idArr indexOfObject:idStr];
                 [self.numArr replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%ld",[self.numArr[index] integerValue]-1]];
@@ -359,13 +377,22 @@
     
     
     _bottomView.carNumLab.text = [NSString stringWithFormat:@"%ld",self.idArr.count];
+    NSInteger pri = 0;
     for (NSInteger i =0 ;i < self.idArr.count; i++) {
         NSInteger num = [self.numArr[i] integerValue];
         MSUMenuModel *model = self.modelArr[i];
         NSString *price = model.dishPrice;
         
         NSInteger totalPrice = num * [price integerValue];
-        self.price = totalPrice + self.price;
+        NSLog(@"----%ld",totalPrice);
+        if (self.idArr.count > 1) {
+            pri = totalPrice + pri;
+            self.price = pri;
+        } else{
+            self.price = totalPrice;
+        }
+        NSLog(@"--333--%ld",_price);
+
     }
     
     _bottomView.priceLab.text = [NSString stringWithFormat:@"%ld",self.price];
