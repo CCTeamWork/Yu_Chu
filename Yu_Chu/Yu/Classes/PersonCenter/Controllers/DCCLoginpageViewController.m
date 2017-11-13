@@ -88,11 +88,6 @@
                  if (succeed) {
                      totalTime = 60;
                      [_timer setFireDate:[NSDate distantPast]];
-                     NSString *messageS = [responseData valueWithNilForKey:@"message"];
-                     if (messageS.length > 4) {
-                         messageS = [messageS substringToIndex:4];
-                     }
-                     _verificationTF.text = messageS;
                      [SVProgressHUD showSuccessWithStatus:@"发送成功"];
                      
                  }else{

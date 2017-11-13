@@ -16,6 +16,8 @@
 
 @property (nonatomic, copy) NSString *totalAmount;
 
+@property (nonatomic, copy) NSString *shopLogo;
+
 @property (nonatomic, strong) NSArray <DCCGoodsModel *>*shopCars;
 
 @end

@@ -170,13 +170,14 @@
 }
 - (void)initAllData:(DCCShopCarModel *)model{
     _shopNameLab.text = model.shopName;
-    
+    [_shopHeadIMGV sd_setImageWithURL:[NSURL URLWithString:model.shopLogo]];
     NSString *contentS = [NSString stringWithFormat:@"已享受满减，优惠%@元",@"0"];
     NSMutableAttributedString *text  = [[NSMutableAttributedString alloc] initWithString: contentS];
     text.yy_font = [UIFont systemFontOfSize:12];
     text.yy_color = JQXXXLZHD2D2D2CLOLR;
     [text yy_setColor:JQXXXLZHFF2D4BCLOLR range:[contentS rangeOfString:@"0"]];
     _discountLab.attributedText = text;
+    _discountLab.hidden = YES;
 
     _totalLab.text = [NSString stringWithFormat:@"合计 ¥%@元",model.totalAmount];
     
@@ -202,7 +203,7 @@
         }];
         
         UIImageView *leftIMGV = [[UIImageView alloc] init];
-        [leftIMGV sd_setImageWithURL:[NSURL URLWithString:goodModel.dishImg]];
+        [leftIMGV sd_setImageWithURL:[NSURL URLWithString:goodModel.coverImage]];
         leftIMGV.layer.cornerRadius = 2.5;
         [contentV addSubview:leftIMGV];
         
