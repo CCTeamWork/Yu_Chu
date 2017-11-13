@@ -198,7 +198,7 @@
 //            strongCell.numLab.frame = CGRectMake(SelfWidth-46-sizeA.width, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>);
             
             if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsID:goodsNum:model:isAdd:)]) {
-                [self.delegate seleDelegateToCaculateWithGoodsID:strongCell.priceLab.text goodsNum:strongCell.numLab.text model:menuModel isAdd:1];
+                [self.delegate seleDelegateToCaculateWithGoodsID:menuModel.seller_id goodsNum:strongCell.numLab.text model:menuModel isAdd:1];
             }
         };
         
@@ -215,7 +215,7 @@
                 }];
             }
             if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsID:goodsNum:model:isAdd:)]) {
-                [strongSelf.delegate seleDelegateToCaculateWithGoodsID:strongCell.priceLab.text goodsNum:strongCell.numLab.text model:menuModel isAdd:0];
+                [strongSelf.delegate seleDelegateToCaculateWithGoodsID:menuModel.seller_id goodsNum:strongCell.numLab.text model:menuModel isAdd:0];
             }
 
         };
