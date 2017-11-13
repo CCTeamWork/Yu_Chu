@@ -49,6 +49,8 @@
 @property (nonatomic , strong) NSMutableArray *idArr;
 @property (nonatomic , strong) NSMutableArray *numArr;
 
+@property (nonatomic , assign) NSInteger price;
+
 @end
 
 @implementation MSUShopDetailController
@@ -300,11 +302,7 @@
 
 #pragma mark - 代理
 - (void)seleDelegateToCaculateWithGoodsID:(NSString *)goodId goodsNum:(NSString *)num model:(MSUMenuModel *)model isAdd:(NSInteger)signNum{
-    _bottomView.buyBtn.backgroundColor = HEXCOLOR(0xff2d4b);
-    _bottomView.buyBtn.enabled = YES;
-    _bottomView.carBtn.selected = YES;
-    _bottomView.carNumLab.hidden = NO;
-    
+
     if (signNum == 1) {
         if (self.idArr.count > 0) {
             for (NSString *idStr in self.idArr) {
@@ -338,7 +336,39 @@
         }
     }
     
+    if (self.idArr.count > 0) {
+        _bottomView.buyBtn.backgroundColor = HEXCOLOR(0xff2d4b);
+        _bottomView.buyBtn.enabled = YES;
+        _bottomView.carBtn.selected = YES;
+        _bottomView.carNumLab.hidden = NO;
+        _bottomView.showLab.hidden = YES;
+        _bottomView.priceLab.hidden = NO;
+        _bottomView.yunFLab.hidden = NO;
+        _bottomView.yunFLab.text = [NSString stringWithFormat:@"配送费%@元",self.payMon];
+    } else{
+        _bottomView.buyBtn.backgroundColor = HEXCOLOR(0xcccccc);
+
+        _bottomView.buyBtn.enabled = NO;
+        _bottomView.carBtn.selected = NO;
+        _bottomView.carNumLab.hidden = YES;
+        _bottomView.showLab.hidden = NO;
+        _bottomView.priceLab.hidden = YES;
+        _bottomView.yunFLab.hidden = YES;
+    }
     
+    
+    
+    _bottomView.carNumLab.text = [NSString stringWithFormat:@"%ld",self.idArr.count];
+    for (NSInteger i =0 ;i < self.idArr.count; i++) {
+        NSInteger num = [self.numArr[i] integerValue];
+        MSUMenuModel *model = self.modelArr[i];
+        NSString *price = model.dishPrice;
+        
+        NSInteger totalPrice = num * [price integerValue];
+        self.price = totalPrice + self.price;
+    }
+    
+    _bottomView.priceLab.text = [NSString stringWithFormat:@"%ld",self.price];
 
 }
 
