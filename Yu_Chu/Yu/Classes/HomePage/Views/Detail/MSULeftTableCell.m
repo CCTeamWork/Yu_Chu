@@ -57,6 +57,7 @@
             make.width.equalTo(74);
             make.height.equalTo(12);
         }];
+    _topLab.hidden = YES;
     
         self.bottomlab = [[UILabel alloc] init];
         _bottomlab.text = @"精选系列";
@@ -71,8 +72,22 @@
             make.width.equalTo(74);
             make.height.equalTo(12);
         }];
+    _bottomlab.hidden = YES;
     
-   
+    self.centerLab = [[UILabel alloc] init];
+    _centerLab.text = @"精选系列";
+    _centerLab.font = [UIFont systemFontOfSize:12];
+    _centerLab.textAlignment = NSTextAlignmentCenter;
+    _centerLab.textColor = HEXCOLOR(0xb7b7b7);
+    _centerLab.highlightedTextColor = HEXCOLOR(0xff2d4b);
+    [self addSubview:_centerLab];
+    [_centerLab makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.top).offset(0);
+        make.left.equalTo(self.left).offset(0);
+        make.width.equalTo(74);
+        make.height.equalTo(56);
+    }];
+    _centerLab.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated{

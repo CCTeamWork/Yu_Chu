@@ -10,6 +10,8 @@
 
 @interface MSUDetaiCommentTableCell : UITableViewCell
 
+@property (nonatomic , copy) void(^likeBtnBlock)(UIButton *sender);
+
 @property (nonatomic , strong) UIButton *iconBtn;
 
 @property (nonatomic , strong) UILabel *nickLab;

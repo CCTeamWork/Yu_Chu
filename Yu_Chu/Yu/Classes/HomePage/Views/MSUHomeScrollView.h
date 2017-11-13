@@ -12,7 +12,7 @@
 
 @protocol MSUHomeScrollViewDelegate <NSObject>
 
-- (void)tableViewDidSelectWithShopID:(NSString *)shopID;
+- (void)tableViewDidSelectWithShopID:(NSString *)shopID model:(MSUHomeDataModel *)model;
 
 @end
 

@@ -191,6 +191,12 @@
 		9AA630B91FB6D4DB00644949 /* comment_image_none@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA630B81FB6D4DB00644949 /* comment_image_none@3x.png */; };
 		9AA630BD1FB6D8C200644949 /* MSUHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630BC1FB6D8C200644949 /* MSUHomeModel.m */; };
 		9AA630C01FB6F68200644949 /* MSUDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630BF1FB6F68200644949 /* MSUDetailModel.m */; };
+		9AB0F74E1FB97C60004AC0B7 /* MSUTimerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0F74D1FB97C60004AC0B7 /* MSUTimerHandler.m */; };
+		9AEC7BB51FB969920047BD7B /* MSUCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB41FB969920047BD7B /* MSUCommentModel.m */; };
+		9AEC7BB71FB973D30047BD7B /* shop_img_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB61FB973D30047BD7B /* shop_img_head@2x.png */; };
+		9AEC7BB91FB973D80047BD7B /* shop_img_head@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB81FB973D80047BD7B /* shop_img_head@3x.png */; };
+		9AEC7BBB1FB974FE0047BD7B /* comment_icon_dot_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BBA1FB974FE0047BD7B /* comment_icon_dot_pressed@2x.png */; };
+		9AEC7BBD1FB975040047BD7B /* comment_icon_dot_pressed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BBC1FB975040047BD7B /* comment_icon_dot_pressed@3x.png */; };
 		E38277068921C63AE4768A8A /* libPods-Yu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF593E1F6F6872A9B321AD79 /* libPods-Yu.a */; };
 /* End PBXBuildFile section */
 
@@ -508,6 +514,14 @@
 		9AA630BC1FB6D8C200644949 /* MSUHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUHomeModel.m; sourceTree = "<group>"; };
 		9AA630BE1FB6F68200644949 /* MSUDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUDetailModel.h; sourceTree = "<group>"; };
 		9AA630BF1FB6F68200644949 /* MSUDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUDetailModel.m; sourceTree = "<group>"; };
+		9AB0F74C1FB97C60004AC0B7 /* MSUTimerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUTimerHandler.h; sourceTree = "<group>"; };
+		9AB0F74D1FB97C60004AC0B7 /* MSUTimerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUTimerHandler.m; sourceTree = "<group>"; };
+		9AEC7BB31FB969920047BD7B /* MSUCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUCommentModel.h; sourceTree = "<group>"; };
+		9AEC7BB41FB969920047BD7B /* MSUCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUCommentModel.m; sourceTree = "<group>"; };
+		9AEC7BB61FB973D30047BD7B /* shop_img_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_img_head@2x.png"; sourceTree = "<group>"; };
+		9AEC7BB81FB973D80047BD7B /* shop_img_head@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_img_head@3x.png"; sourceTree = "<group>"; };
+		9AEC7BBA1FB974FE0047BD7B /* comment_icon_dot_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_icon_dot_pressed@2x.png"; sourceTree = "<group>"; };
+		9AEC7BBC1FB975040047BD7B /* comment_icon_dot_pressed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_icon_dot_pressed@3x.png"; sourceTree = "<group>"; };
 		AF593E1F6F6872A9B321AD79 /* libPods-Yu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yu/Pods-Yu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -687,6 +701,8 @@
 		04B5473B1FA9DDDC0075D2E1 /* @2X */ = {
 			isa = PBXGroup;
 			children = (
+				9AEC7BBA1FB974FE0047BD7B /* comment_icon_dot_pressed@2x.png */,
+				9AEC7BB61FB973D30047BD7B /* shop_img_head@2x.png */,
 				9AA630B61FB6D4D800644949 /* comment_image_none@2x.png */,
 				9A6E22DF1FB5565A009D433E /* nav_icon_pull_default@2x.png */,
 				9902AA4C1FB2D11A00492E3A /* index_pic@2x.png */,
@@ -717,6 +733,8 @@
 		04B547411FA9DDDD0075D2E1 /* @3X */ = {
 			isa = PBXGroup;
 			children = (
+				9AEC7BBC1FB975040047BD7B /* comment_icon_dot_pressed@3x.png */,
+				9AEC7BB81FB973D80047BD7B /* shop_img_head@3x.png */,
 				9AA630B81FB6D4DB00644949 /* comment_image_none@3x.png */,
 				9A6E22E11FB5565F009D433E /* nav_icon_pull_default@3x.png */,
 				9902AA4E1FB2D12200492E3A /* index_pic@3x.png */,
@@ -965,6 +983,8 @@
 				990AED861FA8189D00F5D3E7 /* MSUShadowView.m */,
 				990AED741FA80E7C00F5D3E7 /* MSUStringTools.h */,
 				990AED751FA80E7C00F5D3E7 /* MSUStringTools.m */,
+				9AB0F74C1FB97C60004AC0B7 /* MSUTimerHandler.h */,
+				9AB0F74D1FB97C60004AC0B7 /* MSUTimerHandler.m */,
 				990AED711FA80E7100F5D3E7 /* MSUPathTools.h */,
 				990AED721FA80E7100F5D3E7 /* MSUPathTools.m */,
 				990AED5A1FA80D8400F5D3E7 /* MSUAFNRequest.h */,
@@ -1250,6 +1270,8 @@
 				9AA630BC1FB6D8C200644949 /* MSUHomeModel.m */,
 				9AA630BE1FB6F68200644949 /* MSUDetailModel.h */,
 				9AA630BF1FB6F68200644949 /* MSUDetailModel.m */,
+				9AEC7BB31FB969920047BD7B /* MSUCommentModel.h */,
+				9AEC7BB41FB969920047BD7B /* MSUCommentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1381,8 +1403,10 @@
 				99026D3E1FABFA9900A011F1 /* address_frame@3x.png in Resources */,
 				99026D3C1FABFA9600A011F1 /* address_frame@2x.png in Resources */,
 				99026D5E1FAC3E6E00A011F1 /* shop_icon_time@3x.png in Resources */,
+				9AEC7BB91FB973D80047BD7B /* shop_img_head@3x.png in Resources */,
 				9900EB8C1FAB190D0072F03C /* tabbar_icon_shop_selected@3x.png in Resources */,
 				9900EB831FAAF4700072F03C /* shop_icon_plus@3x.png in Resources */,
+				9AEC7BB71FB973D30047BD7B /* shop_img_head@2x.png in Resources */,
 				9900EB851FAAF4740072F03C /* shop_icon_plus@2x.png in Resources */,
 				990FF7E41FB0424E007DFD29 /* img_clock@2x.png in Resources */,
 				99026D4E1FAC185400A011F1 /* comment_icon_dot_default@2x.png in Resources */,
@@ -1410,8 +1434,10 @@
 				04B547511FA9DDDD0075D2E1 /* address_icon_refresh@2x.png in Resources */,
 				04B547551FA9DDDD0075D2E1 /* address_icon_location@3x.png in Resources */,
 				990FF79E1FAFFA11007DFD29 /* nav_icon_back@3x.png in Resources */,
+				9AEC7BBB1FB974FE0047BD7B /* comment_icon_dot_pressed@2x.png in Resources */,
 				99026D431FAC0BE900A011F1 /* comment_icon_greystar@2x.png in Resources */,
 				990FF79C1FAFFA0E007DFD29 /* nav_icon_back@2x.png in Resources */,
+				9AEC7BBD1FB975040047BD7B /* comment_icon_dot_pressed@3x.png in Resources */,
 				990AED911FA84B4F00F5D3E7 /* mapapi.bundle in Resources */,
 				9900EB5B1FAABEEE0072F03C /* tabbar_icon_shopping_selected@2x.png in Resources */,
 				990AED6E1FA80E2200F5D3E7 /* SVProgressHUD.bundle in Resources */,
@@ -1517,6 +1543,7 @@
 				99026D571FAC3C5D00A011F1 /* MSUSellerView.m in Sources */,
 				047632001FB18C3F003CE6DB /* DCCLocationModel.m in Sources */,
 				99026D5A1FAC3CF200A011F1 /* MSUSellerTableCell.m in Sources */,
+				9AEC7BB51FB969920047BD7B /* MSUCommentModel.m in Sources */,
 				047631831FAB469F003CE6DB /* FSTextView.m in Sources */,
 				9904512F1FB0465400257C94 /* MSUOrderStatusController.m in Sources */,
 				990AED5C1FA80D8400F5D3E7 /* MSUAFNRequest.m in Sources */,
@@ -1575,6 +1602,7 @@
 				990AED491FA80C0F00F5D3E7 /* MSUPersonCenterController.m in Sources */,
 				9904513F1FB05C4D00257C94 /* MSUOrderCompleteController.m in Sources */,
 				04B547321FA9B1040075D2E1 /* UIButton+vertical.m in Sources */,
+				9AB0F74E1FB97C60004AC0B7 /* MSUTimerHandler.m in Sources */,
 				9900EB6D1FAACC2B0072F03C /* TQLocationConverter.m in Sources */,
 				990FF7DD1FB04109007DFD29 /* MSUOrderCancelController.m in Sources */,
 				990FF7C61FB030D3007DFD29 /* MSUOrderSuccessController.m in Sources */,

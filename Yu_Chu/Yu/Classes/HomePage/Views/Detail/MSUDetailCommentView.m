@@ -22,13 +22,20 @@
 
 #import "MSUDetaiCommentTableCell.h"
 
+#import "UIButton+WebCache.h"
 
 #import "MSUDetailCommentView.h"
 #import "MSUCommentTopView.h"
 
+#import "MSUHUD.h"
+#import "MSUAFNRequest.h"
+#import "MSUTimerHandler.h"
+
 @interface MSUDetailCommentView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic , assign) CGFloat cellHeight;
+
+@property (nonatomic , strong) MSUCommentTopView *topView;
 
 @end
 
@@ -42,6 +49,20 @@
         
     }
     return self;
+}
+
+- (void)setCommentModel:(MSUDataModel *)commentModel{
+    _commentModel = commentModel;
+    
+    MSUCommentDetailModel *dataModel = _commentModel.dataList[0];
+    _topView.commentLab.text = [NSString stringWithFormat:@"%0.1f",[dataModel.averageCcore doubleValue]];
+    for (NSInteger i = 0; i < [dataModel.averageCcore integerValue]; i++) {
+        UIImageView *ima = _topView.starArr[i];
+        ima.highlighted = YES;
+    }
+    
+    [self.tableView reloadData];
+    
 }
 
 
@@ -62,8 +83,8 @@
         make.height.equalTo(SelfHeight - (SelfWidth*9/21+64+37));
     }];
     
-    MSUCommentTopView *topView = [[MSUCommentTopView alloc] initWithFrame:CGRectMake(0, 0, SelfWidth, 165.5)];
-    _tableView.tableHeaderView = topView;
+    self.topView = [[MSUCommentTopView alloc] initWithFrame:CGRectMake(0, 0, SelfWidth, 165.5)];
+    _tableView.tableHeaderView = _topView;
     
 
 }
@@ -71,7 +92,7 @@
 
 #pragma mark - 代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return _commentModel.dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -82,9 +103,72 @@
     MSUDetaiCommentTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.contenLab.text = @"呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵";
+    MSUCommentDetailModel *detailModel = self.commentModel.dataList[indexPath.row];
+    [cell.iconBtn sd_setImageWithURL:[NSURL URLWithString:detailModel.portrait] forState:UIControlStateNormal placeholderImage:[MSUPathTools showImageWithContentOfFileByName:@"shop_img_head"]];
+    cell.nickLab.text = detailModel.nickname;
+    
+    for (NSInteger i = 0; i < [detailModel.averageCcore integerValue]; i++) {
+        UIImageView *ima = cell.starArr[i];
+        ima.highlighted = YES;
+    }
+    
+    cell.timeLab.text = [MSUTimerHandler exchangeTimefromTimeTamp:detailModel.createdTime];
+    
+    cell.contenLab.text = detailModel.content;
     CGRect rectA = [MSUStringTools danamicGetHeightFromText:cell.contenLab.text WithWidth:SelfWidth-(14+33+10+14) font:14];
     cell.contenLab.frame = CGRectMake(14+33+10, 28+14+10+11+8+11+16, SelfWidth-(14+33+10+14), rectA.size.height);
+    
+    if ([detailModel.isPraise isEqualToString:@"1"]) {
+        cell.likeBtn.selected = YES;
+        cell.likeBtn.userInteractionEnabled = NO;
+    } else{
+        cell.likeBtn.selected = NO;
+    }
+    
+    cell.numLab.text = detailModel.praiseNum;
+
+    __weak typeof(cell) weakCell = cell;
+    cell.likeBtnBlock = ^(UIButton *sender) {
+        __strong typeof(weakCell) strongCell = weakCell;
+
+        sender.selected = !sender.selected;
+        if (sender.selected) {
+            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",[detailModel.praiseNum integerValue] +1];
+        } else{
+            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",[detailModel.praiseNum integerValue] ];
+        }
+        
+        NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+        if (!token) {
+            token = @"";
+        }
+        
+        NSDictionary *dic = @{@"token":token,@"id":detailModel.comment_id};
+        NSLog(@"--- dic %@",dic);
+        [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/praise" parameters:dic withBlock:^(id obj, NSError *error) {
+            if (obj) {
+                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+                if (!error) {
+                    NSLog(@"访问成功%@",jsonDict);
+                    if([jsonDict[@"code"] isEqualToString:@"200"]){
+//                        strongCell.numLab.text = [NSString stringWithFormat:@"%@",jsonDict[@"data"][@"isPraise"]];
+                        
+                        
+                    } else{
+                      
+                    }
+                    
+                }else{
+                    NSLog(@"访问报错%@",error);
+                }
+                
+            } else{
+                [MSUHUD showFileWithString:@"服务器请求为空"];
+            }
+            
+        }];
+
+    };
     
     cell.lineView.frame = CGRectMake(0, CGRectGetMaxY(cell.contenLab.frame)+14,SelfWidth, 1);
     

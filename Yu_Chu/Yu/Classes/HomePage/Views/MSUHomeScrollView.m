@@ -104,8 +104,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MSUHomeDataModel *dataModel = self.homeModel.data[indexPath.row];
 
-    if (self.delegate && [self.delegate respondsToSelector:@selector(tableViewDidSelectWithShopID:)]) {
-        [self.delegate tableViewDidSelectWithShopID:dataModel.shopId];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tableViewDidSelectWithShopID:model:)]) {
+        [self.delegate tableViewDidSelectWithShopID:dataModel.shopId model:dataModel];
     }
 }
 

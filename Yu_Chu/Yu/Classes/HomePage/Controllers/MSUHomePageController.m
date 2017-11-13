@@ -96,37 +96,6 @@
         }
        
     }];
-    
-//    [MSUAFNRequest getRequestWithURL:@"http://192.168.10.21:8201/member/shop/nearbyShop" parameters:dic withBlock:^(id obj, NSError *error) {
-//        if (obj) {
-//            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
-//            if (!error) {
-//                NSLog(@"访问成功%@",jsonDict);
-//                if([jsonDict[@"code"] isEqualToString:@"200"]){
-//                    MSUHomeModel *homeModel = [MSUHomeModel mj_objectWithKeyValues:jsonDict];
-//                    if (homeModel.data.count > 0) {
-//                        self.scrolleView.hidden = NO;
-//                        self.noDataView.hidden = YES;
-//                        self.scrolleView.homeModel = homeModel;
-//                    } else{
-//                        self.noDataView.hidden = NO;
-//                        self.scrolleView.hidden = YES;
-//                    }
-//                    
-//                } else{
-//                    self.noDataView.hidden = NO;
-//                    self.scrolleView.hidden = YES;
-//                }
-//                
-//            }else{
-//                NSLog(@"访问报错%@",error);
-//            }
-//
-//        } else{
-//        
-//        }
-//    } ];
-
 }
 
 - (void)viewDidLoad {
@@ -229,10 +198,15 @@
 
 
 #pragma mark - 代理
-- (void)tableViewDidSelectWithShopID:(NSString *)shopID{
+- (void)tableViewDidSelectWithShopID:(NSString *)shopID model:(MSUHomeDataModel *)model{
     self.hidesBottomBarWhenPushed = YES;
     MSUShopDetailController *detail = [[MSUShopDetailController alloc] init];
     detail.shopID = shopID;
+    detail.intro = model.remarks;
+    detail.sendMoney = model.minSendFee;
+    detail.payMon = model.shipmentFee;
+    detail.iconStr =  model.logo;
+    detail.shopName = model.name;
     [self.navigationController pushViewController:detail animated:YES];
     self.hidesBottomBarWhenPushed = NO;;
 }

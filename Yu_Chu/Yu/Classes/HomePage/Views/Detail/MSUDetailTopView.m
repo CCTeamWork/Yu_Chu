@@ -41,7 +41,7 @@
     _iconBtn.clipsToBounds = YES;
     _iconBtn.layer.shouldRasterize = YES;
     _iconBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    _iconBtn.backgroundColor = [UIColor brownColor];
+    _iconBtn.backgroundColor = [UIColor redColor];
     [self addSubview:_iconBtn];
     [_iconBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.top).offset(34+15);
@@ -76,17 +76,17 @@
     }];
     
     self.saleLab = [[UILabel alloc] init];
-    _saleLab.text = [NSString stringWithFormat:@"在线支付满%@减%@ 满%@减%@元 满%@减%@元 满%@元减%@元",@"26",@"8",@"52",@"18",@"78",@"24",@"104",@"32"];
+//    _saleLab.text = [NSString stringWithFormat:@"在线支付满%@减%@ 满%@减%@元 满%@减%@元 满%@元减%@元",@"26",@"8",@"52",@"18",@"78",@"24",@"104",@"32"];
     _saleLab.font = [UIFont systemFontOfSize:12];
     _saleLab.textColor = HEXCOLOR(0xffffff);
     _saleLab.numberOfLines = 0;
-    CGRect recta = [MSUStringTools danamicGetHeightFromText:_saleLab.text WithWidth:SelfWidth-14-28-45-8 font:12];
+
     [self addSubview:_saleLab];
     [_saleLab makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_priceLab.bottom).offset(0);
         make.left.equalTo(_nameLab.left).offset(0);
         make.width.equalTo(SelfWidth-14-28-45-8);
-        make.height.equalTo(recta.size.height);
+        make.height.equalTo(30);
     }];
     
 }

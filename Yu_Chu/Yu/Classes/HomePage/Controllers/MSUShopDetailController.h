@@ -12,4 +12,15 @@
 
 @property (nonatomic , strong) NSString *shopID;
 
+@property (nonatomic , copy) NSString *intro;
+
+@property (nonatomic , copy) NSString *sendMoney;
+
+@property (nonatomic , copy) NSString *payMon;
+
+@property (nonatomic , copy) NSString *iconStr;
+
+@property (nonatomic , copy) NSString *shopName;
+
+
 @end

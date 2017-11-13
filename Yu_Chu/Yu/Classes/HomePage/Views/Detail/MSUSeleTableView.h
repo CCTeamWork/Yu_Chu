@@ -12,7 +12,7 @@
 
 @protocol MSUSeleTableViewDelegate <NSObject>
 
-- (void)seleDelegateToCaculateWithGoodsPrice:(NSString *)price goodsNum:(NSInteger)num;
+- (void)seleDelegateToCaculateWithGoodsID:(NSString *)goodId goodsNum:(NSString *)num model:(MSUMenuModel *)model isAdd:(NSInteger)signNum;
 
 - (void)seleRightDelegateToPush;
 
@@ -27,7 +27,6 @@
 
 @property (nonatomic , strong) UITableView *rightTableView;
 
-@property (nonatomic , strong) NSArray *sectionArr;
 
 @property (nonatomic , strong) MSUDetailModel *detailModel;
 

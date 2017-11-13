@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+
+#import "MSUCommentModel.h"
 @interface MSUDetailCommentView : UIView
 
 
 @property (nonatomic , strong) UITableView *tableView;
+
+@property (nonatomic , strong) MSUDataModel *commentModel;
 
 @end

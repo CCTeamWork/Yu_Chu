@@ -21,13 +21,14 @@
 #import "MSULeftTableCell.h"
 #import "MSURightTableCell.h"
 
+#import "UIImageView+WebCache.h"
+
 #import "MSUStringTools.h"
 
 @interface MSUSeleTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic , assign) BOOL isScrollDown;
 
-@property (nonatomic , assign) NSInteger goodNum;
 
 @end
 
@@ -37,7 +38,6 @@
 {
     if (self = [super initWithFrame:frame]) {
         
-        self.sectionArr = @[@"御厨精选系列",@"御厨精选系列1",@"御厨精选系列2",@"御厨精选系列3"];
         [self createView];
         
     }
@@ -147,7 +147,19 @@
         MSUShopDetailModel *shopModel = _detailModel.data[indexPath.row];
         NSMutableString *text = [[NSMutableString alloc] initWithString:shopModel.dishClassName];
         [text insertString:@"\n" atIndex:2];
-
+        if (shopModel.dishClassName.length <= 4) {
+            cell.centerLab.hidden = NO;
+            cell.topLab.hidden = YES;
+            cell.bottomlab.hidden = YES;
+            cell.centerLab.text = shopModel.dishClassName;
+        } else{
+            cell.centerLab.hidden = YES;
+            cell.topLab.hidden = NO;
+            cell.bottomlab.hidden = NO;
+            cell.topLab.text = [text substringToIndex:2];
+            cell.bottomlab.text = [text substringFromIndex:2];
+        }
+        
 //        cell.top
 
         if (indexPath.row == 0) {
@@ -161,23 +173,32 @@
         MSURightTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"rightCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        MSUShopDetailModel *detaiModel = self.detailModel.data[indexPath.section];
+        MSUMenuModel *menuModel = detaiModel.dishList[indexPath.row];
+        
+        [cell.shopImaView sd_setImageWithURL:[NSURL URLWithString:menuModel.coverImage]];
+        cell.nameLab.text = menuModel.dishName;
+        cell.introLab.text = menuModel.dishDisc;
+        cell.priceLab.text = [NSString stringWithFormat:@"¥%@",menuModel.dishPrice];
+        
+        
         __weak typeof(cell) weakCell = cell;
         __weak typeof(self) weakSelf = self;
-        self.goodNum = 0;
         cell.addClickBlock = ^(UIButton *btn) {
+            
+//            NSInteger num = 0;
 
             __strong typeof(weakCell) strongCell = weakCell;
             __strong typeof(weakSelf) strongSelf = weakSelf;
             
             strongCell.numLab.hidden = NO;
             strongCell.deleBtn.hidden = NO;
-            strongSelf.goodNum++;
-            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",strongSelf.goodNum];
+            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",[strongCell.numLab.text integerValue]+1];
 //            CGSize sizeA = [MSUStringTools danamicGetWidthFromText:strongCell.numLab.text WithFont:15];
 //            strongCell.numLab.frame = CGRectMake(SelfWidth-46-sizeA.width, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>);
             
-            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsPrice:goodsNum:)]) {
-                [self.delegate seleDelegateToCaculateWithGoodsPrice:strongCell.priceLab.text goodsNum:[strongCell.numLab.text integerValue]];
+            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsID:goodsNum:model:isAdd:)]) {
+                [self.delegate seleDelegateToCaculateWithGoodsID:strongCell.priceLab.text goodsNum:strongCell.numLab.text model:menuModel isAdd:1];
             }
         };
         
@@ -186,16 +207,15 @@
             __strong typeof(weakCell) strongCell = weakCell;
             __strong typeof(weakSelf) strongSelf = weakSelf;
             
-            weakSelf.goodNum--;
-            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",strongSelf.goodNum];
-            if (weakSelf.goodNum == 0) {
+            strongCell.numLab.text = [NSString stringWithFormat:@"%ld",[strongCell.numLab.text integerValue]-1];
+            if ([strongCell.numLab.text isEqualToString:@"0"]) {
                 [UIView animateWithDuration:0.25 animations:^{
                     weakCell.numLab.hidden = YES;
                     weakCell.deleBtn.hidden = YES;
                 }];
             }
-            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsPrice:goodsNum:)]) {
-                [strongSelf.delegate seleDelegateToCaculateWithGoodsPrice:strongCell.priceLab.text goodsNum:[strongCell.numLab.text integerValue]];
+            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(seleDelegateToCaculateWithGoodsID:goodsNum:model:isAdd:)]) {
+                [strongSelf.delegate seleDelegateToCaculateWithGoodsID:strongCell.priceLab.text goodsNum:strongCell.numLab.text model:menuModel isAdd:0];
             }
 
         };
