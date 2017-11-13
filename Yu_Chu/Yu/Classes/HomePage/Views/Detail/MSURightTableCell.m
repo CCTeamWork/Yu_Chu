@@ -38,7 +38,7 @@
     
     self.shopImaView = [[UIImageView alloc] init];
 //    _shopImaView.image = [MSUPathTools showImageWithContentOfFileByName:@""];
-    _shopImaView.backgroundColor = [UIColor brownColor];
+    _shopImaView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_shopImaView];
     [_shopImaView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.top).offset(14);
@@ -98,7 +98,7 @@
     
     
     self.numLab = [[UILabel alloc] init];
-    _numLab.text = @"1";
+    _numLab.text = @"0";
     CGSize sizeA = [MSUStringTools danamicGetWidthFromText:self.numLab.text WithFont:15];
     _numLab.font = [UIFont systemFontOfSize:15];
     _numLab.textColor = HEXCOLOR(0xff2d4b);

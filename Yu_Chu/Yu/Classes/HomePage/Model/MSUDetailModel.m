@@ -20,7 +20,7 @@
 @implementation MSUShopDetailModel
 
 + (NSDictionary *)mj_objectClassInArray{
-    return @{@"MSUMenuModel":[MSUMenuModel class]};
+    return @{@"dishList":[MSUMenuModel class]};
 }
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName{

@@ -49,7 +49,6 @@
 //    [_iconBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.nickLab = [[UILabel alloc] init];
-    _nickLab.text = @"叶叶叶叶叶子";
     _nickLab.font = [UIFont systemFontOfSize:14];
     _nickLab.textColor = HEXCOLOR(0xff2d4b);
     [self addSubview:_nickLab];
@@ -101,6 +100,7 @@
     
     self.likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_likeBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"comment_icon_dot_default"] forState:UIControlStateNormal];
+    [_likeBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"comment_icon_dot_pressed"] forState:UIControlStateSelected];
     [self addSubview:_likeBtn];
     [_likeBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_iconBtn.top).offset(0);
@@ -108,10 +108,9 @@
         make.width.equalTo(11);
         make.height.equalTo(11);
     }];
-//    [_likeBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_likeBtn addTarget:self action:@selector(likeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.numLab = [[UILabel alloc] init];
-    _numLab.text = @"123";
     _numLab.textAlignment = NSTextAlignmentRight;
     _numLab.font = [UIFont systemFontOfSize:11];
     _numLab.textColor = HEXCOLOR(0xb7b7b7);
@@ -140,6 +139,12 @@
     _lineView.backgroundColor = HEXCOLOR(0xf0f0f0);
     [self addSubview:_lineView];
     
+}
+
+- (void)likeBtnClick:(UIButton *)sender{
+    if (self.likeBtnBlock) {
+        self.likeBtnBlock(sender);
+    }
 }
 
 

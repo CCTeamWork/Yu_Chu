@@ -16,4 +16,6 @@
 
 @property (nonatomic , strong) UIButton *leftBtn;
 
+@property (nonatomic , strong) UILabel *centerLab;
+
 @end

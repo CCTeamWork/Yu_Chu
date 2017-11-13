@@ -21,6 +21,7 @@
 #import "MSUShopCarView.h"
 
 #import "MSUDetailModel.h"
+#import "MSUStringTools.h"
 
 @interface MSUShopDetailController ()<MSUSeleTableViewDelegate>
 
@@ -43,6 +44,11 @@
 
 @property (nonatomic , strong) NSMutableArray *btnArr;
 
+@property (nonatomic , strong) NSMutableArray *modelArr;
+
+@property (nonatomic , strong) NSMutableArray *idArr;
+@property (nonatomic , strong) NSMutableArray *numArr;
+
 @end
 
 @implementation MSUShopDetailController
@@ -60,7 +66,12 @@
     
     self.view.backgroundColor = REDCOLOR;
     
-    [self loadRequest];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    [self loadRequestWithToken:token];
+    [self commentRequestWithToken:token];
     
     self.navView  = [[MSUHomeNavView alloc] initWithFrame:NavRect showNavWithNumber:4];
     [self.view addSubview:self.navView];
@@ -70,27 +81,31 @@
     self.topView = [[MSUDetailTopView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, WIDTH*9/21)];
     _topView.backgroundColor = REDCOLOR;
     [self.view addSubview:_topView];
+    [_topView.iconBtn sd_setImageWithURL:[NSURL URLWithString:self.iconStr] forState:UIControlStateNormal];
+    _topView.nameLab.text = self.shopName;
+    _topView.priceLab.text = [NSString stringWithFormat:@"起送 ¥%@   配送费 ¥%@",self.sendMoney,self.payMon];;
+    _topView.saleLab.text = self.intro;
+//    CGRect recta = [MSUStringTools danamicGetHeightFromText:_topView.saleLab.text WithWidth:WIDTH-14-28-45-8 font:12];
+//    _topView.frame = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
     
     [self createTableView];
     
     self.orderView.hidden = NO;
-    
+    self.commentView.hidden = YES;
+    self.sellerView.hidden = YES;
 
     
     UIButton *btn = self.btnArr[0];
     btn.selected = YES;
 }
 
-- (void)loadRequest
+- (void)loadRequestWithToken:(NSString *)token
 {
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
-    if (!token) {
-        token = @"";
-    }
+
     
     NSDictionary *dic = @{@"token":token,@"shopId":self.shopID};
     NSLog(@"--- dic %@",dic);
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.123:8201/member/shop/getDishClass" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/getDishClass" parameters:dic withBlock:^(id obj, NSError *error) {
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
         if (!error) {
             NSLog(@"访问成功%@",jsonDict);
@@ -108,6 +123,28 @@
         }
     }];
     
+}
+
+- (void)commentRequestWithToken:(NSString *)token{
+    NSDictionary *dic = @{@"token":token,@"shopId":self.shopID,@"tag":@"",@"pageSize":@"",@"pageIndex":@""};
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/getShopComment" parameters:dic withBlock:^(id obj, NSError *error) {
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+        if (!error) {
+            NSLog(@"访问成功%@",jsonDict);
+            if([jsonDict[@"code"] isEqualToString:@"200"]){
+                
+                MSUCommentModel *detailModel = [MSUCommentModel mj_objectWithKeyValues:jsonDict];
+                self.commentView.commentModel = detailModel.data;
+                
+            } else{
+                
+            }
+            
+        }else{
+            NSLog(@"访问报错%@",error);
+        }
+    }];
+
 }
 
 
@@ -203,6 +240,27 @@
     return _btnArr;
 }
 
+- (NSMutableArray *)modelArr{
+    if (!_modelArr) {
+        _modelArr = [NSMutableArray array];
+    }
+    return _modelArr;
+}
+
+- (NSMutableArray *)idArr{
+    if (!_idArr) {
+        _idArr = [NSMutableArray array];
+    }
+    return _idArr;
+}
+
+- (NSMutableArray *)numArr{
+    if (!_numArr) {
+        _numArr = [NSMutableArray array];
+    }
+    return _numArr;
+}
+
 #pragma mark - 点击
 - (void)backArrowBtnClick:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
@@ -241,11 +299,46 @@
 
 
 #pragma mark - 代理
-- (void)seleDelegateToCaculateWithGoodsPrice:(NSString *)price goodsNum:(NSInteger)num{
+- (void)seleDelegateToCaculateWithGoodsID:(NSString *)goodId goodsNum:(NSString *)num model:(MSUMenuModel *)model isAdd:(NSInteger)signNum{
     _bottomView.buyBtn.backgroundColor = HEXCOLOR(0xff2d4b);
     _bottomView.buyBtn.enabled = YES;
     _bottomView.carBtn.selected = YES;
     _bottomView.carNumLab.hidden = NO;
+    
+    if (signNum == 1) {
+        if (self.idArr.count > 0) {
+            for (NSString *idStr in self.idArr) {
+                if ([idStr isEqualToString:goodId]) {
+                    NSInteger index = [self.idArr indexOfObject:idStr];
+                    [self.numArr replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%ld",[self.numArr[index] integerValue]+1]];
+                } else{
+                    [self.idArr addObject:goodId];
+                    [self.numArr addObject:num];
+                    [self.modelArr addObject:model];
+                }
+            }
+        } else{
+            [self.idArr addObject:goodId];
+            [self.numArr addObject:num];
+            [self.modelArr addObject:model];
+        }
+    } else{
+        for (NSString *idStr in self.idArr) {
+            if ([goodId isEqualToString:idStr]) {
+                NSInteger index = [self.idArr indexOfObject:idStr];
+                [self.numArr replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%ld",[self.numArr[index] integerValue]-1]];
+                if ([self.numArr[index] isEqualToString:@"0"]) {
+                    [self.idArr removeObjectAtIndex:index];
+                    [self.numArr removeObjectAtIndex:index];
+                    [self.modelArr removeObjectAtIndex:index];
+                }
+
+            }
+            
+        }
+    }
+    
+    
 
 }
 

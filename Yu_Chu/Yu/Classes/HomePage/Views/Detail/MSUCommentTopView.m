@@ -47,7 +47,6 @@
     
     
     self.commentLab = [[UILabel alloc] init];
-    _commentLab.text = @"4.0";
     _commentLab.font = [UIFont systemFontOfSize:22];
     _commentLab.textAlignment = NSTextAlignmentCenter;
     _commentLab.textColor = HEXCOLOR(0xff2d4b);

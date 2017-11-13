@@ -96,7 +96,6 @@
         }
        
     }];
-
 }
 
 - (void)viewDidLoad {
@@ -199,10 +198,15 @@
 
 
 #pragma mark - 代理
-- (void)tableViewDidSelectWithShopID:(NSString *)shopID{
+- (void)tableViewDidSelectWithShopID:(NSString *)shopID model:(MSUHomeDataModel *)model{
     self.hidesBottomBarWhenPushed = YES;
     MSUShopDetailController *detail = [[MSUShopDetailController alloc] init];
     detail.shopID = shopID;
+    detail.intro = model.remarks;
+    detail.sendMoney = model.minSendFee;
+    detail.payMon = model.shipmentFee;
+    detail.iconStr =  model.logo;
+    detail.shopName = model.name;
     [self.navigationController pushViewController:detail animated:YES];
     self.hidesBottomBarWhenPushed = NO;;
 }
