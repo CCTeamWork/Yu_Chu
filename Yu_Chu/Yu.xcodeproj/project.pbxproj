@@ -1362,7 +1362,7 @@
 				TargetAttributes = {
 					990AECE81FA8048E00F5D3E7 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = VF4Q39SD8Y;
+						DevelopmentTeam = BQTRH34XZT;
 						ProvisioningStyle = Automatic;
 					};
 					990AED011FA8048E00F5D3E7 = {
@@ -1796,7 +1796,7 @@
 			baseConfigurationReference = C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VF4Q39SD8Y;
+				DEVELOPMENT_TEAM = BQTRH34XZT;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1817,7 +1817,7 @@
 			baseConfigurationReference = 6D7E88C8E44E308C234712D9 /* Pods-Yu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VF4Q39SD8Y;
+				DEVELOPMENT_TEAM = BQTRH34XZT;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
