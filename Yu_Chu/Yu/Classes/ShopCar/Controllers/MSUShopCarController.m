@@ -20,6 +20,9 @@
     
     NSMutableArray <DCCShopCarModel *>*_dataSourceArr;
     
+    UIImageView *emptyIMGV;
+    UILabel *emptyLab;
+    
 }
 
 @end
@@ -30,10 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    
     [self initAllSubviews];
-    
-    [self initAllData];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -43,6 +43,8 @@
         [self climpLoginPage];
         return;
     }
+    [self initAllData];
+
 }
 - (void)initAllData{
     
@@ -53,7 +55,26 @@
         [_mainTableview.mj_header endRefreshing];
         if (succeed) {
             _dataSourceArr = [DCCShopCarModel mj_objectArrayWithKeyValuesArray:[responseData valueWithNilForKey:@"data"]];
-            [_mainTableview reloadData];
+            if (kAppDelegate.netStatus) {
+                BOOL isHaveData = (_dataSourceArr.count!=0);
+                self.NONetBtn.hidden = YES;
+                if (!isHaveData) {
+                    //没有评价加载空白页面
+                    emptyIMGV.hidden = NO;
+                    emptyLab.hidden = NO;
+                
+                }else{
+                    emptyIMGV.hidden = YES;
+                    emptyLab.hidden = YES;
+                    [_mainTableview reloadData];
+                }
+            }else{
+                [self.view addSubview:self.NONetBtn];
+                self.NONetBtn.hidden = NO;
+                [self.NONetBtn addTarget:self action:@selector(initAllData) forControlEvents:UIControlEventTouchUpInside];
+                
+            }
+            
         }else{
             [SVProgressHUD showErrorWithStatus:@"请求失败"];
         }
@@ -78,82 +99,52 @@
     navV.backBtn.hidden = YES;
     [self.view addSubview:navV];
     
-    if (kAppDelegate.netStatus) {
-        BOOL isHaveData = YES;
-        self.NONetBtn.hidden = YES;
-        if (!isHaveData) {
-            //没有评价加载空白页面
-            UIImageView *emptyIMGV = [[UIImageView alloc] init];
-            emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
-            emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
-            [self.view addSubview:emptyIMGV];
-            
-            UILabel *emptyLab = [[UILabel alloc] init];
-            emptyLab.text = @"去添点什么吧";
-            emptyLab.textColor = JQXXXLZH272727CLOLR;
-            emptyLab.font = [UIFont systemFontOfSize:14];
-            emptyLab.textAlignment = NSTextAlignmentCenter;
-            [self.view addSubview:emptyLab];
-            
-            [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(navV.mas_bottom).with.offset(87);
-                make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
-                make.width.mas_equalTo(112);
-                make.height.mas_equalTo(112);
-            }];
-            
-            [emptyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(emptyIMGV.mas_bottom).with.offset(20);
-                make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
-            }];
-            
-            
-        }else{
-            //加载消息列表
-            _mainTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, navV.frameMaxY, kScreenWidth, kScreenHeight-navV.frameMaxY) style:UITableViewStylePlain];
-            _mainTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-            _mainTableview.delegate = self;
-            _mainTableview.dataSource = self;
-            _mainTableview.backgroundColor = JQXXXLZHFAFAFACLOLR;
-            _mainTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-                // 进入刷新状态后会自动调用这个block
-                [self initAllData];
-            }];
-            [self.view addSubview:_mainTableview];
-        }
-    }else{
-        [self.view addSubview:self.NONetBtn];
-        self.NONetBtn.hidden = NO;
-        [self.NONetBtn addTarget:self action:@selector(reRequestData) forControlEvents:UIControlEventTouchUpInside];
+    //加载消息列表
+    _mainTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, navV.frameMaxY, kScreenWidth, kScreenHeight-navV.frameMaxY) style:UITableViewStylePlain];
+    _mainTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _mainTableview.delegate = self;
+    _mainTableview.dataSource = self;
+    _mainTableview.backgroundColor = JQXXXLZHFAFAFACLOLR;
+    _mainTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 进入刷新状态后会自动调用这个block
+        [self initAllData];
+    }];
+    [self.view addSubview:_mainTableview];
+    
+    {
+        //没有评价加载空白页面
+        emptyIMGV = [[UIImageView alloc] init];
+        emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
+        emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
+        emptyIMGV.hidden = YES;
+        [self.view addSubview:emptyIMGV];
+        
+        emptyLab = [[UILabel alloc] init];
+        emptyLab.text = @"去添点什么吧";
+        emptyLab.textColor = JQXXXLZH272727CLOLR;
+        emptyLab.font = [UIFont systemFontOfSize:14];
+        emptyLab.textAlignment = NSTextAlignmentCenter;
+        emptyLab.hidden = YES;
+        [self.view addSubview:emptyLab];
+        
+        [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(navV.mas_bottom).with.offset(87);
+            make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+            make.width.mas_equalTo(112);
+            make.height.mas_equalTo(112);
+        }];
+        
+        [emptyLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(emptyIMGV.mas_bottom).with.offset(20);
+            make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+        }];
         
     }
+    
 }
 -(void)reRequestData{
-    //没有评价加载空白页面
-    UIImageView *emptyIMGV = [[UIImageView alloc] init];
-    emptyIMGV.image = [UIImage imageNamed:@"comment_image_none"];
-    emptyIMGV.contentMode = UIViewContentModeScaleAspectFit;
-    [self.view addSubview:emptyIMGV];
     
-    UILabel *emptyLab = [[UILabel alloc] init];
-    emptyLab.text = @"去添点什么吧";
-    emptyLab.textColor = JQXXXLZH272727CLOLR;
-    emptyLab.font = [UIFont systemFontOfSize:14];
-    emptyLab.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:emptyLab];
-    
-    [emptyIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(navV.mas_bottom).with.offset(87);
-        make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
-        make.width.mas_equalTo(112);
-        make.height.mas_equalTo(112);
-    }];
-    
-    [emptyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(emptyIMGV.mas_bottom).with.offset(20);
-        make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
-    }];
-    
+    [self initAllData];
     
 }
 #pragma mark UITableviewDelegate UITbaleviewDatasource
