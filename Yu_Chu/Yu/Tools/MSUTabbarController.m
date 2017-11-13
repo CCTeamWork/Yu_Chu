@@ -29,7 +29,7 @@
     [super viewDidLoad];
     
     // 更改tabbar 选中字体颜色
-    self.tabBar.tintColor = [UIColor orangeColor];
+    self.tabBar.tintColor = [UIColor colorWithHexString:@"#ff2d4b"];
 
     // tabbar创建方法
     [self createSystemTabbar];
@@ -50,15 +50,15 @@
     
     // 更改tabbar 选中字体颜色
     UITabBar *tabbar = [UITabBar appearanceWhenContainedIn:self, nil];
-    tabbar.tintColor = HEXCOLOR(0xf7d721);
-    tabbar.backgroundColor = [UIColor whiteColor];
+    tabbar.tintColor = HEXCOLOR(0xff2d4b);
+    tabbar.backgroundColor = HEXCOLOR(0xf4f4f4);
     
     // 设置所有item的选中时颜色
     // 设置选中文字颜色
     // 创建字典去描述文本
     NSMutableDictionary *attSelect = [NSMutableDictionary dictionary];
     // 文本颜色 -> 描述富文本属性的key -> NSAttributedString.h
-    attSelect[NSForegroundColorAttributeName] = HEXCOLOR(0xf7d721);
+    attSelect[NSForegroundColorAttributeName] = HEXCOLOR(0xff2d4b);
     [item setTitleTextAttributes:attSelect forState:UIControlStateSelected];
     
     // 通过normal状态设置字体大小
@@ -94,8 +94,8 @@
     MSUPersonCenterController *center = [[MSUPersonCenterController alloc] init];
     
     // 图片数组
-    NSArray *imageArr = @[@"home",@"market",@"video",@"myself"];
-    NSArray *selectImaArr = @[@"homechoose",@"marketchoose",@"videochoose",@"myselfchoose"];
+    NSArray *imageArr = @[@"tabbar_icon_index",@"tabbar_icon_order_default",@"tabbar_icon_shopping_default",@"tabbar_icon_mine_default"];
+    NSArray *selectImaArr = @[@"tabbar_icon_index_selected",@"tabbar_icon_order_selected",@"tabbar_icon_shopping_selected",@"tabbar_icon_mine_selected"];
     
     //数组设置
     self.viewControllers = [NSArray arrayWithObjects:
@@ -104,9 +104,27 @@
                             [self createNavWithViewController:shop WithTitle:@"购物车" image:[UIImage imageNamed:imageArr[2]] selectedImage:[UIImage imageNamed:selectImaArr[2]] badgeValue:nil],
                            [self createNavWithViewController:center WithTitle:@"我的" image:[UIImage imageNamed:imageArr[3]] selectedImage:[UIImage imageNamed:selectImaArr[3]] badgeValue:nil],
                             nil];
+    //添加模糊上面的线
+    UIImageView *tabBarTopV = [[UIImageView alloc] init];
+    tabBarTopV.image = [UIImage imageNamed:@"tabbar_bg"];
+    tabBarTopV.frame = CGRectMake(-20, -4, kScreenWidth+40 , 4);
+    [self.tabBar addSubview:tabBarTopV];
     
 }
 
+#pragma mark - 去掉tabBar顶部线条
 
+//去掉tabBar顶部线条
+- (void)removeTabarTopLine {
+    CGRect rect = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.tabBar setBackgroundImage:img];
+    [self.tabBar setShadowImage:img];
+}
 
 @end

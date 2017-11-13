@@ -96,12 +96,12 @@
     [selectTimeV addGestureRecognizer:tapGes];
     _currentHeight+=6;
     
-    [self creatView:self.shopName andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"img_big" andLeftIMGWidth:35 andRightTitle:@"" andightFontSize:14 andColor:JQXXXLZHB7B7B7CLOLR andLeftIMG:@"icon_forward" andLeftIMGWidth:14 andNSInteger:2];
+    [self creatView:self.shopName andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:_currentModel.shopLogo andLeftIMGWidth:35 andRightTitle:@"" andightFontSize:14 andColor:JQXXXLZHB7B7B7CLOLR andLeftIMG:@"icon_forward" andLeftIMGWidth:14 andNSInteger:3];
     [self addUnderLV:_currentHeight];
     
     [self addGoodsList];
     
-    [self creatView:@"在线支付立减优惠" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"icon_onlinepayment" andLeftIMGWidth:18 andRightTitle:@"0" andightFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:nil andLeftIMGWidth:0 andNSInteger:2];
+    [self creatView:@"在线支付立减优惠" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"icon_onlinepayment" andLeftIMGWidth:18 andRightTitle:@"¥0" andightFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:nil andLeftIMGWidth:0 andNSInteger:2];
     
 //    [self creatView:@"会员减配送费" andFontSize:15 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"icon_member" andLeftIMGWidth:18 andRightTitle:@"0" andightFontSize:14 andColor:JQXXXLZH272727CLOLR andLeftIMG:@"nil" andLeftIMGWidth:0 andNSInteger:2];
 //    [self addUnderLV:_currentHeight];
@@ -315,11 +315,11 @@
 - (void)modifyOrSetValueToLocationView{
     _userNameLab.text = _currentModel.consignee;
     _phoneLab.text = _currentModel.mobile;
-    _detailLocationLab.text  = [NSString stringWithFormat:@"%@  %@",_currentModel.address,_currentModel.hnumber];;
+    _detailLocationLab.text  = [NSString stringWithFormat:@"%@%@%@%@  %@",_currentModel.provinceName,_currentModel.cityName,_currentModel.districtName,_currentModel.address,_currentModel.hnumber];;
 }
 - (UIView *)creatView:(NSString *)lefrtTitle andFontSize:(CGFloat)leftFontSize andColor:(UIColor *)leftColor andLeftIMG:(NSString *)lefImgV andLeftIMGWidth:(CGFloat)leftWidth andRightTitle:(NSString *)rightTitle andightFontSize:(CGFloat)rightFontSize andColor:(UIColor *)rightColor andLeftIMG:(NSString *)rightImgV andLeftIMGWidth:(CGFloat)rightWidth andNSInteger:(NSInteger )lab{
     CGFloat viewHeight = 45;
-    if (lab == 2) {
+    if (lab == 2 || lab == 3) {
         viewHeight = 65;
     }
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, _currentHeight, kScreenWidth, viewHeight)];
@@ -328,7 +328,13 @@
     _currentHeight += view.frameSizeHeight;
     
     UIImageView *leftIMGV = [[UIImageView alloc] init];
-    leftIMGV.image = [UIImage imageNamed:lefImgV?lefImgV:@""];
+    if (lab == 3) {
+        [leftIMGV sd_setImageWithURL:[NSURL URLWithString:lefImgV]];
+        leftIMGV.contentMode = UIViewContentModeScaleAspectFill;
+        leftIMGV.clipsToBounds = YES;
+    }else{
+        leftIMGV.image = [UIImage imageNamed:lefImgV?lefImgV:@""];
+    }
     [view addSubview:leftIMGV];
     
     UILabel *leftLab = [[UILabel alloc] init];
@@ -358,7 +364,7 @@
         leftMargin = 14;
     }
     [leftIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(view.mas_left).with.offset(leftWidth);
+        make.left.equalTo(view.mas_left).with.offset(leftMargin);
         make.centerY.equalTo(view.mas_centerY);
         make.width.mas_equalTo(leftW);
         make.height.mas_equalTo(leftW);
@@ -482,7 +488,7 @@
     _userNameLab.text = model.consignee;
     _phoneLab.text = model.mobile;
     _locationID = model.tid;
-    _detailLocationLab.text  =[NSString stringWithFormat:@"%@  %@",model.address,model.hnumber];
+    _detailLocationLab.text  =[NSString stringWithFormat:@"%@%@%@%@  %@",model.provinceName,model.cityName,model.districtName ,model.address,model.hnumber];
     CGFloat contentHeight = [self getSpaceLabelHeight:_detailLocationLab.text withFont:[UIFont systemFontOfSize:14] withWidth:_detailLocationLab.frameSizeWidth];
     _detailLocationLab.numberOfLines = 2;
     [_detailLocationLab mas_updateConstraints:^(MASConstraintMaker *make) {

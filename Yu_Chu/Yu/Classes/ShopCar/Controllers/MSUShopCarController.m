@@ -13,6 +13,7 @@
 #import "DCCConfirmOrderViewController.h"
 #import "DCCLoginpageViewController.h"
 #import "DCCShopCarModel.h"
+#import "MSUShopDetailController.h"
 
 @interface MSUShopCarController ()<UITableViewDelegate,UITableViewDataSource>{
     UITableView *_mainTableview;
@@ -51,7 +52,7 @@
     [SVProgressHUD show];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [[RequestManager sharedInstance]getSHopCarInfomation:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
-        [SVProgressHUD dismiss];
+            [SVProgressHUD dismiss];
         [_mainTableview.mj_header endRefreshing];
         if (succeed) {
             _dataSourceArr = [DCCShopCarModel mj_objectArrayWithKeyValuesArray:[responseData valueWithNilForKey:@"data"]];
@@ -62,6 +63,7 @@
                     //没有评价加载空白页面
                     emptyIMGV.hidden = NO;
                     emptyLab.hidden = NO;
+                    [_mainTableview reloadData];
                 
                 }else{
                     emptyIMGV.hidden = YES;
@@ -142,11 +144,6 @@
     }
     
 }
--(void)reRequestData{
-    
-    [self initAllData];
-    
-}
 #pragma mark UITableviewDelegate UITbaleviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataSourceArr.count;
@@ -169,8 +166,16 @@
     cell.commitBtn.tag = indexPath.row+2000;
     DCCShopCarModel *model = _dataSourceArr[indexPath.row];
     [cell initAllData:model];
+    cell.callBackClimpSale = ^{
+        self.hidesBottomBarWhenPushed = YES;
+        MSUShopDetailController *detail = [[MSUShopDetailController alloc] init];
+        detail.shopID = model.shopId;
+        [self.navigationController pushViewController:detail animated:YES];
+        self.hidesBottomBarWhenPushed = NO;;
+    };
     return cell;
 }
+
 - (void)clickConfirmButton:(UIButton *)sender{
     DCCShopCarModel *model = _dataSourceArr[sender.tag-2000];
     //结算按钮
@@ -188,9 +193,15 @@
     [[RequestManager sharedInstance]removeShopCarInfomation:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
         [SVProgressHUD dismiss];
         if (succeed) {
-            NSIndexPath *indexPath =  [NSIndexPath indexPathForRow:sender.tag-2000 inSection:0];
             [_dataSourceArr removeObjectAtIndex:sender.tag-2000];
-            [_mainTableview deleteRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationAutomatic];
+            [_mainTableview reloadData];
+
+            if (_dataSourceArr.count == 0) {
+                //没有评价加载空白页面
+                emptyIMGV.hidden = NO;
+                emptyLab.hidden = NO;
+                
+            }
             [SVProgressHUD showSuccessWithStatus:@"删除成功"];
         }else{
             [SVProgressHUD showErrorWithStatus:@"删除失败"];

@@ -16,8 +16,15 @@
 
 #import "MSUAllOrderView.h"
 #import "MSUWaitCommentView.h"
+#import "XLZHHeader.h"
+#import "DCCOrderModel.h"
 
-@interface MSUOrderController ()<UIScrollViewDelegate,MSUAllOrderViewDelegate,MSUWaitCommentViewDelegate>
+@interface MSUOrderController ()<UIScrollViewDelegate,MSUAllOrderViewDelegate,MSUWaitCommentViewDelegate>{
+    
+    NSMutableArray <DCCOrderModel*>*_leftDataSourceArr;
+    NSMutableArray <DCCOrderModel*>*_rightDataSourceArr;
+    
+}
 
 @property (nonatomic , strong) UIScrollView *scrollView;
 
@@ -34,6 +41,8 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self initAllData];
+
 }
 
 - (void)viewDidLoad {
@@ -41,14 +50,67 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor colorWithRed:255/255.0 green:0 blue:55/255.0 alpha:1];
-    
-//    MSUHomeNavView *nav = [[MSUHomeNavView alloc] initWithFrame:NavRect showNavWithNumber:2];
-//    [self.view addSubview:nav];
-    
-    
     [self createTopView];
 }
 
+- (void)initAllData{
+    [SVProgressHUD setMinimumDismissTimeInterval:1];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom]; //样式使用自定义
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];// 整个后面的背景选择
+    [SVProgressHUD setBackgroundColor:[UIColor blackColor]];// 弹出框颜色
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];// 弹出框内容颜色
+    
+    RACSubject *firstSignal = [RACSubject subject];
+    RACSubject *secondSignal = [RACSubject subject];
+    RACSignal *zipSignal = [firstSignal zipWith:secondSignal];
+    [SVProgressHUD show];
+    [zipSignal subscribeNext:^(id x) {
+        RACTuple *racX = x;
+        NSNumber *first = racX.first;
+        NSNumber *second = racX.second;
+        if ([first integerValue] == 0 && [second integerValue] == 0) {
+            [SVProgressHUD showErrorWithStatus:@"请求失败"];
+            return ;
+        }
+        //刷新页面
+        [SVProgressHUD dismiss];
+        _allView.dataSourceArr = _leftDataSourceArr;
+        _waitView.dataSourceArr = _rightDataSourceArr;
+        [_allView.bootomTableView reloadData];
+        [_waitView.bootomTableView reloadData];
+        [firstSignal sendCompleted];
+        [secondSignal sendCompleted];
+    }];
+    
+    NSMutableDictionary *leftDic = [[NSMutableDictionary alloc] init];
+    [leftDic setObjectSafe:@"0" forKey:@"status"];
+    [[RequestManager sharedInstance]getMyAllOrderWith:leftDic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+        if (succeed) {
+            _leftDataSourceArr = [DCCOrderModel mj_objectArrayWithKeyValuesArray:[[responseData valueWithNilForKey:@"data"] valueWithNilForKey:@"dataList"]];
+            [firstSignal sendNext:@1];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"请求失败"];
+            [firstSignal sendNext:@0];
+        }
+        
+    }];
+    
+    NSMutableDictionary *rightDic = [[NSMutableDictionary alloc] init];
+    [leftDic setObjectSafe:@"7" forKey:@"status"];
+    [[RequestManager sharedInstance]getMyAllOrderWith:rightDic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+        if (succeed) {
+             _rightDataSourceArr = [DCCOrderModel mj_objectArrayWithKeyValuesArray:[[responseData valueWithNilForKey:@"data"] valueWithNilForKey:@"dataList"]];
+            [secondSignal sendNext:@1];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"请求失败"];
+            [secondSignal sendNext:@0];
+        }
+        
+    }];
+    
+    
+    
+}
 
 - (void)createTopView{
     UIView *bgView = [[UIView alloc] init];

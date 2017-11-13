@@ -6,8 +6,8 @@
 #import "NSDictionary+ValueCheck.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
-#define DCCBaseUrl  @"http://192.168.10.21:8201/"
-#define DCCCYQBaseUrl   @"http://192.168.10.21:8201/"
+#define DCCBaseUrl  @"http://192.168.10.21:8202/"
+#define DCCCYQBaseUrl   @"http://192.168.10.21:8202/"
 
 @interface RequestManager ()
 
@@ -193,6 +193,7 @@ static id instance;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self parserSuccessRequest:task responseObject:responseObject WhenComplete:completion];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
         [self parserFailureRequest:task responseObject:error WhenComplete:completion];
     }];
 }
@@ -338,5 +339,14 @@ static id instance;
     NSString *urlS = [NSString stringWithFormat:@"%@member/user/getMyComments",DCCBaseUrl];
     [params setObject:kAppDelegate.token forKey:@"token"];
     [self getRequestWithUrl:urlS params:params WhenComplete:completion];
+}
+
+//获取我的订单
+- (void)getMyAllOrderWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    NSString *urlS = [NSString stringWithFormat:@"%@member/order/pageMyOrder",DCCBaseUrl];
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    [params setObject:@(10000) forKey:@"pageSize"];
+    [params setObject:@(1) forKey:@"pageIndex"];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
 }
 @end

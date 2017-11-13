@@ -64,7 +64,7 @@
         _scrollView.delegate = self;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.contentSize = CGSizeMake(WIDTH * 3, HEIGHT);
-        [self.window addSubview:_scrollView];
+//        [self.window addSubview:_scrollView];
         [self.window bringSubviewToFront:_scrollView];
         //启动页的滑动页面
         NSArray *picArray = [[NSArray alloc] initWithObjects:@"yindaoye1", @"yindaoye2",@"yindaoye3",nil];

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCCOrderModel.h"
 
 @interface MSUOrderBottomTableCell : UITableViewCell
 
@@ -27,5 +28,7 @@
 @property (nonatomic , strong) UIButton *commentBtn;
 
 @property (nonatomic , strong) UIButton *againBtn;
+
+-(void)setValueToAllSubviews:(DCCOrderModel *)model;
 
 @end
