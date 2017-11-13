@@ -92,7 +92,7 @@
     }];
     
     self.detailLab = [[UILabel alloc] init];
-    _detailLab.text = @"联合会hihi合理hi";
+    _detailLab.text = @"双椒牛蛙套餐";
     _detailLab.font = [UIFont systemFontOfSize:12];
     _detailLab.textColor = HEXCOLOR(0x272727);
     [self addSubview:_detailLab];
