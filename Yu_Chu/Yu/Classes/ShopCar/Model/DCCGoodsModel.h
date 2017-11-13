@@ -18,7 +18,9 @@
 
 @property (nonatomic, copy) NSString *dishName;
 
-@property (nonatomic, copy) NSString *dishImg;
+@property (nonatomic, copy) NSString *coverImage;
+
+@property (nonatomic, copy) NSString *shopLogo;
 
 @property (nonatomic, copy) NSString *count;
 

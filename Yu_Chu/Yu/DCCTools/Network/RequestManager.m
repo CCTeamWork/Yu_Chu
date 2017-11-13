@@ -6,8 +6,8 @@
 #import "NSDictionary+ValueCheck.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
-#define DCCBaseUrl  @"http://192.168.10.123:8201/"
-#define DCCCYQBaseUrl   @"http://192.168.10.67:8201/"
+#define DCCBaseUrl  @"http://192.168.10.21:8201/"
+#define DCCCYQBaseUrl   @"http://192.168.10.21:8201/"
 
 @interface RequestManager ()
 
