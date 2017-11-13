@@ -15,7 +15,7 @@
 
 @property (nonatomic, copy) NSString *shopName;
 
-@property (nonatomic, copy) NSString *logo;
+@property (nonatomic, copy) NSString *shopLogo;
 
 @property (nonatomic, copy) NSString *orderSn;
 
@@ -40,6 +40,8 @@
 @property (nonatomic, copy) NSString *status;
 
 @property (nonatomic, copy) NSString *createdTime;
+
+@property (nonatomic, copy) NSString *extendInfo;
 
 @property (nonatomic, strong) NSArray <DCCGoodsModel *>*goods;
 

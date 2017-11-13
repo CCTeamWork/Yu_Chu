@@ -25,11 +25,14 @@
 @implementation MSUOrderBottomTableCell
 
 -(void)setValueToAllSubviews:(DCCOrderModel *)model{
-    [self.iconBtn.imageView sd_setImageWithURL:[NSURL URLWithString:model.logo]];
+    [self.iconBtn.imageView sd_setImageWithURL:[NSURL URLWithString:model.shopLogo]];
     self.nameLab.text = [NSString stringWithFormat:@"%@ >",model.shopName];
     _statusLab.text = @"订单已完成";
 //    NSInteger timeInterVal = model.crea
-    _timeLab.text = @"22小时27分钟前";
+    _timeLab.text = @"2分钟前";
+    _detailLab.text = model.extendInfo;
+    _priceLab.text = [NSString stringWithFormat:@"¥%@",model.totalAmount];
+
 
 }
 
@@ -92,7 +95,6 @@
     }];
     
     self.detailLab = [[UILabel alloc] init];
-    _detailLab.text = @"双椒牛蛙套餐";
     _detailLab.font = [UIFont systemFontOfSize:12];
     _detailLab.textColor = HEXCOLOR(0x272727);
     [self addSubview:_detailLab];
@@ -105,7 +107,6 @@
 
     
     self.priceLab = [[UILabel alloc] init];
-    _priceLab.text = @"¥22.90";
     _priceLab.textAlignment = NSTextAlignmentRight;
     _priceLab.font = [UIFont systemFontOfSize:14];
     _priceLab.textColor = HEXCOLOR(0xff2d4b);
