@@ -179,9 +179,9 @@
     _discountLab.attributedText = text;
     _discountLab.hidden = YES;
 
-    _totalLab.text = [NSString stringWithFormat:@"合计 ¥%@元",model.totalAmount];
     
     UIView *currentV = _shopOwerV;
+    CGFloat totalPrice = 0;
     for (NSInteger i=0; i< model.shopCars.count; i++) {
         NSArray <DCCGoodsModel *>*modelARR = model.shopCars;
         DCCGoodsModel *goodModel = modelARR[i];
@@ -222,7 +222,7 @@
         UILabel *priceLab = [[UILabel alloc] init];
         priceLab.textColor = JQXXXLZHFF2D4BCLOLR;
         priceLab.font = [UIFont systemFontOfSize:14];
-        priceLab.text = [NSString stringWithFormat:@"¥%@",goodModel.dishPrice];
+        priceLab.text = [NSString stringWithFormat:@"¥%.2f",goodModel.dishPrice.doubleValue];
         [contentV addSubview:priceLab];
         
         [leftIMGV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -259,7 +259,10 @@
                 make.height.mas_equalTo(1.0);
             }];
         }
+        totalPrice += goodModel.dishPrice.doubleValue * goodModel.count.integerValue;
     }
+    _totalLab.text = [NSString stringWithFormat:@"合计 ¥%.2f元",totalPrice];
+
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
