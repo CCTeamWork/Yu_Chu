@@ -88,7 +88,7 @@
     _iconBtn.clipsToBounds = YES;
     _iconBtn.layer.shouldRasterize = YES;
     _iconBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    //    [_iconBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@""] forState:UIControlStateNormal];
+    [_iconBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"shop_img_head"] forState:UIControlStateNormal];
     [bgView addSubview:_iconBtn];
     [_iconBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bgView.top).offset(14);
