@@ -142,7 +142,7 @@
     [bgView addSubview:_priceLab];
     [_priceLab makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_nameLab.top).offset(0);
-        make.right.equalTo(self.right).offset(-14);
+        make.right.equalTo(self.right).offset(-20);
         make.width.equalTo(SelfWidth*0.5);
         make.height.equalTo(14);
     }];

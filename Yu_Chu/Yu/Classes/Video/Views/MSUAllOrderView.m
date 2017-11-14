@@ -142,8 +142,8 @@
         __weak typeof(self) weakSelf = self;
         cell.commentBlickBlock = ^(UIButton *btn) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(commentClick)]) {
-                [strongSelf.delegate commentClick];
+            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(commentClickModel:)]) {
+                [strongSelf.delegate commentClickModel:dataModel];
             }
         };
         

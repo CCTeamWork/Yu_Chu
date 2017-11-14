@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MSUOrderModel.h"
+
+
 @interface MSUCoomentController : UIViewController
+
+@property (nonatomic , strong) MSUListModel *detailModel;
+
 
 @end

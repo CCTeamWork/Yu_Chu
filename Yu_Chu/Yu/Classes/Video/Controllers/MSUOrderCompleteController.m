@@ -54,7 +54,7 @@
     
     NSDictionary *dic = @{@"token":token,@"orderId":self.detailModel._id};
     NSLog(@"--- dic %@",dic);
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.22:8202/member/order/getOrderDetail" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/order/getOrderDetail" parameters:dic withBlock:^(id obj, NSError *error) {
         if (obj) {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
             if (!error) {
@@ -94,6 +94,7 @@
     sellBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
     sellBtn.backgroundColor = [UIColor brownColor];
     //    [sellBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@""] forState:UIControlStateNormal];
+    [sellBtn sd_setImageWithURL:[NSURL URLWithString:self.detailModel.shopLogo] forState:UIControlStateNormal];
     [self.view addSubview:sellBtn];
     [sellBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.top).offset(42);
@@ -215,6 +216,7 @@
     self.hidesBottomBarWhenPushed = YES;
     MSUCoomentController *comment = [[MSUCoomentController alloc] init];
 //    [self.navigationController pushViewController:comment animated:YES];
+    comment.detailModel = self.detailModel;
     [self presentViewController:comment animated:YES completion:nil];
 }
 
@@ -252,7 +254,8 @@
     iconBtn.clipsToBounds = YES;
     iconBtn.layer.shouldRasterize = YES;
     iconBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    [iconBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@""] forState:UIControlStateNormal];
+//    [iconBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@""] forState:UIControlStateNormal];
+    [iconBtn sd_setImageWithURL:[NSURL URLWithString:self.detailModel.shopLogo] forState:UIControlStateNormal];
     [bgView addSubview:iconBtn];
     [iconBtn makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bgView.top).offset(0);
@@ -262,7 +265,7 @@
     }];
     
     UILabel *nameLab = [[UILabel alloc] init];
-    nameLab.text = @"暂两岸咖啡";
+    nameLab.text = self.detailModel.shopName;
     nameLab.font = [UIFont systemFontOfSize:14];
     nameLab.textColor = HEXCOLOR(0x272727);
     [bgView addSubview:nameLab];
