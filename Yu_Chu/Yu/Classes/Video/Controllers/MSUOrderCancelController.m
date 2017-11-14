@@ -35,7 +35,15 @@
     
     MSUOrderCanelView *cancelView = [[MSUOrderCanelView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 118)];
     [self.view addSubview:cancelView];
+    [cancelView.backBtn addTarget:self action:@selector(cancelBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+
     
+    
+    
+}
+
+- (void)cancelBtnClick:(UIButton *)sender{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
 }
 

@@ -103,7 +103,7 @@
     
     NSDictionary *dic = @{@"token":token,@"status":status,@"pageSize":@"10",@"pageIndex":page};
     NSLog(@"--- dic %@",dic);
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/order/pageMyOrder" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/order/pageMyOrder" parameters:dic withBlock:^(id obj, NSError *error) {
 //        NSLog(@"---%@",error);
         if (obj) {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];

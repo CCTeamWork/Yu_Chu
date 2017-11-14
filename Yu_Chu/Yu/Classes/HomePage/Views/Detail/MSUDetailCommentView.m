@@ -145,7 +145,7 @@
         
         NSDictionary *dic = @{@"token":token,@"id":detailModel.comment_id};
         NSLog(@"--- dic %@",dic);
-        [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/praise" parameters:dic withBlock:^(id obj, NSError *error) {
+        [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/shop/praise" parameters:dic withBlock:^(id obj, NSError *error) {
             if (obj) {
                 NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
                 if (!error) {
