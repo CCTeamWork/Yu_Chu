@@ -14,9 +14,9 @@
 
 - (void)commentClick;
 
-- (void)topTableViewCellDidSelect;
+- (void)topTableViewCellDidSelectWithModel:(MSUListModel *)model;
 
-- (void)bottomTableViewCellDidSelect;
+- (void)bottomTableViewCellDidSelectWithModel:(MSUListModel *)model;
 
 
 @end
