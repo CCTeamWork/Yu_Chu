@@ -100,8 +100,10 @@
     //数组设置
     self.viewControllers = [NSArray arrayWithObjects:
                             [self createNavWithViewController:home WithTitle:@"首页" image:[UIImage imageNamed:imageArr[0]] selectedImage:[UIImage imageNamed:selectImaArr[0]] badgeValue:nil],
-                            [self createNavWithViewController:video WithTitle:@"订单" image:[UIImage imageNamed:imageArr[1]] selectedImage:[UIImage imageNamed:selectImaArr[1]] badgeValue:nil],
+                            
                             [self createNavWithViewController:shop WithTitle:@"购物车" image:[UIImage imageNamed:imageArr[2]] selectedImage:[UIImage imageNamed:selectImaArr[2]] badgeValue:nil],
+                            [self createNavWithViewController:video WithTitle:@"订单" image:[UIImage imageNamed:imageArr[1]] selectedImage:[UIImage imageNamed:selectImaArr[1]] badgeValue:nil],
+                            
                            [self createNavWithViewController:center WithTitle:@"我的" image:[UIImage imageNamed:imageArr[3]] selectedImage:[UIImage imageNamed:selectImaArr[3]] badgeValue:nil],
                             nil];
     //添加模糊上面的线

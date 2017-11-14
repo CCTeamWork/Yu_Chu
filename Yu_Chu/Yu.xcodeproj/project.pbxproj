@@ -68,6 +68,7 @@
 		04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5474E1FA9DDDD0075D2E1 /* MSUSeleLocaView.m */; };
 		04C391901FB96F020059030B /* launchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3918F1FB96F020059030B /* launchImage.png */; };
 		04C391941FB988760059030B /* DCCOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C391931FB988760059030B /* DCCOrderModel.m */; };
+		04C3919A1FBAF6B50059030B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C391991FBAF6B50059030B /* Launch Screen.storyboard */; };
 		04CE9EA91FB31533004C5A6F /* DCCShopCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */; };
 		04CE9EAC1FB3192B004C5A6F /* DCCGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAB1FB3192B004C5A6F /* DCCGoodsModel.m */; };
 		04CE9EAF1FB3E745004C5A6F /* DCCConfirmOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAE1FB3E745004C5A6F /* DCCConfirmOrderModel.m */; };
@@ -130,7 +131,6 @@
 		990AECEE1FA8048E00F5D3E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 990AECED1FA8048E00F5D3E7 /* main.m */; };
 		990AECF11FA8048E00F5D3E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 990AECF01FA8048E00F5D3E7 /* AppDelegate.m */; };
 		990AECF91FA8048E00F5D3E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 990AECF81FA8048E00F5D3E7 /* Assets.xcassets */; };
-		990AECFC1FA8048E00F5D3E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 990AECFA1FA8048E00F5D3E7 /* LaunchScreen.storyboard */; };
 		990AED071FA8048E00F5D3E7 /* YuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 990AED061FA8048E00F5D3E7 /* YuTests.m */; };
 		990AED121FA8048E00F5D3E7 /* YuUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 990AED111FA8048E00F5D3E7 /* YuUITests.m */; };
 		990AED221FA804D000F5D3E7 /* MSUTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 990AED211FA804D000F5D3E7 /* MSUTabbarController.m */; };
@@ -325,6 +325,7 @@
 		04C391921FB988760059030B /* DCCOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCOrderModel.h; sourceTree = "<group>"; };
 		04C391931FB988760059030B /* DCCOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCOrderModel.m; sourceTree = "<group>"; };
 		04C391951FBA92F10059030B /* Yu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Yu.entitlements; sourceTree = "<group>"; };
+		04C391991FBAF6B50059030B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		04CE9EA71FB31533004C5A6F /* DCCShopCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCShopCarModel.h; sourceTree = "<group>"; };
 		04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCShopCarModel.m; sourceTree = "<group>"; };
 		04CE9EAA1FB3192B004C5A6F /* DCCGoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCGoodsModel.h; sourceTree = "<group>"; };
@@ -417,7 +418,6 @@
 		990AECEF1FA8048E00F5D3E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		990AECF01FA8048E00F5D3E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		990AECF81FA8048E00F5D3E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		990AECFB1FA8048E00F5D3E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		990AECFD1FA8048E00F5D3E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		990AED021FA8048E00F5D3E7 /* YuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		990AED061FA8048E00F5D3E7 /* YuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YuTests.m; sourceTree = "<group>"; };
@@ -968,7 +968,7 @@
 				990AECEF1FA8048E00F5D3E7 /* AppDelegate.h */,
 				990AECF01FA8048E00F5D3E7 /* AppDelegate.m */,
 				990AECF81FA8048E00F5D3E7 /* Assets.xcassets */,
-				990AECFA1FA8048E00F5D3E7 /* LaunchScreen.storyboard */,
+				04C391991FBAF6B50059030B /* Launch Screen.storyboard */,
 				990AECFD1FA8048E00F5D3E7 /* Info.plist */,
 				990AECEC1FA8048E00F5D3E7 /* Supporting Files */,
 			);
@@ -1419,7 +1419,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				990AECFC1FA8048E00F5D3E7 /* LaunchScreen.storyboard in Resources */,
 				04B547571FA9DDDD0075D2E1 /* back@3x.png in Resources */,
 				04B547581FA9DDDD0075D2E1 /* state-location@3x.png in Resources */,
 				04B547561FA9DDDD0075D2E1 /* address_icon_refresh@3x.png in Resources */,
@@ -1463,6 +1462,7 @@
 				990FF7C31FB02B70007DFD29 /* img_smilingface@3x.png in Resources */,
 				04B547501FA9DDDD0075D2E1 /* address_icon_location@2x.png in Resources */,
 				990FF7CE1FB033C6007DFD29 /* img_tick@3x.png in Resources */,
+				04C3919A1FBAF6B50059030B /* Launch Screen.storyboard in Resources */,
 				047632071FB2B5C2003CE6DB /* AlipaySDK.bundle in Resources */,
 				9904513A1FB05A0E00257C94 /* nav_close@2x.png in Resources */,
 				04B547511FA9DDDD0075D2E1 /* address_icon_refresh@2x.png in Resources */,
@@ -1706,17 +1706,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		990AECFA1FA8048E00F5D3E7 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				990AECFB1FA8048E00F5D3E7 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		990AED141FA8048E00F5D3E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1815,11 +1804,8 @@
 			baseConfigurationReference = C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-
 				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
 				DEVELOPMENT_TEAM = BQTRH34XZT;
-
-
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1840,11 +1826,8 @@
 			baseConfigurationReference = 6D7E88C8E44E308C234712D9 /* Pods-Yu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-
 				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
 				DEVELOPMENT_TEAM = BQTRH34XZT;
-
-
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -195,19 +195,21 @@
      }];
     [self.view addSubview:loginBtn];
     
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        _getNumBtn.enabled = NO;
-        [_getNumBtn setTitleColor:JQXXXLZHD2D2D2CLOLR forState:UIControlStateNormal];
-        [_getNumBtn setTitle:[NSString stringWithFormat:@"已发送(%lds)",totalTime] forState:UIControlStateNormal];
-        totalTime--;
-        if (totalTime == 0) {
-            [_timer setFireDate:[NSDate distantFuture]];
-            [_getNumBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-            [_getNumBtn setTitleColor:JQXXXLZHFF2D4BCLOLR forState:UIControlStateNormal];
-            _getNumBtn.enabled = YES;
-        }
-    }];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeClickFunction) userInfo:nil repeats:YES];
     [_timer setFireDate:[NSDate distantFuture]];
+    
+}
+- (void)timeClickFunction{
+    _getNumBtn.enabled = NO;
+    [_getNumBtn setTitleColor:JQXXXLZHD2D2D2CLOLR forState:UIControlStateNormal];
+    [_getNumBtn setTitle:[NSString stringWithFormat:@"已发送(%lds)",totalTime] forState:UIControlStateNormal];
+    totalTime--;
+    if (totalTime == 0) {
+        [_timer setFireDate:[NSDate distantFuture]];
+        [_getNumBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_getNumBtn setTitleColor:JQXXXLZHFF2D4BCLOLR forState:UIControlStateNormal];
+        _getNumBtn.enabled = YES;
+    }
     
 }
 - (BOOL)judgeIsOK{
