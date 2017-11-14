@@ -20,6 +20,7 @@
             
             // 支付页面 防止点击view移除键盘
             [self endEditing:YES];
+            
         }
     }
 }

@@ -10,6 +10,8 @@
 
 @interface MSUOrderTopView : UIView
 
+
+
 @property (nonatomic , strong) UIImageView *goodPic;
 
 @property (nonatomic , strong) UILabel *nameLab;
@@ -17,5 +19,12 @@
 @property (nonatomic , strong) UILabel *priceLab;
 
 @property (nonatomic , strong) UIButton *joinBtn;
+
+@property (nonatomic , strong) UIButton *addBtn;
+
+@property (nonatomic , strong) UIButton *deleBtn;
+
+@property (nonatomic , strong) UILabel *numLab;
+
 
 @end

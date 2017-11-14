@@ -14,7 +14,7 @@
 
 - (void)seleDelegateToCaculateWithGoodsID:(NSString *)goodId goodsNum:(NSString *)num model:(MSUMenuModel *)model isAdd:(NSInteger)signNum;
 
-- (void)seleRightDelegateToPush;
+- (void)seleRightDelegateToPushWithModel:(MSUMenuModel *)model;
 
 
 @end

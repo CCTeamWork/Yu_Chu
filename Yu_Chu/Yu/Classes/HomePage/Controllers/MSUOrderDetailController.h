@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
+#import "MSUDetailModel.h"
+
 @interface MSUOrderDetailController : UIViewController
+
+@property (nonatomic , strong) MSUMenuModel *menuModel;
+
+@property (nonatomic , copy) NSString *payMon;
+
 
 @end
