@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DCCOrderModel.h"
 
 @protocol MSUWaitCommentViewDelegate <NSObject>
 
@@ -22,6 +21,5 @@
 
 @property (nonatomic , strong) UITableView *bootomTableView;
 
-@property (nonatomic, strong) NSMutableArray <DCCOrderModel*>*dataSourceArr;
 
 @end
