@@ -11,7 +11,6 @@
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
 #import "Masonry.h"
-#import "XLZHHeader.h"
 
 #define SelfContentWidth self.contentView.frame.size.width
 #define SelfWidth [UIScreen mainScreen].bounds.size.width
@@ -23,18 +22,6 @@
 #import "MSUOrderBottomTableCell.h"
 
 @implementation MSUOrderBottomTableCell
-
--(void)setValueToAllSubviews:(DCCOrderModel *)model{
-    [self.iconBtn.imageView sd_setImageWithURL:[NSURL URLWithString:model.shopLogo]];
-    self.nameLab.text = [NSString stringWithFormat:@"%@ >",model.shopName];
-    _statusLab.text = @"订单已完成";
-//    NSInteger timeInterVal = model.crea
-    _timeLab.text = @"2分钟前";
-    _detailLab.text = model.extendInfo;
-    _priceLab.text = [NSString stringWithFormat:@"¥%@",model.totalAmount];
-
-
-}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -61,6 +48,7 @@
     //    [_iconBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.nameLab = [[UILabel alloc] init];
+    _nameLab.text = @"两岸擦费 >";
     _nameLab.font = [UIFont systemFontOfSize:15];
     _nameLab.textColor = HEXCOLOR(0x272727);
     [self addSubview:_nameLab];
@@ -72,6 +60,7 @@
     }];
     
     self.statusLab = [[UILabel alloc] init];
+    _statusLab.text = @"订单已完成";
     _statusLab.textAlignment = NSTextAlignmentRight;
     _statusLab.font = [UIFont systemFontOfSize:12];
     _statusLab.textColor = HEXCOLOR(0xb7b7b7);
@@ -84,6 +73,7 @@
     }];
     
     self.timeLab = [[UILabel alloc] init];
+    _timeLab.text = @"22小时27分钟前";
     _timeLab.font = [UIFont systemFontOfSize:12];
     _timeLab.textColor = HEXCOLOR(0xb7b7b7);
     [self addSubview:_timeLab];
@@ -95,6 +85,7 @@
     }];
     
     self.detailLab = [[UILabel alloc] init];
+    _detailLab.text = @"联合会hihi合理hi";
     _detailLab.font = [UIFont systemFontOfSize:12];
     _detailLab.textColor = HEXCOLOR(0x272727);
     [self addSubview:_detailLab];
@@ -107,6 +98,7 @@
 
     
     self.priceLab = [[UILabel alloc] init];
+    _priceLab.text = @"¥22.90";
     _priceLab.textAlignment = NSTextAlignmentRight;
     _priceLab.font = [UIFont systemFontOfSize:14];
     _priceLab.textColor = HEXCOLOR(0xff2d4b);
