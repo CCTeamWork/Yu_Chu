@@ -35,6 +35,7 @@
     UILabel *_arriveLcationLab;
     
     NSString *_locationID;
+    DCCBaseNavgationView *_navV;
     
 }
 
@@ -45,6 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = JQXXXLZHFFFFFFCLOLR;
+    _navV = [[DCCBaseNavgationView alloc] init];
+    [_navV redBackGroundSetTitle:@"确认订单" andBackGroundColor:JQXXXLZHFF2D4BCLOLR andTarget:self];
+    [self.view addSubview:_navV];
 
     if (self.shopId) {
         if (![self.shopId isEqualToString:@""]) {
@@ -52,7 +56,6 @@
             return;
         }
     }
-    [NSException raise:@"你没有传shopid" format:@"跳转确认订单页面必须传shopid"];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(payResult:) name:@"payResult" object:nil];
 }
 
@@ -73,11 +76,8 @@
 }
 
 - (void)initAllSubviews{
-    DCCBaseNavgationView *navV = [[DCCBaseNavgationView alloc] init];
-    [navV redBackGroundSetTitle:@"确认订单" andBackGroundColor:JQXXXLZHFF2D4BCLOLR andTarget:self];
-    [self.view addSubview:navV];
     
-    _mainScrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, navV.frameMaxY, kScreenWidth, kScreenHeight-navV.frameSizeHeight-70-(IS_IPHONE_X?34:0))];
+    _mainScrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, _navV.frameMaxY, kScreenWidth, kScreenHeight-_navV.frameSizeHeight-70-(IS_IPHONE_X?34:0))];
     _mainScrollerView.backgroundColor = JQXXXLZHFAFAFACLOLR;
     _mainScrollerView.showsVerticalScrollIndicator = NO;
     _mainScrollerView.showsHorizontalScrollIndicator = NO;

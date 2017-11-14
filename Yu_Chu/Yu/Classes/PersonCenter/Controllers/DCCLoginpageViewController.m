@@ -10,6 +10,12 @@
 #import "XLZHHeader.h"
 #import "YYText.h"
 #import "UITextField+Extension.h"
+// 引入JPush功能所需头文件
+#import "JPUSHService.h"
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 @interface DCCLoginpageViewController (){
     
@@ -170,6 +176,14 @@
                      if (self.callBackReturnLoginStatus) {
                          self.callBackReturnLoginStatus(isOK);
                      }
+                     NSString *userTag = [[responseData valueWithNilForKey:@"data"] valueWithNilForKey:@"pushTag"];
+                     [[NSUserDefaults standardUserDefaults] setObject:userTag forKey:@"userTag"];
+                     NSSet *set = [[NSSet alloc] initWithObjects:userTag, nil];
+                     [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                         if (iResCode == 0) {
+                             NSLog(@"覆盖tag成功");
+                         }
+                     } seq:1];
                      [self dismissViewControllerAnimated:YES completion:nil];
                  }else{
                      [SVProgressHUD showErrorWithStatus:[responseData valueWithNilForKey:@"message"]];
