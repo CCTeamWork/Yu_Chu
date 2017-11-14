@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSUOrderModel.h"
 
 @protocol MSUWaitCommentViewDelegate <NSObject>
 
-- (void)commentClick;
+- (void)commentClickModel:(MSUListModel *)model;
+- (void)bottomTableViewCellDidSelectWithModel:(MSUListModel *)model;
 
 @end
 
@@ -20,6 +22,8 @@
 
 
 @property (nonatomic , strong) UITableView *bootomTableView;
+
+@property (nonatomic , strong) NSArray *dataArr;
 
 
 @end

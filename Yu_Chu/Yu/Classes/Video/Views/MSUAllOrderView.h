@@ -12,7 +12,7 @@
 
 @protocol MSUAllOrderViewDelegate <NSObject>
 
-- (void)commentClick;
+- (void)commentClickModel:(MSUListModel *)model;
 
 - (void)topTableViewCellDidSelectWithModel:(MSUListModel *)model;
 

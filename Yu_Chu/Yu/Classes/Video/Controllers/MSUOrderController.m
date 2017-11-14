@@ -122,6 +122,8 @@
                         } else{
                             self.allView.hidden = YES;
                             self.waitView.hidden = NO;
+                            
+                            self.waitView.dataArr = orderModel.data.dataList;
                         }
 
                     } else{
@@ -204,10 +206,12 @@
 }
 
 #pragma - 代理
-- (void)commentClick{
+- (void)commentClickModel:(MSUListModel *)model{
     self.hidesBottomBarWhenPushed = YES;
     MSUCoomentController *coo = [[MSUCoomentController alloc] init];
-    [self.navigationController pushViewController:coo animated:YES];
+//    [self.navigationController pushViewController:coo animated:YES];
+    coo.detailModel = model;
+    [self presentViewController:coo animated:YES completion:nil];
     self.hidesBottomBarWhenPushed = NO;
 }
 

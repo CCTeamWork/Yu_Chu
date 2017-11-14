@@ -10,4 +10,6 @@
 
 @interface MSUThankCommentController : UIViewController
 
+@property (nonatomic , copy) NSString *str;
+
 @end

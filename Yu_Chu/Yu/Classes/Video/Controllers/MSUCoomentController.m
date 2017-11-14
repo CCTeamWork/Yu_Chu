@@ -36,6 +36,9 @@
     _comView.backgroundColor = HEXCOLOR(0xffffff);
     _comView.textView.delegate = self;
     [_comView.pushBtn addTarget:self action:@selector(pushBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_comView.iconBtn sd_setImageWithURL:[NSURL URLWithString:self.detailModel.shopLogo] forState:UIControlStateNormal];
+    _comView.nameLab.text = self.detailModel.shopName;
+    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)];
     tap.delegate = self;
@@ -65,7 +68,9 @@
 - (void)pushBtnClick:(UIButton *)sender{
     self.hidesBottomBarWhenPushed = YES;
     MSUThankCommentController *than = [[MSUThankCommentController alloc] init];
-    [self.navigationController pushViewController:than animated:YES];
+//    [self.navigationController pushViewController:than animated:YES];
+    than.str = _comView.textView.text;
+    [self presentViewController:than animated:YES completion:nil];
 }
 
 #pragma - 代理

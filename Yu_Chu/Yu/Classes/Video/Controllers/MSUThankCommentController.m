@@ -37,13 +37,15 @@
     MSUThankComView *thank = [[MSUThankComView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 168+119+40)];
     [self.view addSubview:thank];
     thank.backgroundColor = HEXCOLOR(0xffffff);
+    thank.detailLab.text = self.str;
     
 }
 
 
 #pragma  - 点击
 - (void)backArrowBtnClick:(UIButton *)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
