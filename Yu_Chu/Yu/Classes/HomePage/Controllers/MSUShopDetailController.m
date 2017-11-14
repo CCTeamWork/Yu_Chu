@@ -130,7 +130,7 @@
 
 - (void)commentRequestWithToken:(NSString *)token{
     NSDictionary *dic = @{@"token":token,@"shopId":self.shopID,@"tag":@"",@"pageSize":@"",@"pageIndex":@""};
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/getShopComment" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/shop/getShopComment" parameters:dic withBlock:^(id obj, NSError *error) {
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
         if (!error) {
             NSLog(@"访问成功%@",jsonDict);

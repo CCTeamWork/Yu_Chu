@@ -54,7 +54,7 @@
     
     NSDictionary *dic = @{@"token":token,@"orderId":self.detailModel._id};
     NSLog(@"--- dic %@",dic);
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/order/getOrderDetail" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.22:8202/member/order/getOrderDetail" parameters:dic withBlock:^(id obj, NSError *error) {
         if (obj) {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
             if (!error) {
