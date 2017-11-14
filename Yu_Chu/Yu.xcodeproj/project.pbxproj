@@ -1815,15 +1815,11 @@
 			baseConfigurationReference = C84BB96D902888AF368DDC15 /* Pods-Yu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
 
 				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
 				DEVELOPMENT_TEAM = BQTRH34XZT;
 
-=======
-				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
-				DEVELOPMENT_TEAM = BQTRH34XZT;
->>>>>>> d629c5cf2c7402583baa68de51fd93b2d369cb6c
+
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1844,15 +1840,11 @@
 			baseConfigurationReference = 6D7E88C8E44E308C234712D9 /* Pods-Yu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
 
 				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
 				DEVELOPMENT_TEAM = BQTRH34XZT;
 
-=======
-				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
-				DEVELOPMENT_TEAM = BQTRH34XZT;
->>>>>>> d629c5cf2c7402583baa68de51fd93b2d369cb6c
+
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

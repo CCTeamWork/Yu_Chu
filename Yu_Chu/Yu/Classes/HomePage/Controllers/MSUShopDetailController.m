@@ -108,7 +108,7 @@
 
     NSDictionary *dic = @{@"token":token,@"shopId":self.shopID};
     NSLog(@"--- dic %@",dic);
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/getDishClass" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/shop/getDishClass" parameters:dic withBlock:^(id obj, NSError *error) {
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
         if (!error) {
             NSLog(@"访问成功%@",jsonDict);
@@ -130,7 +130,7 @@
 
 - (void)commentRequestWithToken:(NSString *)token{
     NSDictionary *dic = @{@"token":token,@"shopId":self.shopID,@"tag":@"",@"pageSize":@"",@"pageIndex":@""};
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/getShopComment" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/shop/getShopComment" parameters:dic withBlock:^(id obj, NSError *error) {
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
         if (!error) {
             NSLog(@"访问成功%@",jsonDict);
@@ -336,19 +336,21 @@
     }
     
     NSError *error = nil;
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:muArr
-                                                       options:kNilOptions
-                                                         error:&error];
-    
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData
-                                                 encoding:NSUTF8StringEncoding];
-    
+    NSMutableString *jsonString = [NSMutableString stringWithFormat:@"["];
+    for (NSMutableDictionary *obj in muArr) {
+        [jsonString appendString:@"{"];
+        for (NSString *key in obj.allKeys) {
+            [jsonString appendString:[NSString stringWithFormat:@"%@:%@,",key,[obj valueWithNilForKey:key]]];
+                    }
+        [jsonString deleteCharactersInRange:NSMakeRange(jsonString.length-1, 1)];
+        [jsonString appendString:@"}"];
+    }
+    [jsonString appendString:@"]"];
     
     NSDictionary *dic = @{@"token":token,@"shopCars":jsonString};
     NSLog(@"---%@",dic);
     
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/addShopCarAll" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/shop/addShopCarAll" parameters:dic withBlock:^(id obj, NSError *error) {
         if (obj) {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
             if (!error) {
