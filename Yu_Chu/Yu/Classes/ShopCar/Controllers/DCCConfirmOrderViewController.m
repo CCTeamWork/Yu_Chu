@@ -37,6 +37,8 @@
     NSString *_locationID;
     DCCBaseNavgationView *_navV;
     
+    NSString *_payOrderSn;
+    
 }
 
 @end
@@ -49,6 +51,7 @@
     _navV = [[DCCBaseNavgationView alloc] init];
     [_navV redBackGroundSetTitle:@"确认订单" andBackGroundColor:JQXXXLZHFF2D4BCLOLR andTarget:self];
     [self.view addSubview:_navV];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getPayResult:) name:@"payResult" object:nil];
 
     if (self.shopId) {
         if (![self.shopId isEqualToString:@""]) {
@@ -56,7 +59,6 @@
             return;
         }
     }
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(payResult:) name:@"payResult" object:nil];
 }
 
 - (void)initAllData{
@@ -143,6 +145,7 @@
                  if (succeed) {
                      NSMutableDictionary *paramic = [[NSMutableDictionary alloc] init];
                      [paramic setObjectSafe:[[responseData valueWithNilForKey:@"data"]valueWithNilForKey:@"id"] forKey:@"orderId"];
+                     _payOrderSn = [[responseData valueWithNilForKey:@"data"]valueWithNilForKey:@"orderSn"];
                      [[RequestManager sharedInstance]getPayOrderWith:paramic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
                          if (succeed) {
                              [self gotoAliPay:[[responseData valueWithNilForKey:@"data"] valueWithNilForKey:@"alipay"]];
@@ -174,8 +177,20 @@
         }
     }];
 }
-- (void)payResult:(NSNotification *)noti{
+static int times = 0;
+- (void)getPayResult:(NSNotification *)noti{
+    if (times != 0) {
+        return;
+    }
+    times += 1;
     if ([noti.object isEqualToString:@"1"]) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:_payOrderSn forKey:@"orderSn"];
+        [[RequestManager sharedInstance]confirmPayOrderWith:dic WhenComplete:^(BOOL succeed, id responseData, NSError *error) {
+            if (succeed) {
+                
+            }
+        }];
         //支付成功
         [self.navigationController popViewControllerAnimated:YES];
     }

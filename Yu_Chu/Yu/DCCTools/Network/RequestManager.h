@@ -63,4 +63,7 @@ typedef void (^JinQiangXinxiRequestCompletionn)(BOOL succeed, id responseData, N
 
 //获取我的订单
 - (void)getMyAllOrderWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion;
+
+//支付确认
+- (void)confirmPayOrderWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion;
 @end

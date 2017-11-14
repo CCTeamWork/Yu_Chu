@@ -349,4 +349,11 @@ static id instance;
     [params setObject:@(1) forKey:@"pageIndex"];
     [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
 }
+
+//支付确认
+- (void)confirmPayOrderWith:(NSMutableDictionary *)params WhenComplete:(JinQiangXinxiRequestCompletionn)completion{
+    [params setObject:kAppDelegate.token forKey:@"token"];
+    NSString *urlS = [NSString stringWithFormat:@"%@member/order/payOrderConfirm",DCCCYQBaseUrl];
+    [self AFNPostRequestWithUrl:urlS params:params WhenComplete:completion];
+}
 @end

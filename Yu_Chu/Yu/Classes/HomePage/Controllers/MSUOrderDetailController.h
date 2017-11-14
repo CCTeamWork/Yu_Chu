@@ -17,5 +17,5 @@
 
 @property (nonatomic , copy) NSString *payMon;
 
-
+@property (nonatomic, copy) NSString *dishID;
 @end

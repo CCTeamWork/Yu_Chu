@@ -1819,8 +1819,7 @@
 				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
 				DEVELOPMENT_TEAM = BQTRH34XZT;
 
-				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
-				DEVELOPMENT_TEAM = BQTRH34XZT;
+
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1845,8 +1844,7 @@
 				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
 				DEVELOPMENT_TEAM = BQTRH34XZT;
 
-				CODE_SIGN_ENTITLEMENTS = Yu/Yu.entitlements;
-				DEVELOPMENT_TEAM = BQTRH34XZT;
+
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
