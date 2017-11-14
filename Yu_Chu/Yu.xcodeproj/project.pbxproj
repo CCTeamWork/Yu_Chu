@@ -195,6 +195,7 @@
 		9AA630C01FB6F68200644949 /* MSUDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630BF1FB6F68200644949 /* MSUDetailModel.m */; };
 		9AB0F74E1FB97C60004AC0B7 /* MSUTimerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0F74D1FB97C60004AC0B7 /* MSUTimerHandler.m */; };
 		9ABDCAF11FBAAD3700A62182 /* MSUOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABDCAF01FBAAD3700A62182 /* MSUOrderModel.m */; };
+		9ABDCAF41FBAC35600A62182 /* MSUDetailDeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABDCAF31FBAC35600A62182 /* MSUDetailDeModel.m */; };
 		9AEC7BB51FB969920047BD7B /* MSUCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB41FB969920047BD7B /* MSUCommentModel.m */; };
 		9AEC7BB71FB973D30047BD7B /* shop_img_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB61FB973D30047BD7B /* shop_img_head@2x.png */; };
 		9AEC7BB91FB973D80047BD7B /* shop_img_head@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB81FB973D80047BD7B /* shop_img_head@3x.png */; };
@@ -524,6 +525,8 @@
 		9AB0F74D1FB97C60004AC0B7 /* MSUTimerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUTimerHandler.m; sourceTree = "<group>"; };
 		9ABDCAEF1FBAAD3700A62182 /* MSUOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUOrderModel.h; sourceTree = "<group>"; };
 		9ABDCAF01FBAAD3700A62182 /* MSUOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUOrderModel.m; sourceTree = "<group>"; };
+		9ABDCAF21FBAC35600A62182 /* MSUDetailDeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUDetailDeModel.h; sourceTree = "<group>"; };
+		9ABDCAF31FBAC35600A62182 /* MSUDetailDeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUDetailDeModel.m; sourceTree = "<group>"; };
 		9AEC7BB31FB969920047BD7B /* MSUCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUCommentModel.h; sourceTree = "<group>"; };
 		9AEC7BB41FB969920047BD7B /* MSUCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUCommentModel.m; sourceTree = "<group>"; };
 		9AEC7BB61FB973D30047BD7B /* shop_img_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_img_head@2x.png"; sourceTree = "<group>"; };
@@ -813,6 +816,8 @@
 				04C391931FB988760059030B /* DCCOrderModel.m */,
 				9ABDCAEF1FBAAD3700A62182 /* MSUOrderModel.h */,
 				9ABDCAF01FBAAD3700A62182 /* MSUOrderModel.m */,
+				9ABDCAF21FBAC35600A62182 /* MSUDetailDeModel.h */,
+				9ABDCAF31FBAC35600A62182 /* MSUDetailDeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1595,6 +1600,7 @@
 				9900EB7E1FAAEED20072F03C /* MSULeftTableCell.m in Sources */,
 				990AED6B1FA80E2200F5D3E7 /* MSUHUD.m in Sources */,
 				990AED591FA80CAC00F5D3E7 /* MSUNaviBaseController.m in Sources */,
+				9ABDCAF41FBAC35600A62182 /* MSUDetailDeModel.m in Sources */,
 				04C391941FB988760059030B /* DCCOrderModel.m in Sources */,
 				047631FC1FB149AF003CE6DB /* SearchResultTable.m in Sources */,
 				990FF7A21FB00405007DFD29 /* MSUAllOrderView.m in Sources */,

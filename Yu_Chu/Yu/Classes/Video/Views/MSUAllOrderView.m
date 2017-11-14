@@ -153,13 +153,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _topTableView) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(topTableViewCellDidSelect)]) {
-            [self.delegate topTableViewCellDidSelect];
-        }
+//        if (self.delegate && [self.delegate respondsToSelector:@selector(topTableViewCellDidSelect)]) {
+//            [self.delegate topTableViewCellDidSelect];
+//        }
     } else{
-        if (self.delegate && [self.delegate respondsToSelector:@selector(bottomTableViewCellDidSelect)]) {
-            [self.delegate bottomTableViewCellDidSelect];
+        MSUListModel *dataModel = self.dataArr[indexPath.row];
+
+        if ([dataModel.status isEqualToString:@"4"] || [dataModel.status isEqualToString:@"3"]) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(topTableViewCellDidSelectWithModel:)]) {
+                [self.delegate topTableViewCellDidSelectWithModel:dataModel];
+            }
+        } else if ([dataModel.status isEqualToString:@"7"]){
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(bottomTableViewCellDidSelectWithModel:)]) {
+                [self.delegate bottomTableViewCellDidSelectWithModel:dataModel];
+            }
         }
+       
     }
 }
 

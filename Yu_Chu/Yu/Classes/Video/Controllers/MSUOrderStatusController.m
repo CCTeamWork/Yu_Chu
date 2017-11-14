@@ -13,11 +13,15 @@
 #import "MSUPrefixHeader.pch"
 #import "MSUPathTools.h"
 
+#import "MSUDetailDeModel.h"
+
 #import "MSUDeatailTableCell.h"
 
 @interface MSUOrderStatusController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic , strong) UITableView *tableView;
+
+@property (nonatomic , strong) NSArray *dataArr;
 
 @end
 
@@ -35,6 +39,43 @@
  
     [self createTopView];
 }
+
+
+- (void)loadRequest
+{
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    
+    NSDictionary *dic = @{@"token":token,@"orderId":self.detaiModel._id};
+    NSLog(@"--- dic %@",dic);
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/order/getOrderDetail" parameters:dic withBlock:^(id obj, NSError *error) {
+        if (obj) {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+            if (!error) {
+                NSLog(@"访问成功%@",jsonDict);
+                if([jsonDict[@"code"] isEqualToString:@"200"]){
+                    MSUDetailDeModel *model = [MSUDetailDeModel mj_objectWithKeyValues:jsonDict];
+                    
+                    self.dataArr = model.data.goods;
+                    [self.tableView reloadData];
+                   
+                } else{
+                    
+                }
+                
+            }else{
+                NSLog(@"访问报错%@",error);
+            }
+            
+        } else{
+            [MSUHUD showFileWithString:@"服务器请求为空"];
+        }
+        
+    }];
+}
+
 
 - (void)createTopView{
     UIView *bgView = [[UIView alloc] init];
@@ -138,12 +179,18 @@
 
 #pragma - 代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MSUDeatailTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    MSUGoodsDetailModel *dataModel = self.dataArr[indexPath.row];
+    
+    cell.leftLab.text = [NSString stringWithFormat:@"%@-%@份",dataModel.dishName,dataModel.num];
+    cell.centerLab.text = [NSString stringWithFormat:@"x%@",dataModel.num];
+    cell.rightLab.text = [NSString stringWithFormat:@"¥%@",dataModel.price];
     
     return cell;
 }

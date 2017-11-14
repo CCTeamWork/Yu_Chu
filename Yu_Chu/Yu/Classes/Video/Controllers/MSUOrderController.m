@@ -211,15 +211,17 @@
     self.hidesBottomBarWhenPushed = NO;
 }
 
-- (void)topTableViewCellDidSelect{
+- (void)topTableViewCellDidSelectWithModel:(MSUListModel *)model{
     self.hidesBottomBarWhenPushed = YES;
     MSUOrderStatusController *status = [[MSUOrderStatusController alloc] init];
+    status.detaiModel = model;
     [self presentViewController:status animated:YES completion:nil];
 }
 
-- (void)bottomTableViewCellDidSelect{
+- (void)bottomTableViewCellDidSelectWithModel:(MSUListModel *)model{
     self.hidesBottomBarWhenPushed = YES;
     MSUOrderCompleteController *status = [[MSUOrderCompleteController alloc] init];
+    status.detailModel = model;
     [self presentViewController:status animated:YES completion:nil];
 }
 

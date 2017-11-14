@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MSUOrderModel.h"
+
 @interface MSUOrderCompleteController : UIViewController
+
+@property (nonatomic , strong) MSUListModel *detailModel;
 
 @end

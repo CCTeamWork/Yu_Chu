@@ -319,11 +319,64 @@
 }
 
 - (void)buyBtnClick:(UIButton *)sender{
-    self.hidesBottomBarWhenPushed =YES;
-    DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
-    com.shopId = self.shopID;
-    com.shopName = self.shopName;
-    [self.navigationController pushViewController:com animated:YES];
+    [MSUHUD showStatusWithString:@"正在提交订单"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    
+    NSMutableArray *muArr = [NSMutableArray array];
+    for (NSInteger i = 0; i < self.idArr.count; i++) {
+        NSMutableDictionary *muDic = [NSMutableDictionary dictionary];
+        [muDic setObject:self.shopID forKey:@"shopId"];
+        [muDic setObject:self.idArr[i] forKey:@"dishId"];
+        [muDic setObject:self.numArr[i] forKey:@"count"];
+        
+        [muArr addObject:muDic];
+    }
+    
+    NSError *error = nil;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:muArr
+                                                       options:kNilOptions
+                                                         error:&error];
+    
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                 encoding:NSUTF8StringEncoding];
+    
+    
+    NSDictionary *dic = @{@"token":token,@"shopCars":jsonString};
+    NSLog(@"---%@",dic);
+    
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/addShopCarAll" parameters:dic withBlock:^(id obj, NSError *error) {
+        if (obj) {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+            if (!error) {
+                NSLog(@"访问成功%@",jsonDict);
+                if([jsonDict[@"code"] isEqualToString:@"200"]){
+                    [MSUHUD showFileWithString:@"提交成功"];
+                    
+                    self.hidesBottomBarWhenPushed =YES;
+                    DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
+                    com.shopId = self.shopID;
+                    com.shopName = self.shopName;
+                    [self.navigationController pushViewController:com animated:YES];
+                } else{
+                    [MSUHUD showFileWithString:@"提交失败"];
+
+                }
+                
+            }else{
+                NSLog(@"访问报错%@",error);
+                [MSUHUD showFileWithString:@"提交失败"];
+            }
+            
+        } else{
+            [MSUHUD showFileWithString:@"服务器请求为空"];
+        }
+        
+    }];
+
 }
 
 
@@ -411,11 +464,13 @@
 }
 
 - (void)seleRightDelegateToPushWithModel:(MSUMenuModel *)model{
+
     self.hidesBottomBarWhenPushed = YES;
     MSUOrderDetailController *order = [[MSUOrderDetailController alloc] init];
     order.payMon = self.payMon;
     order.menuModel = model;
     [self.navigationController pushViewController:order animated:YES];
+
 }
 
 
