@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MSUOrderModel.h"
+
 @protocol MSUAllOrderViewDelegate <NSObject>
 
 - (void)commentClick;
@@ -26,6 +28,8 @@
 @property (nonatomic , strong) UITableView *topTableView;
 
 @property (nonatomic , strong) UITableView *bootomTableView;
+
+@property (nonatomic , strong) NSArray *dataArr;
 
 
 @end

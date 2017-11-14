@@ -231,8 +231,10 @@
         [_rightTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.row] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 
     } else{
-        if (self.delegate && [_delegate respondsToSelector:@selector(seleRightDelegateToPush)]) {
-            [self.delegate seleRightDelegateToPush];
+        MSUShopDetailModel *detaiModel = self.detailModel.data[indexPath.section];
+        MSUMenuModel *menuModel = detaiModel.dishList[indexPath.row];
+        if (self.delegate && [_delegate respondsToSelector:@selector(seleRightDelegateToPushWithModel:)]) {
+            [self.delegate seleRightDelegateToPushWithModel:menuModel];
         }
     }
 }

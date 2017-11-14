@@ -13,6 +13,8 @@
 
 #import "MSUPrefixHeader.pch"
 #import "MSUHomeNavView.h"
+#import "MSUNoDataView.h"
+
 
 #import "MSUAllOrderView.h"
 #import "MSUWaitCommentView.h"
@@ -26,6 +28,9 @@
 @property (nonatomic , strong) MSUAllOrderView *allView;
 
 @property (nonatomic , strong) MSUWaitCommentView *waitView;
+
+@property (nonatomic , strong) MSUNoDataView *noDataView;
+
 
 @end
 
@@ -47,6 +52,8 @@
     
     
     [self createTopView];
+    
+    [self loadRequstWithStatus:@"0" page:@"1"];
 }
 
 
@@ -87,6 +94,65 @@
     
 }
 
+// 0是全部 10是完成
+- (void)loadRequstWithStatus:(NSString *)status page:(NSString *)page{
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    
+    NSDictionary *dic = @{@"token":token,@"status":status,@"pageSize":@"10",@"pageIndex":page};
+    NSLog(@"--- dic %@",dic);
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/order/pageMyOrder" parameters:dic withBlock:^(id obj, NSError *error) {
+//        NSLog(@"---%@",error);
+        if (obj) {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+            if (!error) {
+                NSLog(@"访问成功%@",jsonDict);
+                if([jsonDict[@"code"] isEqualToString:@"200"]){
+                    MSUOrderModel *orderModel = [MSUOrderModel mj_objectWithKeyValues:jsonDict];
+
+                    if (orderModel.data.dataList.count > 0) {
+                        self.noDataView.hidden = YES;
+                        if ([status isEqualToString:@"0"]) {
+                            self.allView.hidden = NO;
+                            self.waitView.hidden = YES;
+                            
+                            self.allView.dataArr = orderModel.data.dataList;
+                        } else{
+                            self.allView.hidden = YES;
+                            self.waitView.hidden = NO;
+                        }
+
+                    } else{
+                        self.noDataView.hidden = NO;
+                        self.allView.hidden = YES;
+                        self.waitView.hidden = YES;
+                    }
+                    
+                } else{
+                    self.noDataView.hidden = NO;
+                    self.allView.hidden = YES;
+                    self.waitView.hidden = YES;
+                }
+                
+            }else{
+                NSLog(@"访问报错%@",error);
+                self.noDataView.hidden = NO;
+                self.allView.hidden = YES;
+                self.waitView.hidden = YES;
+            }
+            
+        } else{
+            [MSUHUD showFileWithString:@"服务器请求为空"];
+            self.noDataView.hidden = NO;
+            self.allView.hidden = YES;
+            self.waitView.hidden = YES;
+        }
+        
+    }];
+}
+
 #pragma mark - 点击事件
 - (void)menuBtnClick:(UIButton *)sender{
     
@@ -97,9 +163,12 @@
     
     if (sender.tag == 1542) {
         _scrollView.contentOffset = CGPointMake(0,0);
+        [self loadRequstWithStatus:@"0" page:@"1"];
     } else{
         _scrollView.contentOffset = CGPointMake(WIDTH, 0);
         self.waitView.hidden = NO;
+        [self loadRequstWithStatus:@"0" page:@"7"];
+
     }
 }
 
@@ -123,6 +192,15 @@
         _waitView.delegate = self;
     }
     return _waitView;
+}
+
+- (MSUNoDataView *)noDataView{
+    if(!_noDataView){
+        _noDataView = [[MSUNoDataView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49)];
+        [self.view addSubview:_noDataView];
+        _noDataView.backgroundColor = HEXCOLOR(0xf0f0f0);
+    }
+    return _noDataView;
 }
 
 #pragma - 代理

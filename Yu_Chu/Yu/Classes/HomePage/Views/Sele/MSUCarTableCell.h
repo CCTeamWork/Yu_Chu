@@ -10,6 +10,10 @@
 
 @interface MSUCarTableCell : UITableViewCell
 
+@property (nonatomic , copy) void(^addBlock)(UIButton *btn);
+@property (nonatomic , copy) void(^deleBlock)(UIButton *btn);
+
+
 @property (nonatomic , strong) UILabel *nameLab;
 
 @property (nonatomic , strong) UILabel *introLab;

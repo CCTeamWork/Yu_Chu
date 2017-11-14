@@ -8,6 +8,9 @@
 
 #import "MSUOrderTopView.h"
 
+#import "MSUPathTools.h"
+#import "MSUStringTools.h"
+
 //masonry
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
@@ -86,7 +89,46 @@
     }];
 //    [_joinBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_addBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"shop_icon_plus"] forState:UIControlStateNormal];
+    [self addSubview:_addBtn];
+    [_addBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_goodPic.bottom).offset(30);
+        make.right.equalTo(self.right).offset(-14);
+        make.width.equalTo(22);
+        make.height.equalTo(22);
+    }];
+    _addBtn.hidden = YES;
+    
+    self.numLab = [[UILabel alloc] init];
+    _numLab.text = @"1";
+    CGSize sizeA = [MSUStringTools danamicGetWidthFromText:self.numLab.text WithFont:15];
+    _numLab.font = [UIFont systemFontOfSize:15];
+    _numLab.textColor = HEXCOLOR(0xff2d4b);
+    _numLab.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:_numLab];
+    [_numLab makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(_addBtn.centerY).offset(0);
+        make.right.equalTo(_addBtn.left).offset(-10);
+        make.width.equalTo(sizeA.width+10);
+        make.height.equalTo(15);
+    }];
+    _numLab.hidden = YES;
+    
+    self.deleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_deleBtn setImage:[MSUPathTools showImageWithContentOfFileByName:@"shop_icon_subtract"] forState:UIControlStateNormal];
+    [self addSubview:_deleBtn];
+    [_deleBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_addBtn.top).offset(0);
+        make.right.equalTo(_numLab.left).offset(-10);
+        make.width.equalTo(22);
+        make.height.equalTo(22);
+    }];
+    _deleBtn.hidden = YES;
+    
 }
+
+
 
 
 @end

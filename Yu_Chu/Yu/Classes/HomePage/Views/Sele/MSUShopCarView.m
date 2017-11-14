@@ -38,10 +38,30 @@
     return self;
 }
 
+- (void)setModelArr:(NSMutableArray *)modelArr{
+    _modelArr = modelArr;
+    
+    [_tableView remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.top).offset(35);
+        make.left.equalTo(self.left).offset(0);
+        make.width.equalTo(SelfWidth);
+        make.height.equalTo(60*modelArr.count);
+    }];
+    
+    [self.tableView reloadData];
+}
+
+- (void)setNumArr:(NSMutableArray *)numArr{
+    _numArr = numArr;
+}
+
+
+
+
 
 - (void)createView{
     UIView *bgView = [[UIView alloc] init];
-    bgView.backgroundColor = HEXCOLOR(0xb7b7b7);
+    bgView.backgroundColor = HEXCOLOR(0xf2f2f2);
     [self addSubview:bgView];
     [bgView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.top).offset(0);
@@ -86,22 +106,46 @@
     self.tableView.panGestureRecognizer.delaysTouchesBegan = self.tableView.delaysContentTouches;
     _tableView.rowHeight = 60;
     [_tableView registerClass:[MSUCarTableCell class] forCellReuseIdentifier:@"carCell"];
-    [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.top).offset(35);
-        make.left.equalTo(self.left).offset(0);
-        make.width.equalTo(SelfWidth);
-        make.height.equalTo(60);
-    }];
+//    [_tableView makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.top).offset(35);
+//        make.left.equalTo(self.left).offset(0);
+//        make.width.equalTo(SelfWidth);
+//        make.height.equalTo(60);
+//    }];
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.modelArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MSUCarTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"carCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    MSUMenuModel *model = self.modelArr[indexPath.row];
+    
+    cell.nameLab.text = model.dishName;
+    cell.priceLab.text = model.dishPrice;
+    
+    cell.numLab.text = self.numArr[indexPath.row];
+    CGSize sizeA = [MSUStringTools danamicGetWidthFromText:cell.numLab.text WithFont:15];
+    cell.numLab.frame = CGRectMake(SelfWidth-46-sizeA.width, 19, sizeA.width, 22);
+
+    __weak typeof(cell) weakCell = cell;
+    __weak typeof(self) weakSelf = self;
+    cell.addBlock = ^(UIButton *btn) {
+        weakCell.numLab.text = [NSString stringWithFormat:@"%ld",[weakCell.numLab.text integerValue]+1];
+        weakCell.numLab.frame = CGRectMake(SelfWidth-46, 19, sizeA.width, 15);
+    };
+    
+    cell.deleBlock = ^(UIButton *btn) {
+        weakCell.numLab.text = [NSString stringWithFormat:@"%ld",[weakCell.numLab.text integerValue]-1];
+        if ([weakCell.numLab.text isEqualToString:@"0"]) {
+            [weakSelf.modelArr removeObject:model];
+            [weakSelf.tableView reloadData];
+        }
+    };
     
     return cell;
 }

@@ -106,7 +106,6 @@
 - (void)loadRequestWithToken:(NSString *)token
 {
 
-    
     NSDictionary *dic = @{@"token":token,@"shopId":self.shopID};
     NSLog(@"--- dic %@",dic);
     [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/shop/getDishClass" parameters:dic withBlock:^(id obj, NSError *error) {
@@ -226,6 +225,7 @@
         _shadowView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.44];
         [self.view addSubview:_shadowView];
         _shadowView.hidden = YES;
+
     }
     return _shadowView;
 }
@@ -233,7 +233,8 @@
 - (MSUShopCarView *)carView{
     if (!_carView) {
         self.carView = [[MSUShopCarView alloc] init];
-        _carView.frame = CGRectMake(0, HEIGHT-50-35, WIDTH, 50);
+        _carView.frame = CGRectMake(0, HEIGHT*0.55, WIDTH, HEIGHT*0.45);
+//        _carView.frame = CGRectMake(0, HEIGHT-50*_modelArr.count-35-20, WIDTH, 50*_modelArr.count+20);
         [self.shadowView addSubview:_carView];
     }
     return _carView;
@@ -300,18 +301,28 @@
 
 
 - (void)carBtnClick:(UIButton *)sender{
-//    self.hidesBottomBarWhenPushed =YES;
-//    DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
-//    com.shopId = @"1";
-//    com.shopName = @"haha";
-//    [self.navigationController pushViewController:com animated:YES];
+    self.shadowView.hidden = NO;
+    self.carView.hidden = NO;
+    [self.view bringSubviewToFront:self.bottomView];
+
+//    CGRect rect = _carView.frame;
+//    rect.origin.y = HEIGHT-50*_modelArr.count-35-20;
+//    rect.size.height = 50*_modelArr.count+20;
+//    _carView.frame = rect;
+    
+//    _carView.frame = CGRectMake(0, HEIGHT-50*_modelArr.count-35-20, WIDTH, 50*_modelArr.count+20);
+
+    self.carView.modelArr = self.modelArr;
+    self.carView.numArr = self.numArr;
+    _carView.backgroundColor = HEXCOLOR(0xffffff);
+
 }
 
 - (void)buyBtnClick:(UIButton *)sender{
     self.hidesBottomBarWhenPushed =YES;
     DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
-    com.shopId = @"1";
-    com.shopName = @"haha";
+    com.shopId = self.shopID;
+    com.shopName = self.shopName;
     [self.navigationController pushViewController:com animated:YES];
 }
 
@@ -322,7 +333,7 @@
     NSArray * array = [NSArray arrayWithArray: self.idArr];
 
     if (signNum == 1) {
-        if (self.idArr.count > 0) {
+        if (array.count > 0) {
             if ([array containsObject:goodId]) {
                 NSInteger index = [self.idArr indexOfObject:goodId];
                 [self.numArr replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%ld",[self.numArr[index] integerValue]+1]];
@@ -399,9 +410,11 @@
 
 }
 
-- (void)seleRightDelegateToPush{
+- (void)seleRightDelegateToPushWithModel:(MSUMenuModel *)model{
     self.hidesBottomBarWhenPushed = YES;
     MSUOrderDetailController *order = [[MSUOrderDetailController alloc] init];
+    order.payMon = self.payMon;
+    order.menuModel = model;
     [self.navigationController pushViewController:order animated:YES];
 }
 

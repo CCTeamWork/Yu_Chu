@@ -70,22 +70,21 @@
         make.width.equalTo(22);
         make.height.equalTo(22);
     }];
-//    [_addBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_addBtn addTarget:self action:@selector(addBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.numLab = [[UILabel alloc] init];
     _numLab.text = @"1";
-    CGSize sizeA = [MSUStringTools danamicGetWidthFromText:_numLab.text WithFont:15];
     _numLab.font = [UIFont systemFontOfSize:15];
     _numLab.textColor = HEXCOLOR(0xff2d4b);
     _numLab.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_numLab];
-    [_numLab makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_addBtn.centerY).offset(0);
-        make.right.equalTo(_addBtn.left).offset(-10);
-        make.width.equalTo(sizeA.width);
-        make.height.equalTo(15);
-    }];
-    
+//    [_numLab makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(_addBtn.centerY).offset(0);
+//        make.right.equalTo(_addBtn.left).offset(-10);
+//        make.width.equalTo(sizeA.width);
+//        make.height.equalTo(15);
+//    }];
+//    
     self.deleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _deleBtn.layer.cornerRadius = 11;
     _deleBtn.clipsToBounds = YES;
@@ -99,7 +98,7 @@
         make.width.equalTo(22);
         make.height.equalTo(22);
     }];
-    //    [_addBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_deleBtn addTarget:self action:@selector(deleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 
 
     self.priceLab = [[UILabel alloc] init];
@@ -116,5 +115,16 @@
     }];
 }
 
+- (void)addBtnClick:(UIButton *)sender{
+    if (self.addBlock) {
+        self.addBlock(sender);
+    }
+}
+
+- (void)deleBtnClick:(UIButton *)sender{
+    if (self.deleBlock) {
+        self.deleBlock(sender);
+    }
+}
 
 @end

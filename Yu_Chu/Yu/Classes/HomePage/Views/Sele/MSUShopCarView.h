@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MSUDetailModel.h"
+
 @interface MSUShopCarView : UIView
 
 @property (nonatomic , strong) UILabel *numLab;
@@ -15,5 +17,9 @@
 @property (nonatomic , strong) UIButton *clearBtn;
 
 @property (nonatomic , strong) UITableView *tableView;
+
+
+@property (nonatomic , strong) NSMutableArray *modelArr;
+@property (nonatomic , strong) NSMutableArray *numArr;
 
 @end
