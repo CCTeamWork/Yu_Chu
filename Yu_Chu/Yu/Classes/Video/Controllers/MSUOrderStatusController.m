@@ -38,6 +38,8 @@
     [nav.backArrowBtn addTarget:self action:@selector(backArrowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
  
     [self createTopView];
+    
+    [self loadRequest];
 }
 
 
@@ -50,7 +52,7 @@
     
     NSDictionary *dic = @{@"token":token,@"orderId":self.detaiModel._id};
     NSLog(@"--- dic %@",dic);
-    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8201/member/order/getOrderDetail" parameters:dic withBlock:^(id obj, NSError *error) {
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/order/getOrderDetail" parameters:dic withBlock:^(id obj, NSError *error) {
         if (obj) {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
             if (!error) {
@@ -168,10 +170,42 @@
 
 #pragma -点击
 - (void)cancelBtnClick:(UIButton *)sender{
-    self.hidesBottomBarWhenPushed = YES;
-    MSUOrderCancelController *cancel = [[MSUOrderCancelController alloc] init];
-    [self.navigationController pushViewController:cancel animated:YES];
-}
+    [MSUHUD showFileWithString:@"正在申请取消订单"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    
+    NSDictionary *dic = @{@"token":token,@"orderId":self.detaiModel._id};
+    NSLog(@"--- dic %@",dic);
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/order/cancleOrder" parameters:dic withBlock:^(id obj, NSError *error) {
+        if (obj) {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+            if (!error) {
+                NSLog(@"访问成功%@",jsonDict);
+                if([jsonDict[@"code"] isEqualToString:@"200"]){
+                    [MSUHUD showFileWithString:@"申请成功"];
+                    self.hidesBottomBarWhenPushed = YES;
+                    MSUOrderCancelController *cancel = [[MSUOrderCancelController alloc] init];
+                    [self.navigationController pushViewController:cancel animated:YES];
+
+                } else{
+                    [MSUHUD showFileWithString:@"申请失败"];
+
+                }
+                
+            }else{
+                NSLog(@"访问报错%@",error);
+                [MSUHUD showFileWithString:@"申请失败"];
+            }
+            
+        } else{
+            [MSUHUD showFileWithString:@"服务器请求为空"];
+        }
+        
+    }];
+
+ }
 
 - (void)backArrowBtnClick:(UIButton *)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
