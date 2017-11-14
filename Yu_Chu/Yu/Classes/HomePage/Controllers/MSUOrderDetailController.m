@@ -169,11 +169,41 @@
 }
 
 - (void)buyBtnClick:(UIButton *)sender{
-    self.hidesBottomBarWhenPushed =YES;
-    DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
-    com.shopId = self.menuModel.shopId;
-    com.shopName = self.menuModel.dishName;
-    [self.navigationController pushViewController:com animated:YES];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"dccLoginToken"];
+    if (!token) {
+        token = @"";
+    }
+    
+    NSDictionary *dic = @{@"token":token,@"shopCars":[NSString stringWithFormat:@"[{shopId:%@,dishId:%@,count:%@}]",self.menuModel.shopId,self.menuModel.seller_id,_topView.numLab.text]};
+    
+    [[MSUAFNRequest sharedInstance] postRequestWithURL:@"http://192.168.10.21:8202/member/shop/addShopCarAll" parameters:dic withBlock:^(id obj, NSError *error) {
+        if (obj) {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:obj options:NSJSONReadingMutableLeaves error:nil];
+            if (!error) {
+                NSLog(@"访问成功%@",jsonDict);
+                if([jsonDict[@"code"] isEqualToString:@"200"]){
+                    [MSUHUD showFileWithString:@"提交成功"];
+                    
+                    self.hidesBottomBarWhenPushed =YES;
+                    DCCConfirmOrderViewController *com = [[DCCConfirmOrderViewController alloc] init];
+                    com.shopId = self.menuModel.shopId;
+                    com.shopName = self.menuModel.dishName;
+                    [self.navigationController pushViewController:com animated:YES];
+                } else{
+                    [MSUHUD showFileWithString:@"提交失败"];
+                    
+                }
+                
+            }else{
+                NSLog(@"访问报错%@",error);
+                [MSUHUD showFileWithString:@"提交失败"];
+            }
+            
+        } else{
+            [MSUHUD showFileWithString:@"服务器请求为空"];
+        }
+        
+    }];
 }
 
 
