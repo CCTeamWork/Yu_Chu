@@ -66,9 +66,9 @@
 		04B547591FA9DDDD0075D2E1 /* MSUHomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B547491FA9DDDD0075D2E1 /* MSUHomePageController.m */; };
 		04B5475A1FA9DDDD0075D2E1 /* MSUSeleAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5474B1FA9DDDD0075D2E1 /* MSUSeleAddressController.m */; };
 		04B5475B1FA9DDDD0075D2E1 /* MSUSeleLocaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5474E1FA9DDDD0075D2E1 /* MSUSeleLocaView.m */; };
-		04C391901FB96F020059030B /* launchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3918F1FB96F020059030B /* launchImage.png */; };
 		04C391941FB988760059030B /* DCCOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C391931FB988760059030B /* DCCOrderModel.m */; };
 		04C3919A1FBAF6B50059030B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C391991FBAF6B50059030B /* Launch Screen.storyboard */; };
+		04C3919E1FBAF8EF0059030B /* xxxxxx.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C3919D1FBAF8EE0059030B /* xxxxxx.png */; };
 		04CE9EA91FB31533004C5A6F /* DCCShopCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */; };
 		04CE9EAC1FB3192B004C5A6F /* DCCGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAB1FB3192B004C5A6F /* DCCGoodsModel.m */; };
 		04CE9EAF1FB3E745004C5A6F /* DCCConfirmOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE9EAE1FB3E745004C5A6F /* DCCConfirmOrderModel.m */; };
@@ -321,11 +321,11 @@
 		04B5474B1FA9DDDD0075D2E1 /* MSUSeleAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUSeleAddressController.m; sourceTree = "<group>"; };
 		04B5474D1FA9DDDD0075D2E1 /* MSUSeleLocaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUSeleLocaView.h; sourceTree = "<group>"; };
 		04B5474E1FA9DDDD0075D2E1 /* MSUSeleLocaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUSeleLocaView.m; sourceTree = "<group>"; };
-		04C3918F1FB96F020059030B /* launchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchImage.png; sourceTree = "<group>"; };
 		04C391921FB988760059030B /* DCCOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCOrderModel.h; sourceTree = "<group>"; };
 		04C391931FB988760059030B /* DCCOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCOrderModel.m; sourceTree = "<group>"; };
 		04C391951FBA92F10059030B /* Yu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Yu.entitlements; sourceTree = "<group>"; };
 		04C391991FBAF6B50059030B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		04C3919D1FBAF8EE0059030B /* xxxxxx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xxxxxx.png; sourceTree = "<group>"; };
 		04CE9EA71FB31533004C5A6F /* DCCShopCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCShopCarModel.h; sourceTree = "<group>"; };
 		04CE9EA81FB31533004C5A6F /* DCCShopCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCCShopCarModel.m; sourceTree = "<group>"; };
 		04CE9EAA1FB3192B004C5A6F /* DCCGoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCGoodsModel.h; sourceTree = "<group>"; };
@@ -961,6 +961,7 @@
 		990AECEB1FA8048E00F5D3E7 /* Yu */ = {
 			isa = PBXGroup;
 			children = (
+				04C3919D1FBAF8EE0059030B /* xxxxxx.png */,
 				04C391951FBA92F10059030B /* Yu.entitlements */,
 				04B547171FA9B1040075D2E1 /* DCCTools */,
 				990AED251FA80BA700F5D3E7 /* Classes */,
@@ -1069,7 +1070,6 @@
 		990AED301FA80BA700F5D3E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				04C3918F1FB96F020059030B /* launchImage.png */,
 				990AED471FA80C0F00F5D3E7 /* MSUPersonCenterController.h */,
 				990AED481FA80C0F00F5D3E7 /* MSUPersonCenterController.m */,
 				047631E81FB07564003CE6DB /* DCCLoginpageViewController.h */,
@@ -1434,6 +1434,7 @@
 				9900EB5D1FAABEF20072F03C /* tabbar_icon_shopping_selected@3x.png in Resources */,
 				99026D3E1FABFA9900A011F1 /* address_frame@3x.png in Resources */,
 				99026D3C1FABFA9600A011F1 /* address_frame@2x.png in Resources */,
+				04C3919E1FBAF8EF0059030B /* xxxxxx.png in Resources */,
 				99026D5E1FAC3E6E00A011F1 /* shop_icon_time@3x.png in Resources */,
 				9AEC7BB91FB973D80047BD7B /* shop_img_head@3x.png in Resources */,
 				9900EB8C1FAB190D0072F03C /* tabbar_icon_shop_selected@3x.png in Resources */,
@@ -1452,7 +1453,6 @@
 				04B547521FA9DDDD0075D2E1 /* back@2x.png in Resources */,
 				9902AA4F1FB2D12200492E3A /* index_pic@3x.png in Resources */,
 				9AA630B91FB6D4DB00644949 /* comment_image_none@3x.png in Resources */,
-				04C391901FB96F020059030B /* launchImage.png in Resources */,
 				04B5474F1FA9DDDD0075D2E1 /* address_icon_edit@2x.png in Resources */,
 				99026D451FAC0BEC00A011F1 /* comment_icon_greystar@3x.png in Resources */,
 				990AECF91FA8048E00F5D3E7 /* Assets.xcassets in Resources */,
