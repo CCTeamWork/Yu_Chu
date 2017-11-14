@@ -49,7 +49,7 @@
     [self judgeNetIsChange];
     //设置极光推送
     [self setJPUSH:launchOptions];
-    [AMapServices sharedServices].apiKey = @"3a4e6ecafefa66c22884cff96f992a799";
+    [AMapServices sharedServices].apiKey = @"3a4e6ecafef66c22884cff96f992a799";
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = WHITECOLOR;
@@ -172,6 +172,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[UIApplication alloc] setApplicationIconBadgeNumber:0];
+
 }
 
 
@@ -255,6 +257,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         } seq:1];
     }
 }
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Required,For systems with less than or equal to iOS6
