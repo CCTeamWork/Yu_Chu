@@ -126,6 +126,7 @@
         make.width.equalTo(75);
         make.height.equalTo(29);
     }];
+    _commentBtn.hidden = YES;
     [_commentBtn addTarget:self action:@selector(commentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.againBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -146,6 +147,7 @@
         make.width.equalTo(103);
         make.height.equalTo(29);
     }];
+    _againBtn.hidden = YES;
     //    [_iconBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *lineView = [[UIView alloc] init];

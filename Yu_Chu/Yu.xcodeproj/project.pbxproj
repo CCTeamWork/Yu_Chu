@@ -194,6 +194,7 @@
 		9AA630BD1FB6D8C200644949 /* MSUHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630BC1FB6D8C200644949 /* MSUHomeModel.m */; };
 		9AA630C01FB6F68200644949 /* MSUDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA630BF1FB6F68200644949 /* MSUDetailModel.m */; };
 		9AB0F74E1FB97C60004AC0B7 /* MSUTimerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB0F74D1FB97C60004AC0B7 /* MSUTimerHandler.m */; };
+		9ABDCAF11FBAAD3700A62182 /* MSUOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABDCAF01FBAAD3700A62182 /* MSUOrderModel.m */; };
 		9AEC7BB51FB969920047BD7B /* MSUCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB41FB969920047BD7B /* MSUCommentModel.m */; };
 		9AEC7BB71FB973D30047BD7B /* shop_img_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB61FB973D30047BD7B /* shop_img_head@2x.png */; };
 		9AEC7BB91FB973D80047BD7B /* shop_img_head@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AEC7BB81FB973D80047BD7B /* shop_img_head@3x.png */; };
@@ -521,6 +522,8 @@
 		9AA630BF1FB6F68200644949 /* MSUDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUDetailModel.m; sourceTree = "<group>"; };
 		9AB0F74C1FB97C60004AC0B7 /* MSUTimerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUTimerHandler.h; sourceTree = "<group>"; };
 		9AB0F74D1FB97C60004AC0B7 /* MSUTimerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUTimerHandler.m; sourceTree = "<group>"; };
+		9ABDCAEF1FBAAD3700A62182 /* MSUOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUOrderModel.h; sourceTree = "<group>"; };
+		9ABDCAF01FBAAD3700A62182 /* MSUOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUOrderModel.m; sourceTree = "<group>"; };
 		9AEC7BB31FB969920047BD7B /* MSUCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSUCommentModel.h; sourceTree = "<group>"; };
 		9AEC7BB41FB969920047BD7B /* MSUCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSUCommentModel.m; sourceTree = "<group>"; };
 		9AEC7BB61FB973D30047BD7B /* shop_img_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_img_head@2x.png"; sourceTree = "<group>"; };
@@ -808,6 +811,8 @@
 			children = (
 				04C391921FB988760059030B /* DCCOrderModel.h */,
 				04C391931FB988760059030B /* DCCOrderModel.m */,
+				9ABDCAEF1FBAAD3700A62182 /* MSUOrderModel.h */,
+				9ABDCAF01FBAAD3700A62182 /* MSUOrderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1583,6 +1588,7 @@
 				04B547351FA9B1040075D2E1 /* UITextField+Extension.m in Sources */,
 				990AECEE1FA8048E00F5D3E7 /* main.m in Sources */,
 				990FF7D11FB03678007DFD29 /* MSUPaySuccessController.m in Sources */,
+				9ABDCAF11FBAAD3700A62182 /* MSUOrderModel.m in Sources */,
 				04B547331FA9B1040075D2E1 /* UIColor+Expend.m in Sources */,
 				047631E61FB07541003CE6DB /* DCCConfirmOrderViewController.m in Sources */,
 				990FF7E01FB041B8007DFD29 /* MSUOrderCanelView.m in Sources */,
