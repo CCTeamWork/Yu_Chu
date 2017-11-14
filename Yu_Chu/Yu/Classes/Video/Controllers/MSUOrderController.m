@@ -122,6 +122,8 @@
                         } else{
                             self.allView.hidden = YES;
                             self.waitView.hidden = NO;
+                            
+                            self.waitView.dataArr = orderModel.data.dataList;
                         }
 
                     } else{

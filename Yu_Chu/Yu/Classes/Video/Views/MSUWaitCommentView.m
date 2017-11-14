@@ -19,9 +19,18 @@
 
 #import "MSUWaitCommentView.h"
 
+#import "MSUPathTools.h"
+#import "MSUStringTools.h"
+#import "UIButton+WebCache.h"
+#import "MSUTimerHandler.h"
+
+
 #import "MSUOrderBottomTableCell.h"
 
 @interface MSUWaitCommentView ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic , assign) NSInteger cellHeight;
+
 
 @end
 
@@ -37,6 +46,12 @@
     return self;
 }
 
+
+- (void)setDataArr:(NSArray *)dataArr{
+    _dataArr = dataArr;
+    
+    [self.bootomTableView reloadData];
+}
 
 - (void)createView{
     
@@ -59,23 +74,64 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return self.dataArr.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return self.cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MSUOrderBottomTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderBottomell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    MSUListModel *dataModel = self.dataArr[indexPath.row];
+    
+    [cell.iconBtn sd_setImageWithURL:[NSURL URLWithString:dataModel.shopLogo] forState:UIControlStateNormal placeholderImage:[MSUPathTools showImageWithContentOfFileByName:@"shop_img_head"]];
+    cell.nameLab.text = dataModel.shopName;
+    
+    cell.timeLab.text = [MSUTimerHandler exchangeTimefromTimeTamp:dataModel.createdTime];
+    cell.detailLab.text = dataModel.extendInfo;
+    cell.priceLab.text = [NSString stringWithFormat:@"%@",dataModel.totalAmount];
+    
+    cell.statusLab.hidden = NO;
+    cell.commentBtn.hidden = YES;
+    cell.againBtn.hidden = YES;
+    self.cellHeight = 108;
+    if ([dataModel.status isEqualToString:@"1"]) {
+        cell.statusLab.text = @"待支付";
+    } else if ([dataModel.status isEqualToString:@"4"] || [dataModel.status isEqualToString:@"3"]){
+        cell.statusLab.text = @"骑手正在配送中";
+    } else if ([dataModel.status isEqualToString:@"2"]){
+        cell.statusLab.text = @"等待骑手接单中";
+    } else if ([dataModel.status isEqualToString:@"7"]){
+        cell.statusLab.text = @"订单已完成";
+        cell.commentBtn.hidden = NO;
+        cell.againBtn.hidden = NO;
+        self.cellHeight = 168;
+    } else{
+        cell.statusLab.hidden = YES;
+    }
+
+    
     __weak typeof(self) weakSelf = self;
     cell.commentBlickBlock = ^(UIButton *btn) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(commentClick)]) {
-            [strongSelf.delegate commentClick];
+        if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(commentClickModel:)]) {
+            [strongSelf.delegate commentClickModel:dataModel];
         }
     };
 
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MSUListModel *dataModel = self.dataArr[indexPath.row];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bottomTableViewCellDidSelectWithModel:)]) {
+        [self.delegate bottomTableViewCellDidSelectWithModel:dataModel];
+    }
 }
 
 
